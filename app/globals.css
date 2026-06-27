@@ -11,8 +11,14 @@
   --color-primaryColor: #4AE3C9;
   --color-secondaryColor: #032C2D;
   --color-alertRed: #E31A1A;
+  --color-gradient: bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent
 }
 
+@layer components {
+  .gradient {
+    @apply bg-gradient-to-r from-[#FFFFFF] to-[#FFFFFF]/60 bg-clip-text text-transparent;
+  }
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
