@@ -27,13 +27,13 @@ export default function Footer() {
         <div>© ZOI DLT Foundation. All rights reserved</div> 
 
         <div className='flex gap-4 flex-wrap'>
-          <img width={24} height={24} src='icons/fbicon.svg'/>
-          <img width={24} height={24} src='icons/yticon.svg'/>
-          <img width={24} height={24} src='icons/twittericon.svg'/>
-          <img width={24} height={24} src='icons/linkedinicon.svg'/>
-          <img width={24} height={24} src='icons/instaicon.svg'/>
-          <img width={24} height={24} src='icons/discord.svg'/>
-          <img width={24} height={24} src='icons/tiktokicon.svg'/>
+          <img className='h-[14px] w-[14px] md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]' width={24} height={24} src='icons/fbicon.svg'/>
+          <img className='h-[14px] w-[14px] md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]' width={24} height={24} src='icons/yticon.svg'/>
+          <img className='h-[14px] w-[14px] md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]' width={24} height={24} src='icons/twittericon.svg'/>
+          <img className='h-[14px] w-[14px] md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]' width={24} height={24} src='icons/linkedinicon.svg'/>
+          <img className='h-[14px] w-[14px] md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]' width={24} height={24} src='icons/instaicon.svg'/>
+          <img className='h-[14px] w-[14px] md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]' width={24} height={24} src='icons/discord.svg'/>
+          <img className='h-[14px] w-[14px] md:h-[18px] md:w-[18px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]' width={24} height={24} src='icons/tiktokicon.svg'/>
         </div>
       </div>
     </div>
