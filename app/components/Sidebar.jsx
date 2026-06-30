@@ -38,7 +38,7 @@ export default function Sidebar() {
       <Link
         className={`${activeTokens ? "bg-[#0C1414] text-primaryColor" : ""} flex items-center gap-2 p-6 pl-8 cursor-pointer`}
         onClick={() => { setActiveDashboard(false); setActiveStaking(false); setActiveSupport(false); setActiveTokens(true); setActiveZoi(false) }}
-        href={'/'}
+        href={'/tokens'}
       >
         <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px] ' src='/icons/tokens.svg' />
         <div
@@ -48,7 +48,7 @@ export default function Sidebar() {
       <Link
         className={`${activeSupport ? "bg-[#0C1414] text-primaryColor" : ""} flex items-center gap-2 p-6 pl-8 cursor-pointer`}
         onClick={() => { setActiveDashboard(false); setActiveStaking(false); setActiveSupport(true); setActiveTokens(false); setActiveZoi(false) }}
-        href={'/'}
+        href={'/helpandsupports'}
       >
         <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px] ' src='/icons/support.svg' />
         <div 
@@ -59,7 +59,7 @@ export default function Sidebar() {
       <Link
         className={`${activeZoi ? "bg-[#0C1414] text-primaryColor" : ""} flex items-center gap-2 p-6 pl-8 cursor-pointer`}
         onClick={() => { setActiveDashboard(false); setActiveStaking(false); setActiveSupport(false); setActiveTokens(false); setActiveZoi(true) }}
-        href={'/'}
+        href={'/ToiAnnouncements'}
       >
         <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px] ' src='/icons/zoi.svg' />
         <div 
