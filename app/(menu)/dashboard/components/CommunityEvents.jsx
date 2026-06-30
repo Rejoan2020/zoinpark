@@ -59,7 +59,7 @@ export default function CommunityEvents() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </div>
       </div>
-      <div className='grid grid-cols-3 gap-2 xl:gap-4'>
+      <div className='grid grid-cols-3 gap-2 md:gap-3 lg:gap-3 xl:gap-4'>
         {dummy.map((item) => <Card2 key={item.id} link={item.link} url={item.url} title={item.title} description={item.description} />)}
       </div>
     </div>

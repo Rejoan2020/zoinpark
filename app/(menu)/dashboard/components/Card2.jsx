@@ -5,8 +5,8 @@ import Image from 'next/image'
 export default function Card2(card) {
     return (
         <div>
-            <div className=' xl:h-[566px] lg:h-[440px] md:h-[330px] h-[230px] border border-zinc-800 rounded-md'>
-                <Image alt='card' className='w-full' width={464} height={546} src={card.url} />
+            <div className='className="w-full border border-zinc-800 rounded-md flex flex-col border border-zinc-800 rounded-md'>
+                <Image  alt='card' className="w-full h-auto object-cover" width={464} height={546} src={card.url} />
                 <div className='text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] gradient xl:p-8 l:p-4 p-2 md:p-2 md:pb-0 xl:pb-0 l:pb-0'>{card.title}</div>
                 <div className='text-secondaryText text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] xl:p-8 l:p-4 md:p-2 p-2  xl:pt-0 l:pt-0 md:pt-0'>{card.description}</div>
                 <div className='border ml-2 mr-2 border-zinc-800'></div>
@@ -39,10 +39,10 @@ export default function Card2(card) {
                     </div>
                 </div>
                 <div className='flex justify-evenly gap-2 p-1 md:p-2 lg:p-4 xl:p-6 text-secondaryText text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px]'>
-                    <button className='bg-primaryColor text-black rounded-md h-[12px] w-[50px] md:h-[24px] md:w-[90px] lg:h-[36px] lg:w-[170px] xl:h-[48px] xl:w-[240px] text-[6px] md:text-[10px] lg:text-[12px] xl:text-[14px]'>
+                    <button className='p-2 bg-primaryColor text-black rounded-md flex-1'>
                         Join event
                     </button>
-                    <button className='bg-white text-black rounded-md h-[12px] w-[50px] md:h-[24px] md:w-[90px] lg:h-[36px] lg:w-[170px] xl:h-[48px] xl:w-[240px] text-[6px] md:text-[10px] lg:text-[12px] xl:text-[14px]'>
+                    <button className='p-2 bg-white text-black rounded-md flex-1'>
                         Copy Link
                     </button>
                 </div>
