@@ -52,8 +52,8 @@ export default function Sidebar() {
       <div>
         <Link
           className={`${activeSupport ? "bg-[#0C1414] text-primaryColor" : ""} flex items-center gap-2 p-6 pl-8 cursor-pointer`}
-          onClick={() => { setSubMenu(!subMenu); setActiveDashboard(false); setActiveStaking(false); setActiveSupport(true); setActiveTokens(false); setActiveZoi(false) }}
-          href={'/helpandsupports'}
+          onClick={() => { setSubMenu(!subMenu); setActiveDashboard(false); setActiveStaking(false); setActiveSupport(true); setActiveTokens(false); setActiveZoi(false); setActiveTickets(true); }}
+          href={'/helpandsupports/tickets'}
         >
           <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px] ' src='/icons/support.svg' />
           <div
@@ -70,7 +70,7 @@ export default function Sidebar() {
             <Link
               className={`${activeTickets ? "text-primaryColor" : ""} flex items-center gap-2 p-4 pl-12 cursor-pointer`}
               onClick={() => { setActiveTickets(true); setActiveTutorials(false); setActiveContact(false); }}
-              href={'/helpandsupports'}
+              href={'/helpandsupports/tickets'}
             >
               {activeTickets?
               <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px] ' src='/icons/ticketsC.svg' />
@@ -82,7 +82,7 @@ export default function Sidebar() {
             <Link
               className={`${activeTutorials ? "text-primaryColor" : ""} flex items-center gap-2 p-4 pl-12 cursor-pointer`}
               onClick={() => { setActiveTickets(false); setActiveTutorials(true); setActiveContact(false); }}
-              href={'/helpandsupports'}
+              href={'/helpandsupports/tutorials'}
             >
               {activeTutorials?
               <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px] ' src='/icons/tutorialsC.svg' />
@@ -94,7 +94,7 @@ export default function Sidebar() {
             <Link
               className={`${activeContact ? "text-primaryColor" : ""} flex items-center gap-2 p-4 pl-12 cursor-pointer`}
               onClick={() => { setActiveTickets(false); setActiveTutorials(false); setActiveContact(true); }}
-              href={'/helpandsupports'}
+              href={'/helpandsupports/contactus'}
             >
               {activeContact?
               <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px] ' src='/icons/contactusC.svg' />
