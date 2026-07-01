@@ -1,7 +1,6 @@
 import React from 'react'
 import Searchbar from '@/app/components/Searchbar'
-import Row from './Row'
-import Button from '@/app/components/Button'
+import Row from './Row' 
 
 export default function StakingHistory() {
   const rows = [
