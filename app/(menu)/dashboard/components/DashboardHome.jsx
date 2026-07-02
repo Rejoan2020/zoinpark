@@ -5,7 +5,7 @@ export default function DashboardHome() {
   const dummy = [
     {
       id: 1,
-      title: 'invite and Earn',
+      title: 'Invite and Earn',
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       image: "/icons/home/invite.png",
       link: "/dashboard/invite"
@@ -27,8 +27,8 @@ export default function DashboardHome() {
   ];
   return (
     <div>
-      <div className='xl:h-[247px] lg:h-[180px] md:h-[130px] flex xl:text-xl l:text-l md:text-md border border-zinc-800'>
-        <div className='basis-[30%] border-r border-zinc-800 xl:p-16 l:p-12 md:p-8'>
+      <div className='xl:h-[247px] lg:h-[180px] md:h-[130px] flex xl:text-xl lg:text-l md:text-md border border-zinc-800'>
+        <div className='basis-[30%] border-r border-zinc-800 p-4 xl:p-16 l:p-12 md:p-8'>
           <div className='flex'>
             <ul className="text-[#4AE3C9] list-disc pl-5">
               <li></li>
@@ -40,7 +40,7 @@ export default function DashboardHome() {
           </div>
           <div className='flex text-[#4AE3C9]'>+1.2%<img src='icons/home/upArrow.svg' /></div>
         </div>
-        <div className='flex flex-col xl:gap-4 l:gap-2 md:gap-1 basis-[70%] xl:p-16 l:p-12 md:p-8'>
+        <div className='flex flex-col xl:gap-4 lg:gap-2 md:gap-1 basis-[70%] xl:p-16 l:p-12 md:p-8 p-4'>
           <div className='flex'>
             <ul className="text-[#4AE3C9] list-disc pl-5">
               <li></li>
@@ -63,7 +63,7 @@ export default function DashboardHome() {
 
         </div>
       </div>
-      <div className='grid grid-cols-3 gap-6'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2'>
         {dummy.map((num) => <Card
           key={num.id}
           title={num.title}
