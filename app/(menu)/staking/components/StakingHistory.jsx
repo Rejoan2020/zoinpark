@@ -130,16 +130,16 @@ export default function StakingHistory() {
           <div className='text-secondaryText'>You can withdraw your principal USDT after 10days</div>
           <Searchbar />
         </div>
-        <div className='flex text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
+        <div className='grid grid-cols-9 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
           <div className='p-4'>Serial No.</div>
           <div className='p-4 flex justify-center '>Staking ID</div>
-          <div className='p-4 flex justify-center w-24 md:w-32 lg:w-40 xl:w-56 '>Investment Name</div>
-          <div className='p-4 flex justify-center '>Principal(ZOIN)</div>
-          <div className='p-4 flex justify-center'>Withdrawal(ZOIN)</div>
-          <div className='p-4 flex justify-center'>Balance(ZOIN)</div>
+          <div className='p-4 flex justify-center '>Investment Name</div>
+          <div className='p-4 flex justify-center '>Principal (ZOIN)</div>
+          <div className='p-4 flex justify-center'>Withdrawal (ZOIN)</div>
+          <div className='p-4 flex justify-center'>Balance (ZOIN)</div>
           <div className='p-4 flex justify-center'>Investment Start</div>
           <div className='p-4 flex justify-center'>Payment Mode</div>
-          <div className='p-4 pl-8 md:pl-16 lg:pl-24 xl:pl-32'>Action</div>
+          <div className='p-4 flex justify-center'>Action</div>
         </div>
         {rows.map((row) => <Row key={row.serial} serial={row.serial} id={row.id} name={row.name}
           principal={row.principal} withdrawal={row.withdrawal} balance={row.balance} start={row.start}

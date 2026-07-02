@@ -88,10 +88,10 @@ export default function ZoinHistory() {
             <div className='text-secondaryText'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
             <Searchbar />
           </div>
-          <div className='flex text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
+          <div className='grid grid-cols-7 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
             <div className='p-4'>Serial No.</div>
-            <div className='p-4 flex justify-center '>Transaction No.</div>
-            <div className='p-4 flex justify-center w-24 md:w-32 lg:w-40 xl:w-56 '>Credit(USDT)</div>
+            <div className='p-4 flex justify-center'>Transaction No.</div>
+            <div className='p-4 flex justify-center'>Credit(USDT)</div>
             <div className='p-4 flex justify-center '>Debit(USDT)</div>
             <div className='p-4 flex justify-center'>Remark</div>
             <div className='p-4 flex justify-center'>Date</div>
