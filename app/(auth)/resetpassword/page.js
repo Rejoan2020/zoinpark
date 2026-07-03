@@ -8,31 +8,38 @@ export default function page() {
       <div><Image height={52} width={106} src={'icons/logo.svg'} /></div>
       <div className='flex flex-col gap-2 items-center w-100 md:w-120 lg:w-130 xl:w-140'>
         <div className='mb-12'>
-          <div className='text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>Create your account</div>
-          <div className='flex justify-center text-secondaryText text-[8px] md:text-[12px] lg:text-[16px] xl:text-[20px]'>
-            Please enter your details to sign in to your account
+          <div className='text-[32px] md:text-[32px] lg:text-[40px] xl:text-[48px] flex justify-center'>Reset password</div>
+          <div className='flex justify-center text-secondaryText text-[12px] md:text-[12px] lg:text-[16px] xl:text-[20px]'>
+            Please enter the following information to reset password
           </div>
         </div>
         <div className='flex justify-start w-full gap-4 mt-4'>
-          <div className='underline underline-offset-4'>Email</div>
-          <div className='text-secondaryText'>Phone number</div>
+            OTP code
         </div>
         <input
           className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
-          value={"Enter your email address"}
+          value={"Enter OTP code"}
         />
 
         <div className='flex justify-between w-full gap-4 mt-4'>
-          <div className=''>Password</div>
-          <div className='underline text-secondaryText'>Forgot Password?</div>
+          New Password
         </div>
         <input
           className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
-          value={"Enter your password"}
+          value={"Enter new password"}
         />
+
+        <div className='flex justify-between w-full gap-4 mt-4'>
+          Confirm Password
+        </div>
+        <input
+          className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
+          value={"Confirm password"}
+        />
+
         <button className='w-full bg-primaryColor p-2 mt-4 mb-4 text-black'>Create your account</button>
         <div className='text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px] text-secondaryText'>
-          Already have an account? <Link className='text-primaryText underline' href={'/'}>Sign in</Link>
+          Don't have an account? <Link className='text-primaryText underline' href={'/'}>Create new account</Link>
         </div>
       </div>
     </div>

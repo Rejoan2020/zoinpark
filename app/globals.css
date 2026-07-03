@@ -1,25 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #070808; 
+  --color-background: #070808;
   --color-secondaryBackground: #0F0F0F;
   --color-primaryText: #FFFFFF;
   --color-secondaryText: #9F9F9F;
   --color-stroke: #242B2B;
   --color-stroke2: #333C3C;
-  --color-selectedNavBg:#0C1414;
+  --color-selectedNavBg: #0C1414;
   --color-primaryColor: #4AE3C9;
   --color-secondaryColor: #032C2D;
   --color-alertRed: #E31A1A;
-  --color-gradient: bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent
 }
 
 @layer components {
   .gradient {
     @apply bg-gradient-to-r from-[#FFFFFF] to-[#FFFFFF]/60 bg-clip-text text-transparent;
   }
-  .gradientbg{
-    @apply bg-gradient-to-r from-[#040706] to-[#0F1212]
+
+  .gradientbg {
+    @apply bg-gradient-to-r from-[#040706] to-[#0F1212];
+  }
+
+  .gradientbg2 {
+    background:
+      radial-gradient(circle at top left, rgba(74, 227, 201, .25), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(74, 227, 201, .15), transparent 35%),
+      radial-gradient(circle at center, rgba(74, 227, 201, .08), transparent 50%),
+      #070808;
   }
 }
 
