@@ -5,7 +5,7 @@ import React from 'react'
 export default function page() {
   return (
     <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
-      <div><Image height={52} width={106} src={'icons/logo.svg'} /></div>
+      <div><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></div>
       <div className='flex flex-col gap-2 items-center w-100 md:w-120 lg:w-130 xl:w-140'>
         <div className='mb-12'>
           <div className='text-[32px] md:text-[32px] lg:text-[40px] xl:text-[48px] flex justify-center'>Reset password</div>
@@ -37,9 +37,9 @@ export default function page() {
           value={"Confirm password"}
         />
 
-        <button className='w-full bg-primaryColor p-2 mt-4 mb-4 text-black'>Create your account</button>
+        <button className='w-full bg-primaryColor p-2 mt-4 mb-4 text-black'>Reset password</button>
         <div className='text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px] text-secondaryText'>
-          Don't have an account? <Link className='text-primaryText underline' href={'/'}>Create new account</Link>
+          Don't have an account? <Link className='text-primaryText underline' href={'/'}> Create new account</Link>
         </div>
       </div>
     </div>
