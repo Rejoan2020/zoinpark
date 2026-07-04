@@ -1,15 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css"; 
+import { Inter } from "next/font/google"; 
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Zoin Park",
@@ -20,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={inter.variable}
     >
       <body className="min-h-full flex flex-col gradientbg2">
         {children}
