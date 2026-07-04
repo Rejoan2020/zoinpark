@@ -16,21 +16,25 @@ export default function Header() {
         </div>
 
         <div className='flex gap-4 md:gap-8 lg:gap-12 xl:gap-16'>
-          <div 
-          className='cursor-pointer flex items-center justify-evenly border border-background rounded bg-secondaryColor w-[200px] md:w-[220px] lg:w-[249px] xl:w-[279px]
+          <div
+            className='cursor-pointer flex items-center justify-evenly border border-background rounded bg-secondaryColor w-[200px] md:w-[220px] lg:w-[249px] xl:w-[279px]
           xl:text-[18px] lg:text-[16px] md:text-[12px] text-[10px]'>
-            <Image height={24} width={24} alt='pdf' src={'/icons/pdf.svg'}/> Download Whitepaper PDF
+            <Image height={24} width={24} alt='pdf' src={'/icons/pdf.svg'} /> Download Whitepaper PDF
           </div>
           <div className='flex border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor cursor-pointer'>
             <img src='/icons/notification.svg' />
           </div>
           <div className='cursor-pointer flex items-center border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor text-primaryColor'>
-            <div className=''>language</div> 
-            <Image height={24} width={24} alt='dropdown' src='/icons/dropdown.svg' /> 
+            <div className=''>language</div>
+            <Image height={24} width={24} alt='dropdown' src='/icons/dropdown.svg' />
           </div>
           <Link className='cursor-pointer flex items-center' href={'/signin'}>
             Login
           </Link>
+          <div
+            className='cursor-pointer flex items-center'
+            
+          >Rayan</div>
         </div>
       </div>
     </>
