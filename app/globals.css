@@ -24,14 +24,20 @@
 
   .gradientbg2 {
     background:
-      radial-gradient(circle at top left, rgba(74, 227, 201, .25), transparent 30%),
-      radial-gradient(circle at bottom right, rgba(74, 227, 201, .15), transparent 35%),
-      radial-gradient(circle at center, rgba(74, 227, 201, .08), transparent 50%),
-      #070808;
+      radial-gradient(circle at 20% 30%, rgba(74, 227, 201, 0.25) 0%, transparent 30%),
+      radial-gradient(circle at 80% 20%, rgba(74, 227, 201, 0.18) 0%, transparent 35%),
+      radial-gradient(circle at 60% 75%, rgba(74, 227, 201, 0.12) 0%, transparent 40%),
+      #000000;
   }
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
   font-family: var(--font-inter), sans-serif;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.04em; 
+  min-height: 100vh;
 }

@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
+    <div className='flex flex-col min-h-full items-center gap-16 text-primaryText mt-12'>
       <div><Image height={52} width={106} src={'icons/logo.svg'} /></div>
       <div className='flex flex-col gap-2 items-center'>
         <div className='mb-12'>
