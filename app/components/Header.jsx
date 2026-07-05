@@ -40,7 +40,7 @@ export default function Header() {
               <div className='text-primaryText absolute right-0 top-full mt-2 bg-[#000000] z-50'>
                 <div className='flex h-10 md:h-12 lg:h-14 xl:h-16 p-6 w-31 md:w-35 lg:w-39 xl:w-45 gap-2 items-center'>
                   <Image src={'/icons/settings.svg'} alt='Settings' height={24} width={24} />
-                  <div>Settings</div>
+                  <Link href={'/user/settings'} >Settings</Link>
                 </div>
                 <div className='border border-zinc-800'></div>
 
