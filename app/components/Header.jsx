@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import { signOutWithGoogle } from '../actions/auth';
 
 export default function Header({ session }) {
   const loggedin = !!session;
@@ -72,10 +73,20 @@ export default function Header({ session }) {
                   </div>
                   <div className='border border-zinc-800'></div>
 
-                  <div className='flex h-10 md:h-12 lg:h-14 xl:h-16 p-6 w-31 md:w-35 lg:w-39 xl:w-45 gap-2 items-center'>
-                    <Image src={'/icons/logout.svg'} alt='Settings' height={24} width={24} />
-                    <div className='text-red-500'>Log Out</div>
-                  </div>
+                  <form action={signOutWithGoogle}>
+                    <button
+                      type="submit"
+                      className="flex h-10 md:h-12 lg:h-14 xl:h-16 p-6 w-31 md:w-35 lg:w-39 xl:w-45 gap-2 items-center cursor-pointer"
+                    >
+                      <Image
+                        src="/icons/logout.svg"
+                        alt="Log out"
+                        width={24}
+                        height={24}
+                      />
+                      <span className="text-red-500">Log Out</span>
+                    </button>
+                  </form>
                 </div>
               }
             </div>

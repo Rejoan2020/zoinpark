@@ -9,7 +9,7 @@ export async function signInWithGoogle() {
 }
 
 export async function signOutWithGoogle() {
-  await signOut("google",{
+  await signOut({
     redirectTo: "/signin",
 });
 }

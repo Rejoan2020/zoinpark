@@ -7,7 +7,7 @@ export default function ForgetPass() {
     const [email, setEmail] = useState(true);
     return (
         <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
-            <div><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></div>
+            <Link href={'/dashboard'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
             <div className='flex flex-col gap-2 items-center w-100 md:w-120 lg:w-130 xl:w-140'>
                 <div className='mb-12'>
                     <div className='text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>Forgot password?</div>

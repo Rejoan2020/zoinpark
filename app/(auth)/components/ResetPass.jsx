@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react' 
+import React from 'react'
 
 export default function ResetPass() {
   return (
     <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
-      <div><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></div>
+      <Link href={'/dashboard'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
       <div className='flex flex-col gap-2 items-center w-100 md:w-120 lg:w-130 xl:w-140'>
         <div className='mb-12'>
           <div className='text-[32px] md:text-[32px] lg:text-[40px] xl:text-[48px] flex justify-center'>Reset password</div>
@@ -14,7 +14,7 @@ export default function ResetPass() {
           </div>
         </div>
         <div className='flex justify-start w-full gap-4 mt-4'>
-            OTP code
+          OTP code
         </div>
         <input
           className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
