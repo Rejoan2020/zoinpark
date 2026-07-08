@@ -12,7 +12,7 @@ export default function Footer() {
         <img src='/icons/googlead.png' />
       </div>
       <div className='xl:pt-24 l:pt-12 md:pt-0'>To learn more about zoi network visit
-        <Link className='text-blue-500' href={'#'}> something.net</Link>
+        <Link className='text-blue-500' href={'#'}> zoinpark.net</Link>
       </div>
       <div className='border-t border-zinc-800 border-b xl:p-8 l:p-6 md:p-4 p-2 w-full flex flex-col items-center'>
         Zoin listing exchanges

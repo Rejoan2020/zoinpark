@@ -21,7 +21,7 @@ export default function ForgetPass() {
                 </div>
                 <input
                     className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
-                    value={`Enter your ${email ? "email address" : "phone number"} `}
+                    placeholder={`Enter your ${email ? "email address" : "phone number"} `}
                 />
                 <button className='w-full bg-primaryColor p-2 mt-4 mb-4 text-black'>Send OTP</button>
                 <div className='text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px] text-secondaryText'>
