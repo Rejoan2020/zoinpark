@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function Header() {
-  let loggedin = true;
+export default function Header({ session }) {
+  const loggedin = !!session;
+  console.log(session);
   const submenuRef = useRef();
   const path = usePathname();
   const [modal, setModal] = useState(false);
@@ -15,16 +16,16 @@ export default function Header() {
       if (submenuRef.current && !submenuRef.current.contains(e.target)) setModal(false);
     }
 
-    document.addEventListener('click',handleClickOutSide);
+    document.addEventListener('click', handleClickOutSide);
 
-    return ()=>{
-      document.removeEventListener('click',handleClickOutSide);
+    return () => {
+      document.removeEventListener('click', handleClickOutSide);
     }
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setModal(false);
-  },[path])
+  }, [path])
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function Header() {
           {
             loggedin ?
               <div className='gradient flex justify-start'>
-                Welcome Ryan!
+                Welcome {session?.user?.name}!
               </div> : <div></div>}
         </div>
 
@@ -55,7 +56,14 @@ export default function Header() {
               Login
             </Link> :
             <div ref={submenuRef} className='cursor-pointer flex items-center relative'>
-              <button className='cursor-pointer' onClick={() => setModal(!modal)}>Rayan</button>
+              <button className='cursor-pointer' onClick={() => setModal(!modal)}>
+                <Image
+                  className='rounded-full border'
+                  alt={session?.user?.name}
+                  height={48}
+                  width={48}
+                  src={session?.user?.image} />
+              </button>
               {modal &&
                 <div className='text-primaryText absolute right-0 top-full mt-2 bg-[#000000] z-50'>
                   <div className='flex h-10 md:h-12 lg:h-14 xl:h-16 p-6 w-31 md:w-35 lg:w-39 xl:w-45 gap-2 items-center'>
