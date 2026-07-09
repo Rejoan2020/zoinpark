@@ -66,8 +66,8 @@ export default function Header({ session }) {
                   width={48}
                   src={session?.user?.image} /> :
                   <div
-                    className='rounded-full border'
-                  >{session?.user?.name}</div>}
+                    className='rounded-full border w-6 h-6 md:w-8 md:h-8 g:w-10 lg:h-10 xl:w-12 xl:h-12 flex justify-center items-center'
+                  >{session?.user?.name.charAt(0).toUpperCase()}</div>}
               </button>
               {modal &&
                 <div className='text-primaryText absolute right-0 top-full mt-2 bg-[#000000] z-50'>

@@ -3,6 +3,9 @@
 import { signIn, signOut } from "@/auth";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
+import PasswordResetToken from "@/models/PasswordResetToken";
+import resend from "@/lib/mail";
+import { createHash, randomUUID } from "node:crypto";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -70,4 +73,46 @@ export async function signUp(formData) {
     password: pass,
     redirectTo: "/signin",
   })
+}
+
+
+export async function sendOTP(formData) {
+  const email = formData.get("email");
+  const user = await User.findOne({ email });
+
+  if (!!user) {
+    try {
+      await PasswordResetToken.deleteMany({ email });
+      const token = randomUUID();
+      const hashedToken = createHash("sha256").update(token).digest("hex");
+      await PasswordResetToken.create({
+        email,
+        token: hashedToken,
+        expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+      });
+
+      await resend.emails.send({
+        from: "ZoinPark <onboarding@resend.dev>",
+        to: email,
+        subject: "Reset your password",
+        html: `<h2>Reset Password</h2>
+        <p>Click the link below:</p>
+
+        <a href="${process.env.NEXTAUTH_URL}/resetpassword?token=${token}">
+          Reset Password
+        </a>`,
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  const message = "If an account with that email exists, we've sent a password reset link."
+  return message;
+}
+
+export async function getToken(hashedToken) {
+  const token = await PasswordResetToken.findOne({token:hashedToken});
+  if(token.expiresAt < new Date())throw new Error("Reset link has expired");
+  if(!token)throw new Error("Invalid reset link");
+  return token.token;
 }
