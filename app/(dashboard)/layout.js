@@ -6,6 +6,7 @@ import { auth } from '@/auth';
 
 export default async function layout({children}) {
   const session = await auth();
+  console.log("session:    ",session)
   return (
     <div className="flex min-h-screen">
           <Sidebar />

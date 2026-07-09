@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google"; 
 import "./globals.css";
+import { dbconnect } from "@/lib/mongo.js";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,7 +13,8 @@ export const metadata = {
   description: "Cryptocurrency and NFT marketplace",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const conn = await dbconnect();
   return (
     <html
       lang="en"
