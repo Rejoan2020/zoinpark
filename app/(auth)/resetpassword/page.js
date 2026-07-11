@@ -1,16 +1,26 @@
 import React from 'react'
-import ResetPass from '../components/ResetPass' 
-import crypto from 'crypto' 
-import { getToken } from '@/app/actions';
+import ResetPass from '../components/ResetPass'
+import crypto from 'crypto'
+import { getToken } from '@/app/actions'; 
 
 
-export default async function page({searchParams}) { 
-  const {token} = await searchParams;
-  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+export default async function page({ searchParams }) {
+  const { token } = await searchParams;
+
+  const hashedToken = token ? crypto.createHash("sha256").update(token).digest("hex") : undefined;
   const storedToken = await getToken(hashedToken);
-  const matched = hashedToken === storedToken;
-  console.log(matched);
+  const matched = storedToken ? true : false;
+  const email = storedToken?.email;
+
+  // if(matched){
+  //   await changePass(email);
+  // }
+  //This change function should be called from the ResetPass component as it will need new pass value
+  //from the user.
+
   return (
-    <ResetPass />
+    <>
+      {matched ? <ResetPass email = {email}/> : <div>Wrong token!</div>}
+    </>
   )
 }

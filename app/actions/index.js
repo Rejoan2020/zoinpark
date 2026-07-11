@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import PasswordResetToken from "@/models/PasswordResetToken";
 import resend from "@/lib/mail";
 import { createHash, randomUUID } from "node:crypto";
+import { redirect } from "next/navigation";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -112,7 +113,28 @@ export async function sendOTP(formData) {
 
 export async function getToken(hashedToken) {
   const token = await PasswordResetToken.findOne({token:hashedToken});
-  if(token.expiresAt < new Date())throw new Error("Reset link has expired");
   if(!token)throw new Error("Invalid reset link");
-  return token.token;
+  if(token.expiresAt < new Date())throw new Error("Reset link has expired");
+  return token;
 }
+
+export async function changePass(email,newPass){
+  const user = await User.findOne({email});
+  console.log("user : xxxxxxxxxxxxxxx :",email,user, newPass);
+
+  user.password = newPass;
+  user.save();
+
+}
+
+export async function resetPassword(formData) {
+    const newPass = formData.get('newPass');
+    const retypedNewPass = formData.get('retypedNewPass');
+    const email = formData.get('email');
+    if (newPass === retypedNewPass) {
+      await changePass(email, newPass);
+      console.log('Password changed!')
+      redirect("/signin")
+    }
+    throw new error("Paswords are not same!")
+  }
