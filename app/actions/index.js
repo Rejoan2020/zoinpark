@@ -24,7 +24,7 @@ export async function logIn(initailState, formData) {
     await signIn("credentials", {
       email: email,
       password: pass,
-      redirectTo: "/dashboard"
+      redirectTo: `${String(process.env.NEXTAUTH_URL)}/dashboard`
     });
   } catch (err) {
     if (err instanceof AuthError) {
@@ -38,7 +38,7 @@ export async function logIn(initailState, formData) {
 
 export async function signOutWithGoogle() {
   await signOut({
-    redirectTo: "/signin",
+    redirectTo: `${String(process.env.NEXTAUTH_URL)}/signin`,
   });
 }
 
@@ -55,7 +55,7 @@ export async function signUp(formData) {
     }
     const hashedPass = await bcrypt.hash(pass, 12);
     user.name = user.name || name;
-    user.pass = hashedPass;
+    user.password = hashedPass;
 
     await user.save();
 
@@ -143,7 +143,7 @@ export async function resetPassword(formData) {
   if (newPass === retypedNewPass) {
     await changePass(email, newPass);
     console.log('Password changed!')
-    redirect("/signin")
+    redirect(`${String(process.env.NEXTAUTH_URL)}/signin`)
   }
   throw new error("Paswords are not same!")
 }
