@@ -2,11 +2,16 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useActionState, useState } from 'react';
 import { logIn, signInWithGoogle } from '@/app/actions';
+
+const initialState = {
+  error: null,
+};
 
 export default function SignIn() {
   const [email, setEmail] = useState(true);
+  const [state, formAction, pending] = useActionState(logIn, initialState)
   return (
     <div className='flex flex-col min-h-full items-center gap-16 text-primaryText mt-12'>
       <Link href={'/dashboard'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
@@ -17,7 +22,7 @@ export default function SignIn() {
         </div>
         <form
           className='w-full'
-          action={logIn}
+          action={formAction}
         >
           <div className='flex justify-start w-full gap-4 mt-4'>
             <div onClick={() => setEmail(true)} className={`${email ? "underline underline-offset-4" : "text-secondaryText"} cursor-pointer`}>Email</div>
@@ -40,7 +45,9 @@ export default function SignIn() {
             className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
             placeholder={"Enter your password"}
           />
-
+          {state?.error && (
+            <p className="text-red-500">{state.error}</p>
+          )}
           <button className='w-full bg-primaryColor p-2 mt-4 mb-4 text-black cursor-pointer'>Sign in</button>
         </form>
         <form

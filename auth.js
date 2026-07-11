@@ -30,7 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const user = await User.findOne({
           email: credentials.email,
         });
-        // console.log("Cred: ",credentials)
+        console.log("Cred: ",credentials)
         if (!user) {
           return null;
         }
