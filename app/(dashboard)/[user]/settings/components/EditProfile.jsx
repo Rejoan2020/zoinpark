@@ -2,13 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import { updateProfile } from '@/app/actions'
 
-export default function EditProfile() {
+export default function EditProfile({user}) {
 
   return (
     <div className='text-primaryText'>
       <div className='p-4 md:p-8 lg:p-12 xl:p-12 flex justify-between'>
         <div>
-          <Image alt='Profile' height={96} width={96} src={'/images/pp.png'} />
+          <Image className='rounded-full' alt='Profile' height={96} width={96} src={user?.image} />
           <div className='flex text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] pt-4'>
             <button className='p-2 text-primaryColor border border-[#4AE3C933] rounded-md m-2'>Change picture</button>
             <button className='p-2 text-red-500 border border-[#E31A1A33] rounded-md m-2'>Delete</button>

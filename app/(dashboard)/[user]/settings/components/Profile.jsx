@@ -8,9 +8,9 @@ export default function Profile({user}) {
     <div className='text-primaryText'>
       <div className='p-4 md:p-8 lg:p-12 xl:p-12 flex justify-between'>
         <div>
-          <Image alt='Profile' height={96} width={96} src={'/images/pp.png'} />
-          <div className='text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px]'>{user.name}</div>
-          <div className='text-primaryColor text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.zoiid?user.zoiid:"----"}</div>
+          <Image className='rounded-full' alt='Profile' height={96} width={96} src={user?.image} />
+          <div className='text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px]'>{user?.name}</div>
+          <div className='text-primaryColor text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.zoiid?user?.zoiid:"----"}</div>
         </div>
         <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>
           <Link className='p-2 bg-primaryColor text-black m-2' href={'/user/settings/edit-profile'}>Edit profile</Link>
@@ -21,32 +21,32 @@ export default function Profile({user}) {
       <div className='p-4 md:p-8 lg:p-12 xl:p-16 grid grid-cols-2 gap-2 md:gap-4 lg:gap-6 xl:gap-8'>
         <div>
           <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>Email</div>
-          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.email?user.email:"----"}</div>
+          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.email?user?.email:"----"}</div>
         </div>
         <div>
           <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>Country</div>
-          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.country?user.country:'----'}</div>
+          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.country?user?.country:'----'}</div>
         </div>
         <div>
           <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>Contact Number</div>
-          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.phone?user.phone:"----"}</div>
+          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.phone?user?.phone:"----"}</div>
         </div>
         <div>
           <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>State</div>
-          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.state?user.state:"----"}</div>
+          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.state?user?.state:"----"}</div>
         </div>
         <div>
           <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>Address</div>
-          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.address?user.address:"----"}</div>
+          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.address?user?.address:"----"}</div>
         </div>
         <div>
           <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>City</div>
-          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.city?user.city:"----"}</div>
+          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.city?user?.city:"----"}</div>
         </div>
         <div></div>
         <div>
           <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>Zip Code</div>
-          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user.zipcode?user.zipcode:"----"}</div>
+          <div className='text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.zipcode?user?.zipcode:"----"}</div>
         </div>
       </div>
     </div>

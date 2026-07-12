@@ -5,9 +5,9 @@ import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { signOutWithGoogle } from '../actions';
 
-export default function Header({ session }) {
-  const loggedin = !!session;
-  console.log(session);
+export default function Header({ user }) {
+  const loggedin = !!user;
+  
   const submenuRef = useRef();
   const path = usePathname();
   const [modal, setModal] = useState(false);
@@ -35,7 +35,7 @@ export default function Header({ session }) {
           {
             loggedin ?
               <div className='gradient flex justify-start'>
-                Welcome {session?.user?.name}!
+                Welcome {user?.name}!
               </div> : <div></div>}
         </div>
 
@@ -58,16 +58,16 @@ export default function Header({ session }) {
             </Link> :
             <div ref={submenuRef} className='cursor-pointer flex items-center relative'>
               <button className='cursor-pointer' onClick={() => setModal(!modal)}>
-                {session?.user?.image ? 
+                {user?.image ? 
                 <Image
                   className='rounded-full border w-6 h-6 md:w-8 md:h-8 g:w-10 lg:h-10 xl:w-12 xl:h-12'
-                  alt={session?.user?.name}
+                  alt={user?.name}
                   height={48}
                   width={48}
-                  src={session?.user?.image} /> :
+                  src={user?.image} /> :
                   <div
                     className='rounded-full border w-6 h-6 md:w-8 md:h-8 g:w-10 lg:h-10 xl:w-12 xl:h-12 flex justify-center items-center'
-                  >{session?.user?.name.charAt(0).toUpperCase()}</div>}
+                  >{user?.name.charAt(0).toUpperCase()}</div>}
               </button>
               {modal &&
                 <div className='text-primaryText absolute right-0 top-full mt-2 bg-[#000000] z-50'>
