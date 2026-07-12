@@ -48,7 +48,10 @@ export default function SignIn() {
           {state?.error && (
             <p className="text-red-500">{state.error}</p>
           )}
-          <button className='w-full bg-primaryColor p-2 mt-4 mb-4 text-black cursor-pointer'>Sign in</button>
+          <button disabled={pending}
+            className={`w-full ${pending?"bg-white":"bg-primaryColor"} p-2 mt-4 mb-4 text-black cursor-pointer`}>
+            {pending ? "Signing in..." : "sign in"}
+          </button>
         </form>
         <form
           action={signInWithGoogle}

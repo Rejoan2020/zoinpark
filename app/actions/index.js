@@ -8,6 +8,8 @@ import resend from "@/lib/mail";
 import { createHash, randomUUID } from "node:crypto";
 import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
+import { auth } from "@/auth";
+import { dbconnect } from "@/lib/mongo";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -43,7 +45,6 @@ export async function signOutWithGoogle() {
 }
 
 export async function signUp(formData) {
-  console.log(formData);
   const name = formData.get("name");
   const email = formData.get("email");
   const pass = formData.get("password");
@@ -85,6 +86,42 @@ export async function signUp(formData) {
   })
 }
 
+export async function updateProfile(formData) { 
+  await dbconnect();
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    throw new Error("Unauthorized");
+  }
+
+  const updateData = {
+    zoiid: formData.get("zoiid"),
+    name: formData.get("name"),
+    address: formData.get("address"),
+    country: formData.get("country"),
+    state: formData.get("state"),
+    city: formData.get("city"),
+    zipcode: formData.get("zipcode"),
+    phone: formData.get("phone"),
+  };
+
+    Object.keys(updateData).forEach((key) => {
+    if (
+      updateData[key] === null ||
+      updateData[key] === undefined ||
+      updateData[key] === ""
+    ) {
+      delete updateData[key];
+    }
+  });
+  console.log(updateData)
+  const user = await User.findOneAndUpdate(
+    { email: session.user.email },
+    { $set: updateData }
+  );
+  
+  console.log(user)
+}
 
 export async function sendOTP(formData) {
   const email = formData.get("email");

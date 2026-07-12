@@ -1,10 +1,9 @@
 import React from 'react'
 import Profile from './components/Profile' 
+import { redirect } from 'next/navigation'
 
 export default function page() {
-  return (
-    <div className='text-primaryText'>
-      <Profile/>
-    </div>
+  return ( 
+    redirect('/user/settings/profile')
   )
 }

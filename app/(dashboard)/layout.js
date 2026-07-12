@@ -6,8 +6,7 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
 export default async function layout({children}) {
-  const session = await auth();
-  console.log("session:    ",session)
+  const session = await auth(); 
   if (!session) {
     redirect("/signin");
   }
