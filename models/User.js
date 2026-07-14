@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    zoiid: String,
+    email: { type: String, required: true, unique: true },
+    password: String,
+    image: String,
+    emailVerified: String,
+
     name: String,
     address: String,
     country: String,
@@ -9,9 +13,18 @@ const userSchema = new mongoose.Schema({
     city: String,
     zipcode: String,
     phone: String,
-    password: String,
-    email: { type: String, required: true, unique: true },
-    image: String,
+
+    zoiid: String,
+    referralCode: String,
+    referredBy: String,
+
+    rank:String,
+
+    SuccessfulInvites: Number,
+
+    createdAt: Date,
+    updatedAt: Date
+    
 })
 
 export default mongoose.models.User || mongoose.model("User", userSchema);
