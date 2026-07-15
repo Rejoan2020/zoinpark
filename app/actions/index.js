@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
 import { auth } from "@/auth";
 import { dbconnect } from "@/lib/mongo";
+import Wallet from "@/models/Wallet";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -45,6 +46,7 @@ export async function signOutWithGoogle() {
 }
 
 export async function signUp(formData) {
+  await dbconnect();
   const name = formData.get("name");
   const email = formData.get("email");
   const pass = formData.get("password");
@@ -57,6 +59,19 @@ export async function signUp(formData) {
     const hashedPass = await bcrypt.hash(pass, 12);
     user.name = user.name || name;
     user.password = hashedPass;
+    user.address='';
+    user.country='';
+    user.state='';
+    user.city='';
+    user.zipcode='';
+    user.phone='';
+    user.zoiid='';
+    user.referralCode='';
+    user.referredBy='';
+    user.rank='';
+    user.successfulInvites='';
+    user.createdAt='';
+    user.updatedAt='';
 
     await user.save();
 
@@ -72,13 +87,31 @@ export async function signUp(formData) {
 
   const hashedPassword = await bcrypt.hash(pass, 12);
 
-  await User.create({
+  const newUser = await User.create({
     name,
     email,
     password: hashedPassword,
     image: "",
     emailVerified: null,
+    address:'',
+    country:'',
+    state:'',
+    city:'',
+    zipcode:'',
+    phone:'',
+    zoiid:'',
+    referralCode:'',
+    referredBy:'',
+    rank:'',
+    successfulInvites:'',
+    createdAt:'',
+    updatedAt:''
   });
+  
+  await Wallet.create({
+    user: newUser._id
+  })
+  
   await signIn('credentials', {
     email: email,
     password: pass,

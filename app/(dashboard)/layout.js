@@ -5,11 +5,14 @@ import Footer from '../components/Footer';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import User from '@/models/User';
+import { dbconnect } from '@/lib/mongo';
 
 export default async function layout({children}) {
+  await dbconnect();
+  console.log('in')
   const session = await auth(); 
-  const user = await User.findOne({email : session.user.email}).lean();
-  user._id = user._id.toString();
+  const user = await User.findOne({email : session?.user?.email}).lean();
+  if(user)user._id = user._id.toString();
   
   if (!session) {
     redirect("/signin");

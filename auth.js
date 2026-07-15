@@ -30,7 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const user = await User.findOne({
           email: credentials.email,
         });
-        console.log("Cred: ",credentials)
+        console.log("Cred: ", credentials)
         if (!user) {
           return null;
         }
@@ -53,22 +53,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     })],
   callbacks: {
     async signIn({ user, account }) {
-      if (
-        account.provider === "google" &&
-        user.email &&
-        user.image
-      ) {
+      if (account.provider === "google" && user.email) {
         await dbconnect();
 
-        await User.findOneAndUpdate(
-          {
-            email: user.email,
-            image: { $in: [null, ""] },
-          },
-          {
-            image: user.image,
-          }
-        );
+        const dbUser = await User.findOne({ email: user.email });
+
+        if (dbUser) {
+          dbUser.image ??= user.image;
+
+          dbUser.address ??= "";
+          dbUser.country ??= "";
+          dbUser.state ??= "";
+          dbUser.city ??= "";
+          dbUser.zipcode ??= "";
+          dbUser.phone ??= "";
+
+          dbUser.zoiid ??= generateZoiId();
+          dbUser.referralCode ??= generateReferralCode();
+          dbUser.referredBy ??= "";
+
+          dbUser.rank ??= "Bronze";
+          dbUser.successfulInvites ??= 0;
+
+          await dbUser.save();
+        }
       }
 
       return true;
