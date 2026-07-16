@@ -8,6 +8,7 @@ import bcrypt from "bcryptjs";
 import { dbconnect } from "./lib/mongo";
 import { generateZoiId } from "./utils/generateZoiId";
 import { generateReferralCode } from "./utils/generateReferralCode";
+import Wallet from "./models/Wallet";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(client),
@@ -15,7 +16,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: "jwt",
   },
   providers: [
-    Google,
+    Google({
+      allowDangerousEmailAccountLinking: true,
+    }),
     Credentials({
       credentials: {
         email: {
@@ -59,7 +62,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }
   },
   events: {
-    async createUser({ user }) {
+    async createUser({ user }) { 
       await dbconnect();
 
       await User.findByIdAndUpdate(user.id, {
@@ -77,11 +80,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           rank: "",
           successfulInvites: 0,
         },
-      });
-
+      }); 
       await Wallet.create({
         user: user.id,
-      });
+      }); 
     },
   }
 })
