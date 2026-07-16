@@ -1,8 +1,8 @@
 import React from 'react'
 import Card from './Card'
 
-export default function DashboardHome() {
-  const dummy = [
+export default function DashboardHome({wallet}) {
+  const cards = [
     {
       id: 1,
       title: 'Invite and Earn',
@@ -36,7 +36,7 @@ export default function DashboardHome() {
             <div className='gradient'>Zoin balance</div>
           </div>
           <div className='gradient xl:text-[48px] lg:text-[32px]'>
-            24532487.00
+            {wallet.balance}
           </div>
           <div className='flex text-[#4AE3C9]'>+1.2%<img src='icons/home/upArrow.svg' /></div>
         </div>
@@ -64,7 +64,7 @@ export default function DashboardHome() {
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2'>
-        {dummy.map((num) => <Card
+        {cards.map((num) => <Card
           key={num.id}
           title={num.title}
           description={num.description}

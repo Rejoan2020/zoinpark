@@ -62,7 +62,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }
   },
   events: {
-    async createUser({ user }) { 
+    async createUser({ user }) {
       await dbconnect();
 
       await User.findByIdAndUpdate(user.id, {
@@ -80,10 +80,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           rank: "",
           successfulInvites: 0,
         },
-      }); 
+      });
       await Wallet.create({
         user: user.id,
-      }); 
+      });
     },
   }
 })
