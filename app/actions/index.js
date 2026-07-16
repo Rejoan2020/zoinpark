@@ -11,6 +11,8 @@ import { AuthError } from "next-auth";
 import { auth } from "@/auth";
 import { dbconnect } from "@/lib/mongo";
 import Wallet from "@/models/Wallet";
+import { generateZoiId } from "@/utils/generateZoiId";
+import { generateReferralCode } from "@/utils/generateReferralCode";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -65,8 +67,8 @@ export async function signUp(formData) {
     user.city='';
     user.zipcode='';
     user.phone='';
-    user.zoiid='';
-    user.referralCode='';
+    user.zoiid= generateZoiId();
+    user.referralCode= generateReferralCode();
     user.referredBy='';
     user.rank='';
     user.successfulInvites='';
@@ -99,8 +101,8 @@ export async function signUp(formData) {
     city:'',
     zipcode:'',
     phone:'',
-    zoiid:'',
-    referralCode:'',
+    zoiid: generateZoiId(),
+    referralCode: generateReferralCode(),
     referredBy:'',
     rank:'',
     successfulInvites:'',

@@ -6,6 +6,8 @@ import Credentials from "next-auth/providers/credentials";
 import User from "./models/User";
 import bcrypt from "bcryptjs";
 import { dbconnect } from "./lib/mongo";
+import { generateZoiId } from "./utils/generateZoiId";
+import { generateReferralCode } from "./utils/generateReferralCode";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(client),
@@ -52,34 +54,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
     })],
   callbacks: {
-    async signIn({ user, account }) {
-      if (account.provider === "google" && user.email) {
-        await dbconnect();
-
-        const dbUser = await User.findOne({ email: user.email });
-
-        if (dbUser) {
-          dbUser.image ??= user.image;
-
-          dbUser.address ??= "";
-          dbUser.country ??= "";
-          dbUser.state ??= "";
-          dbUser.city ??= "";
-          dbUser.zipcode ??= "";
-          dbUser.phone ??= "";
-
-          dbUser.zoiid ??= generateZoiId();
-          dbUser.referralCode ??= generateReferralCode();
-          dbUser.referredBy ??= "";
-
-          dbUser.rank ??= "Bronze";
-          dbUser.successfulInvites ??= 0;
-
-          await dbUser.save();
-        }
-      }
-
+    async signIn() {
       return true;
+    }
+  },
+  events: {
+    async createUser({ user }) {
+      await dbconnect();
+
+      await User.findByIdAndUpdate(user.id, {
+        $set: {
+          zoiid: generateZoiId(),
+          referralCode: generateReferralCode(),
+          image: user.image,
+          address: "",
+          country: "",
+          state: "",
+          city: "",
+          zipcode: "",
+          phone: "",
+          referredBy: "",
+          rank: "",
+          successfulInvites: 0,
+        },
+      });
+
+      await Wallet.create({
+        user: user.id,
+      });
     },
   }
 })
