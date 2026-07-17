@@ -6,53 +6,42 @@ export default function WeeklyChallenge() {
   const dummy1 = [
     {
       id: 1,
-      image: '/icons/weekly/contact.svg',
-      name: 'Complete KYC',
-      amount: '10 ZOINS'
+      image: '/icons/stakingC.svg',
+      name: 'Stake at least 100 ZOINS this week',
+      amount: '100 ZOINS'
     },
     {
       id: 2,
-      image: '/icons/fbicon.svg',
-      name: 'Share on facebook',
-      amount: '10 ZOINS'
+      image: '/images/community.png',
+      name: "Join this week's community event",
+      amount: '100 ZOINS'
     },
     {
       id: 3,
-      image: '/icons/weekly/twitter.svg',
-      name: 'Share on X',
-      amount: '10 ZOINS'
+      image: '/icons/refer.png',
+      name: 'Refer 1 friend this week',
+      amount: '20 ZOINS'
     },
-    {
-      id: 4,
-      image: '/icons/linkedinicon.svg',
-      name: 'Comment on LinkedIn post',
-      amount: '10 ZOINS'
-    }
+    
   ]
   const dummy2 = [
     {
+      id: 4,
+      image: '/icons/dailyCheckin.png',
+      name: 'Daily check-in',
+      amount: '5 ZOINS'
+    },
+    {
       id: 5,
-      image: '/icons/yticon.svg',
-      name: 'Like 3 videos on Youtube',
-      amount: '10 ZOINS'
+      image: '/icons/dailyCheckin.png',
+      name: 'Visit ZoinPark for 5 consecutive days',
+      amount: '20 ZOINS'
     },
     {
       id: 6,
-      image: '/icons/logo.svg',
-      name: 'Share the app',
-      amount: '10 ZOINS'
-    },
-    {
-      id: 7,
-      image: '/icons/weekly/rate.svg',
-      name: 'Rate our app',
-      amount: '10 ZOINS'
-    },
-    {
-      id: 8,
-      image: '/icons/weekly/feedback.svg',
-      name: 'Give us your feedback',
-      amount: '100 ZOINS'
+      image: '/icons/dailyCheckin.png',
+      name: 'Visit ZoinPark for 7 consecutive days',
+      amount: '50 ZOINS'
     },
   ]
   return (
@@ -81,10 +70,10 @@ export default function WeeklyChallenge() {
       <div className='flex gap-4'>
         <div className='flex flex-col xl:gap-4 lg:gap-3 md:gap-2 gap-1'>
           {dummy1.map((item) => <Box key={item.id} url={item.image} title={item.name} amount={item.amount} />)} 
-        </div>
+        </div> 
         <div className='flex flex-col xl:gap-4 lg:gap-3 md:gap-2 gap-1'>
-          {dummy2.map((item) => <Box key={item.id} url={item.image} title={item.name} amount={item.amount} />)}
-        </div>
+          {dummy2.map((item) => <Box key={item.id} url={item.image} title={item.name} amount={item.amount} />)} 
+        </div> 
       </div>
     </div>
   )

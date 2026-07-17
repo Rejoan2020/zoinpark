@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const challengeSchema = new mongoose.Schema(
+const weeklyChallengeSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -35,5 +35,5 @@ const challengeSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.Challenge || 
-mongoose.model("Challenge", challengeSchema);
+export default mongoose.models.WeeklyChallenge || 
+mongoose.model("WeeklyChallenge", weeklyChallengeSchema);

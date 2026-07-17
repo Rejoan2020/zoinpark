@@ -35,7 +35,7 @@ export default function EditProfile({user}) {
             name='address'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'ZOI12345'}
+            placeholder={'House#497, Chorail Club Road, Keraniganj, Dhaka'}
           />
         </div>
         <div className='w-full'>
@@ -44,7 +44,7 @@ export default function EditProfile({user}) {
             name='name'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'ZOI12345'}
+            placeholder={'Md. Rejoanur Rahman Apu'}
           />
         </div>
         <div className='w-full'>
@@ -53,7 +53,7 @@ export default function EditProfile({user}) {
             name='country'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'ZOI12345'}
+            placeholder={'Bangladesh'}
           />
         </div>
         {/* <div className='w-full'>
@@ -71,7 +71,7 @@ export default function EditProfile({user}) {
             name='state'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'ZOI12345'}
+            placeholder={'Keraniganj'}
           />
         </div>
         {/* <div className='w-full'>
@@ -89,7 +89,7 @@ export default function EditProfile({user}) {
             name='city'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'ZOI12345'}
+            placeholder={'Dhaka'}
           />
         </div>
         <div className='w-full'>
@@ -98,7 +98,7 @@ export default function EditProfile({user}) {
             name='phone'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'ZOI12345'}
+            placeholder={'01621089309'}
           />
         </div>
         <div className='w-full'>
@@ -107,7 +107,7 @@ export default function EditProfile({user}) {
             name='zipcode'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'ZOI12345'}
+            placeholder={'1310'}
           />
         </div>
 
@@ -116,7 +116,7 @@ export default function EditProfile({user}) {
           <button
             className='p-2 pl-6 pr-6 border border-[#242B2B] m-2 cursor-pointer'
             // onClick={() => formRef.current?.reset()}
-          >Cancel</button>
+          >Clear</button>
         </div>
 
 
