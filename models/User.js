@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 
     rank:String,
 
-    SuccessfulInvites: Number,
+    successfulInvites: Number,
 
     createdAt: Date,
     updatedAt: Date

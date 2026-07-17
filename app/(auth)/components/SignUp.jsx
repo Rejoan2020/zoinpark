@@ -4,9 +4,12 @@ import Link from 'next/link'
 import React from 'react'
 import { useState } from 'react';
 import { signUp } from '@/app/actions';
+import { useSearchParams } from 'next/navigation';
 
 export default function SignUp() {
   const [email, setEmail] = useState(true);
+    const params = useSearchParams();
+    const referralCode = params?.get('ref');
   return (
     <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
       <Link href={'/dashboard'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
@@ -21,6 +24,13 @@ export default function SignUp() {
           className='w-full'
           action={signUp}
         >
+          <input
+            name='referral'
+            type='hidden'
+            className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
+            value={referralCode}
+          />
+
           <div className='flex justify-start w-full gap-4 mt-4'>
             <div className="text-primaryText cursor-pointer">Name</div>
           </div>

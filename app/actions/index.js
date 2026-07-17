@@ -53,6 +53,7 @@ export async function signUp(formData) {
   const email = formData.get("email");
   const pass = formData.get("password");
   const user = await User.findOne({ email: email })
+  const ref = formData.get('referral')
 
   if (user) {
     if (!!user.password) {
@@ -61,19 +62,19 @@ export async function signUp(formData) {
     const hashedPass = await bcrypt.hash(pass, 12);
     user.name = user.name || name;
     user.password = hashedPass;
-    user.address='';
-    user.country='';
-    user.state='';
-    user.city='';
-    user.zipcode='';
-    user.phone='';
-    user.zoiid= generateZoiId();
-    user.referralCode= generateReferralCode();
-    user.referredBy='';
-    user.rank='';
-    user.successfulInvites='';
-    user.createdAt='';
-    user.updatedAt='';
+    user.address = '';
+    user.country = '';
+    user.state = '';
+    user.city = '';
+    user.zipcode = '';
+    user.phone = '';
+    user.zoiid = generateZoiId();
+    user.referralCode = generateReferralCode();
+    user.referredBy = ref;
+    user.rank = '';
+    user.successfulInvites = 0;
+    user.createdAt = '';
+    user.updatedAt = '';
 
     await user.save();
 
@@ -95,25 +96,34 @@ export async function signUp(formData) {
     password: hashedPassword,
     image: "",
     emailVerified: null,
-    address:'',
-    country:'',
-    state:'',
-    city:'',
-    zipcode:'',
-    phone:'',
+    address: '',
+    country: '',
+    state: '',
+    city: '',
+    zipcode: '',
+    phone: '',
     zoiid: generateZoiId(),
     referralCode: generateReferralCode(),
-    referredBy:'',
-    rank:'',
-    successfulInvites:'',
-    createdAt:'',
-    updatedAt:''
+    referredBy: ref,
+    rank: '',
+    successfulInvites: 0,
+    createdAt: '',
+    updatedAt: ''
   });
-  
+
   await Wallet.create({
     user: newUser._id
   })
-  
+
+  const inviter = await User.findOne({
+    referralCode: ref,
+  });
+
+  if (inviter) {
+    inviter.successfulInvites += 1;
+    await inviter.save();
+  }
+
   await signIn('credentials', {
     email: email,
     password: pass,
@@ -121,7 +131,7 @@ export async function signUp(formData) {
   })
 }
 
-export async function updateProfile(formData) { 
+export async function updateProfile(formData) {
   await dbconnect();
   const session = await auth();
 
@@ -140,7 +150,7 @@ export async function updateProfile(formData) {
     phone: formData.get("phone"),
   };
 
-    Object.keys(updateData).forEach((key) => {
+  Object.keys(updateData).forEach((key) => {
     if (
       updateData[key] === null ||
       updateData[key] === undefined ||
@@ -154,7 +164,7 @@ export async function updateProfile(formData) {
     { email: session.user.email },
     { $set: updateData }
   );
-  
+
   console.log(user)
 }
 
@@ -218,4 +228,52 @@ export async function resetPassword(formData) {
     redirect(`${String(process.env.NEXTAUTH_URL)}/signin`)
   }
   throw new error("Paswords are not same!")
+}
+
+export async function inviteByEmail(initailState, formData) {
+  await dbconnect();
+
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    throw new Error("Unauthorized");
+  }
+
+  const email = formData.get("email");
+
+  const user = await User.findOne({ email: session.user.email });
+
+  const referralLink = `${process.env.NEXTAUTH_URL}/signup?ref=${user.referralCode}`;
+  console.log(referralLink);
+  const { data, error } = await resend.emails.send({
+    from: "ZoinPark <onboarding@resend.dev>",
+    to: email,
+    subject: "You've been invited to join ZoinPark!",
+    html: `
+      <h2>You've been invited to ZoinPark</h2>
+
+      <p>Your friend invited you to join ZoinPark.</p>
+
+      <p>
+        <a href="${referralLink}">
+          Join ZoinPark
+        </a>
+      </p>
+
+      <p>Or copy this link:</p>
+
+      <p>${referralLink}</p>
+    `,
+  });
+  if (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+
+  return {
+    success: true,
+    message: "Invitation sent successfully!",
+  };
 }
