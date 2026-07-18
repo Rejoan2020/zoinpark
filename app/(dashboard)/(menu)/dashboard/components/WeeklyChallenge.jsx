@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Box from './Box'
+import { getDaysRemaining } from '@/utils/getRemainingDay'
 
 export default function WeeklyChallenge() {
   const dummy1 = [
@@ -44,6 +45,7 @@ export default function WeeklyChallenge() {
       amount: '50 ZOINS'
     },
   ]
+  const day = getDaysRemaining();
   return (
     <div className='flex flex-col text-secondaryText gap-8 p-2 md:p-4 lg:p-8 xl:p-12 text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>
       <div>
@@ -59,7 +61,7 @@ export default function WeeklyChallenge() {
               height={12}
               src='/icons/stopwatch.svg'
             />
-            5 days remaining
+            {day} days remaining
           </div>
         </div>
 
