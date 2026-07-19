@@ -63,7 +63,7 @@ export default function DashboardHome({wallet}) {
 
         </div>
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2'>
         {cards.map((num) => <Card
           key={num.id}
           title={num.title}
