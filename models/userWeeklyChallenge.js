@@ -7,10 +7,14 @@ const userWeeklyChallengeSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    challengeId: {
+      type: String,
+      required: true
+    },
+    lastActivity: Date,
 
     challenge: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "WeeklyChallenge",
+      type: String,
       required: true,
     },
 
@@ -38,7 +42,7 @@ const userWeeklyChallengeSchema = new mongoose.Schema(
 );
 
 userWeeklyChallengeSchema.index(
-  { user: 1, challenge: 1 },
+  { user: 1, challengeId: 1 },
   { unique: true }
 );
 

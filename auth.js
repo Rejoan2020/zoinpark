@@ -9,6 +9,8 @@ import { dbconnect } from "./lib/mongo";
 import { generateZoiId } from "./utils/generateZoiId";
 import { generateReferralCode } from "./utils/generateReferralCode";
 import Wallet from "./models/Wallet";
+import { createUserWeeklyChallenge } from "./app/actions";
+
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(client),
@@ -84,6 +86,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       await Wallet.create({
         user: user.id,
       });
+      await createUserWeeklyChallenge(user);
     },
   }
 })

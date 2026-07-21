@@ -26,7 +26,7 @@ export default function DashboardHome({wallet}) {
     }
   ];
   return (
-    <div>
+    <div className='mb-32'>
       <div className='xl:h-[247px] lg:h-[180px] md:h-[130px] flex xl:text-xl lg:text-l md:text-md border border-zinc-800'>
         <div className='basis-[30%] border-r border-zinc-800 p-4 xl:p-16 l:p-12 md:p-8'>
           <div className='flex'>

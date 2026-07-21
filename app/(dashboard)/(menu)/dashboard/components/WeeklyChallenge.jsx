@@ -3,43 +3,45 @@ import Image from 'next/image'
 import Box from './Box'
 import { getDaysRemaining } from '@/utils/getRemainingDay'
 
-export default function WeeklyChallenge() {
+export default function WeeklyChallenge({ challengeArray }) {
+  console.log("weeklyy")
+
   const dummy1 = [
     {
-      id: 1,
+      id: "stake-100",
       image: '/icons/stakingC.svg',
       name: 'Stake at least 100 ZOINS this week',
       amount: '100 ZOINS'
     },
     {
-      id: 2,
+      id: 'community-event',
       image: '/images/community.png',
       name: "Join this week's community event",
       amount: '100 ZOINS'
     },
     {
-      id: 3,
+      id: 'refer-1',
       image: '/icons/refer.png',
       name: 'Refer 1 friend this week',
       amount: '20 ZOINS'
     },
-    
+
   ]
   const dummy2 = [
     {
-      id: 4,
+      id: "daily-checkin",
       image: '/icons/dailyCheckin.png',
       name: 'Daily check-in',
       amount: '5 ZOINS'
     },
     {
-      id: 5,
+      id: "visit-5",
       image: '/icons/dailyCheckin.png',
       name: 'Visit ZoinPark for 5 consecutive days',
       amount: '20 ZOINS'
     },
     {
-      id: 6,
+      id: "visit-7",
       image: '/icons/dailyCheckin.png',
       name: 'Visit ZoinPark for 7 consecutive days',
       amount: '50 ZOINS'
@@ -71,11 +73,19 @@ export default function WeeklyChallenge() {
       </div>
       <div className='flex gap-4'>
         <div className='flex flex-col xl:gap-4 lg:gap-3 md:gap-2 gap-1'>
-          {dummy1.map((item) => <Box key={item.id} url={item.image} title={item.name} amount={item.amount} />)} 
-        </div> 
+          {dummy1.map((item) => {
+            const challenge = challengeArray.find((ch) => ch.challengeId == item.id);
+            return <Box key={item.id} challenge={challenge} url={item.image} title={item.name} amount={item.amount} />
+          }
+          )}
+        </div>
         <div className='flex flex-col xl:gap-4 lg:gap-3 md:gap-2 gap-1'>
-          {dummy2.map((item) => <Box key={item.id} url={item.image} title={item.name} amount={item.amount} />)} 
-        </div> 
+          {dummy2.map((item) => {
+            const challenge = challengeArray.find((ch) => ch.challengeId == item.id);
+            return <Box key={item.id} challenge={challenge} url={item.image} title={item.name} amount={item.amount} />
+          }
+          )}
+        </div>
       </div>
     </div>
   )

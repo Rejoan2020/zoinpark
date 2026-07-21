@@ -13,6 +13,7 @@ import { dbconnect } from "@/lib/mongo";
 import Wallet from "@/models/Wallet";
 import { generateZoiId } from "@/utils/generateZoiId";
 import { generateReferralCode } from "@/utils/generateReferralCode";
+import userWeeklyChallenge from "@/models/userWeeklyChallenge"; 
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -24,7 +25,7 @@ export async function logIn(initailState, formData) {
   const email = formData.get('email');
   const pass = formData.get('password');
 
-  console.log(email, pass)
+  // console.log(email, pass)
   try {
     await signIn("credentials", {
       email: email,
@@ -39,6 +40,7 @@ export async function logIn(initailState, formData) {
     }
     throw err;
   }
+
 }
 
 export async function signOutWithGoogle() {
@@ -107,8 +109,8 @@ export async function signUp(formData) {
     referredBy: ref,
     rank: '',
     successfulInvites: 0,
-    createdAt: '',
-    updatedAt: ''
+    createdAt: new Date(),
+    updatedAt: new Date()
   });
 
   await Wallet.create({
@@ -121,14 +123,60 @@ export async function signUp(formData) {
 
   if (inviter) {
     inviter.successfulInvites += 1;
+    // const userWeekly = await userWeeklyChallenge();
+    // if(!userWeekly.completed && !userWeekly.claimed)
     await inviter.save();
   }
+
+  await createUserWeeklyChallenge(newUser);
 
   await signIn('credentials', {
     email: email,
     password: pass,
     redirectTo: "/signin",
   })
+}
+
+export async function createUserWeeklyChallenge(newUser) {
+  const challenges = [
+    {
+      id: "stake-100",
+      title: "Stake at least 100 ZOINS this week",
+    },
+    {
+      id: "community-event",
+      title: "Join this week's community event",
+    },
+    {
+      id: "refer-1",
+      title: "Refer 1 friend this week",
+    },
+    {
+      id: "daily-checkin",
+      title: "Daily check-in",
+    },
+    {
+      id: "visit-5",
+      title: "Visit ZoinPark for 5 consecutive days",
+    },
+    {
+      id: "visit-7",
+      title: "Visit ZoinPark for 7 consecutive days",
+    },
+  ];
+  const docs = challenges.map((challenge) => ({
+    user: newUser._id,
+    challengeId: challenge.id,
+    lastActivity: null,
+    challenge: challenge.title,
+    progress: 0,
+    completed: false,
+    claimed: false,
+    completedAt: null,
+    claimedAt: null,
+  }));
+  // console.log(docs);
+  await userWeeklyChallenge.insertMany(docs);
 }
 
 export async function updateProfile(formData) {
