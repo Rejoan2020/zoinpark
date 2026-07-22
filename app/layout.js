@@ -20,9 +20,11 @@ export default async function RootLayout({ children }) {
 
   const dailyCheckIn = await userWeeklyChallenge.findOne({ challengeId: 'daily-checkin' });
   const fiveDaysCheckIn = await userWeeklyChallenge.findOne({challengeId: 'visit-5'});
+  const sevenDaysCheckIn = await userWeeklyChallenge.findOne({challengeId: 'visit-7'});
   // console.log(dailyCheckIn);
   await updateDailyCheckIn(dailyCheckIn);
   await updateDaysCheckIn(fiveDaysCheckIn, 5);
+  await updateDaysCheckIn(sevenDaysCheckIn, 7);
 
   return (
     <html

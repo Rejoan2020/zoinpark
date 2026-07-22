@@ -67,18 +67,19 @@ export async function claimRewardForDailyCheckIn(id, amount) {
             type: "credit",
             source: "challenge",
             amount: amount,
-            description: "Daily check-in completed!",
+            description: `${challenge.challengeId} completed!`,
             status: "completed",
         })
     }
     catch (err) {
-        throw new Error("Failed to create wallet transaction");
+        console.log(err)
+        throw err;
     }
 
     challenge.claimed = true;
     challenge.claimedAt = new Date();
     challenge.progress = 0;
-
+    
     wallet.balance += amount;
     wallet.totalCredit += amount;
 
@@ -107,13 +108,16 @@ export async function updateDaysCheckIn(challenge, days) {
     }
     if (challenge.progress >= days && !challenge.completed) {
         challenge.lastActivity = new Date();
-        challenge.claimed = false;
+        // challenge.claimed = false;
         challenge.completed = true;
         challenge.completedAt = new Date();
     }
     await challenge.save();
 }
 
+// export async function claimRewardForReferAFriend(){
+//     console.log('refer reward claimed!');
+// }
 // export async function claimRewardForFiveDaysCheckIn(id) {
 //     // console.log("claim reward for five days checkin");
 //     const session = await auth();

@@ -3,8 +3,7 @@ import Image from 'next/image'
 import Box from './Box'
 import { getDaysRemaining } from '@/utils/getRemainingDay'
 
-export default function WeeklyChallenge({ challengeArray }) {
-  console.log("weeklyy")
+export default function WeeklyChallenge({ challengeArray }) { 
 
   const dummy1 = [
     {

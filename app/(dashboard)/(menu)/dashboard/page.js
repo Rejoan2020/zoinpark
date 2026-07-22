@@ -8,11 +8,8 @@ import Wallet from '@/models/Wallet';
 export default async function page() {
     await dbconnect();
     const session = await auth();
-    const user = await User.findOne({user:session?.user._id});
-    const wallet = await Wallet.findOne({user:user._id})
-    
-    console.log(user);
-    console.log(wallet);
+    const user = await User.findOne({email:session?.user?.email}); 
+    const wallet = await Wallet.findOne({user:user._id});
     return (
         <DashboardHome wallet = {wallet}/>
     )

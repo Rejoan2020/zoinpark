@@ -13,7 +13,8 @@ import { dbconnect } from "@/lib/mongo";
 import Wallet from "@/models/Wallet";
 import { generateZoiId } from "@/utils/generateZoiId";
 import { generateReferralCode } from "@/utils/generateReferralCode";
-import userWeeklyChallenge from "@/models/userWeeklyChallenge"; 
+import userWeeklyChallenge from "@/models/userWeeklyChallenge";
+import WalletTransaction from "@/models/WalletTransaction";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -123,8 +124,38 @@ export async function signUp(formData) {
 
   if (inviter) {
     inviter.successfulInvites += 1;
-    // const userWeekly = await userWeeklyChallenge();
-    // if(!userWeekly.completed && !userWeekly.claimed)
+    const challenge = await userWeeklyChallenge.findOne({
+      user: inviter._id,
+      challengeId: 'refer-1',
+    });
+    const wallet = await Wallet.findOne({ user: inviter.id });
+
+    if (!wallet) {
+      throw new Error("Wallet not found");
+    }
+
+    if (!challenge.completed && !challenge.claimed) {
+      try {
+        const creditTransaction = await WalletTransaction.create({
+          wallet: wallet._id,
+          type: "credit",
+          source: "challenge",
+          amount: 20,
+          description: "Refer one friend in a week",
+          status: "completed",
+        })
+      }
+      catch (err) {
+        console.log(err);
+        throw err;
+      }
+      challenge.completed = true;
+      challenge.progress = 1;
+      challenge.lastActivity = new Date();
+      challenge.completedAt = new Date();
+      challenge.save();
+    }
+
     await inviter.save();
   }
 
@@ -259,7 +290,6 @@ export async function getToken(hashedToken) {
 
 export async function changePass(email, newPass) {
   const user = await User.findOne({ email });
-  console.log("user : xxxxxxxxxxxxxxx :", email, user, newPass);
   const hashedPass = await bcrypt.hash(newPass, 12);
   user.password = hashedPass;
   user.save();
