@@ -15,6 +15,8 @@ import { generateZoiId } from "@/utils/generateZoiId";
 import { generateReferralCode } from "@/utils/generateReferralCode";
 import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import WalletTransaction from "@/models/WalletTransaction";
+import Event from "@/models/Event";
+import EventRegistration from "@/models/EventRegistration";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -354,4 +356,166 @@ export async function inviteByEmail(initailState, formData) {
     success: true,
     message: "Invitation sent successfully!",
   };
+}
+
+export async function registerForEvent(eventId) {
+  await dbconnect();
+
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    throw new Error("Unauthorized");
+  }
+
+  const user = await User.findOne({
+    email: session.user.email,
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const event = await Event.findById(eventId);
+
+  if (!event) {
+    throw new Error("Event not found");
+  }
+
+  const exists = await EventRegistration.findOne({
+    user: user._id,
+    event: event._id,
+  });
+
+  if (exists) {
+    throw new Error("You have already registered for this event.");
+  }
+
+  await EventRegistration.create({
+    user: user._id,
+    event: event._id,
+  });
+
+  const eventDate = new Date(event.eventDate);
+
+  await resend.emails.send({
+    from: "ZoinPark <onboarding@resend.dev>",
+    to: 'rejoan523@gmail.com',
+    subject: `Registration Confirmed - ${event.title}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto;">
+        <h2>You're Registered!</h2>
+
+        <p>Hi <strong>${user.name}</strong>,</p>
+
+        <p>Thank you for registering for the following ZoinPark event:</p>
+
+        <hr />
+
+        <h3>${event.title}</h3>
+
+        <p>${event.description}</p>
+
+        <p>
+          <strong>📅 Date:</strong>
+          ${eventDate.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })}
+        </p>
+
+        <p>
+          <strong>🕒 Time:</strong>
+          ${eventDate.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    })}
+        </p>
+
+        <p>
+          <strong>📍 Location:</strong>
+          ${event.location}
+        </p>
+
+        <p style="margin-top:20px;">
+          <a
+            href="${event.registrationLink}"
+            style="
+              background:#16a34a;
+              color:white;
+              padding:12px 20px;
+              text-decoration:none;
+              border-radius:6px;
+              display:inline-block;
+            "
+          >
+            Join Event
+          </a>
+        </p>
+
+        <p style="margin-top:20px;">
+          Or use this link:
+        </p>
+
+        <p>${event.registrationLink}</p>
+
+        <hr />
+
+        <p>We look forward to seeing you!</p>
+
+        <p><strong>Team ZoinPark</strong></p>
+      </div>
+    `,
+  });
+  const challenge = await userWeeklyChallenge.findOne({
+    user: user._id,
+    challengeId: 'community-event'
+  })
+  if (!challenge) throw new Error("Challenge not found!");
+  if (!challenge.claimed) {
+    challenge.completed = true;
+    challenge.progress = 1;
+    challenge.completedAt = new Date();
+    challenge.lastActivity = new Date();
+    challenge.save();
+  }
+
+  return {
+    success: true,
+    message: "Successfully registered for the event.",
+  };
+}
+
+export async function isRegistered(eventId) {
+  await dbconnect();
+
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    throw new Error("Unauthorized");
+  }
+
+  const user = await User.findOne({
+    email: session.user.email,
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const event = await Event.findById(eventId);
+
+  if (!event) {
+    throw new Error("Event not found");
+  }
+
+  const exists = await EventRegistration.findOne({
+    user: user._id,
+    event: event._id,
+  });
+
+  if (exists) {
+    return true;
+  }
+  else return false;
 }

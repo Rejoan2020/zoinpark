@@ -6,50 +6,7 @@ import CopyButton from './CopyButton'
 import InviteEmailForm from './InviteEmailForm'
 
 export default function Invite({ referral, users, successfulInvites }) {
-  const dummy2 = [
-    {
-      id: 1,
-      image: '/icons/mark1.png',
-      name: 'Mark boucher',
-      amount: '100 ZOINS'
-    },
-    {
-      id: 2,
-      image: '/icons/mark2.png',
-      name: 'Cark boucher',
-      amount: '100 ZOINS'
-    },
-    {
-      id: 3,
-      image: '/icons/mark3.png',
-      name: 'Dark boucher',
-      amount: '100 ZOINS'
-    },
-    {
-      id: 4,
-      image: '/icons/mark1.png',
-      name: 'Fark boucher',
-      amount: '100 ZOINS'
-    },
-    {
-      id: 5,
-      image: '/icons/mark2.png',
-      name: 'Nark boucher',
-      amount: '100 ZOINS'
-    },
-    {
-      id: 6,
-      image: '/icons/mark3.png',
-      name: 'Lark boucher',
-      amount: '100 ZOINS'
-    },
-    {
-      id: 7,
-      image: '/icons/mark1.png',
-      name: 'Xark boucher',
-      amount: '100 ZOINS'
-    },
-  ]
+  
   let currentTotal = 3;
   if (successfulInvites < 3) currentTotal = 3;
   else if (successfulInvites < 10) currentTotal = 10;
