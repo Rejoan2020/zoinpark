@@ -9,23 +9,27 @@ const stakePackageSchema = new mongoose.Schema(
       unique: true,
     },
 
-    minimum: {
+    minAmount: {
       type: Number,
       required: true,
     },
 
-    maximum: {
+    maxAmount: {
       type: Number,
       required: true,
+    },
+
+    dailyProfit: {
+      type: Number,
     },
 
     duration: {
-      type: Number, // days
+      type: String,
       required: true,
     },
 
-    roi: {
-      type: Number, // percentage
+    apy: {
+      type: Number,
       required: true,
     },
 

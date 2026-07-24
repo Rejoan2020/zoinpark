@@ -1,19 +1,10 @@
-'use client'
-import React, { useState } from 'react'
-import StakingNavbar from './components/StakingNavbar'
-import StakingPackage from './components/StakingPackage'
-import StakingHistory from './components/StakingHistory'
+import React from 'react' 
+import StakingPageClient from './components/StakingPageClient'
+import { getPackages } from '@/app/actions/staking';
 
-export default function page() {
-  const [stakingPackage, setStakingPackage] = useState(true);
-  const handleClick = (tab)=>{
-    if(tab=='staking')setStakingPackage(true);
-    else setStakingPackage(false);
-  }
-  return (
-    <div>
-        <StakingNavbar handleClick = {handleClick} staking={stakingPackage}/>
-        {stakingPackage ?<StakingPackage/>: <StakingHistory/>}
-    </div>
+export default async function page() {
+  const packages = await getPackages(); 
+  return(
+    <StakingPageClient packages = {packages}/>
   )
 }

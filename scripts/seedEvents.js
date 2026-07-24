@@ -1,5 +1,4 @@
 
-import { dbconnect } from "../lib/mongo.js";
 import Event from "../models/Event.js";
 
 const events = [
@@ -66,7 +65,7 @@ const events = [
 
 async function seed() {
     try {
-        await dbconnect();
+        await mongoose.connect(String('mongodb+srv://rejoan523_db_user:ceuE6DePDw68pUzd@cluster0.ekmh1po.mongodb.net/zoinpark'));
 
         await Event.deleteMany();
         await Event.insertMany(events);
