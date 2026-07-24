@@ -10,6 +10,7 @@ export default function Button({ challenge, title }) {
     if (challenge.challengeId === "visit-7") await claimRewardForDailyCheckIn(challenge.challengeId, 50);
     if (challenge.challengeId === "refer-1") await claimRewardForDailyCheckIn(challenge.challengeId, 20);
     if (challenge.challengeId === "community-event") await claimRewardForDailyCheckIn(challenge.challengeId, 100);
+    if (challenge.challengeId === "stake-100") await claimRewardForDailyCheckIn(challenge.challengeId, 100);
   }
   const disabled = challenge.claimed || !challenge.completed;
   return (

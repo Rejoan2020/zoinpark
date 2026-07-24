@@ -20,9 +20,13 @@ const userStakeSchema = new mongoose.Schema(
       required: true,
     },
 
-    expectedReturn: {
+    dailyProfit: {
       type: Number,
       required: true,
+    },
+
+    apy:{
+      type:Number,
     },
 
     startDate: {
