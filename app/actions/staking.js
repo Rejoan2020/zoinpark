@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import UserStake from "@/models/UserStake";
 import WalletTransaction from "@/models/WalletTransaction";
 import userWeeklyChallenge from "@/models/userWeeklyChallenge";
+import { differenceInCalendarDays } from "date-fns";
 
 async function getPackages() {
     const packages = await StakePackage.find().lean();
@@ -103,8 +104,70 @@ async function createStake(packageId, amount, paymentMode) {
 
 }
 
-// async function getHistory(){
-//     const history = await 
-// }
+async function getUserStakes() {
+    const history = await UserStake.find().lean();
+    return history;
+}
 
-export { getPackages, createStake };
+async function withdraw(stakeId) {
+    const stake = await UserStake.findById(stakeId);
+
+    if (!stake)
+        throw new Error("Stake not found");
+
+    if (stake.status === 'completed') throw new Error("This is no longer active!")
+
+    const session = await auth();
+
+    const user = await User.findOne({
+        email: session.user.email,
+    });
+
+    if (!stake.user.equals(user._id))
+        throw new Error("Unauthorized");
+
+    const effectiveEnd = new Date() > stake.endDate ? stake.endDate : new Date();
+    const daysPassed = differenceInCalendarDays(effectiveEnd, stake.startDate);
+
+    const totalReward = stake.amount * (stake.dailyProfit / 100) * daysPassed;
+    let withdrawable = totalReward - Number(stake.claimedRewards);
+    console.log(withdrawable);
+    if (withdrawable <= 0)
+        throw new Error("No rewards available.");
+
+    const wallet = await Wallet.findOne({
+        user: user._id,
+    });
+
+    if (new Date() > stake.endDate) {
+        stake.status = 'completed';
+        withdrawable += Number(stake.amount);
+    }
+
+    wallet.balance += withdrawable;
+
+    stake.updatedAt = new Date();
+    stake.claimedRewards += withdrawable;
+    await stake.save();
+
+    try {
+        const creditTransaction = await WalletTransaction.create({
+            wallet: wallet._id,
+            type: "credit",
+            source: "staking",
+            amount: withdrawable,
+            description: 'Staking bonus!',
+            status: "completed",
+        })
+    }
+    catch (err) {
+        throw err;
+    }
+
+    await wallet.save();
+    return {
+        success: true,
+        amount: withdrawable,
+    };
+}
+export { getPackages, createStake, getUserStakes, withdraw };

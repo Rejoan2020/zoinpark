@@ -5,7 +5,7 @@ import StakingHistory from './StakingHistory';
 import StakingNavbar from './StakingNavbar';
 import { useState } from 'react';
 
-export default function StakingPageClient({packages}) {
+export default function StakingPageClient({ packages, history, totalStaking }) {
     const [stakingPackage, setStakingPackage] = useState(true);
     const handleClick = (tab) => {
         if (tab == 'staking') setStakingPackage(true);
@@ -15,8 +15,8 @@ export default function StakingPageClient({packages}) {
 
     return (
         <div>
-            <StakingNavbar handleClick={handleClick} staking={stakingPackage} />
-            {stakingPackage ? <StakingPackage packages = {packages}/> : <StakingHistory />}
+            <StakingNavbar handleClick={handleClick} staking={stakingPackage}  />
+            {stakingPackage ? <StakingPackage packages={packages} /> : <StakingHistory history = {history} totalStaking = {totalStaking} />}
         </div>
     )
 }

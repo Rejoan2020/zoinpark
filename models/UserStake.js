@@ -20,6 +20,11 @@ const userStakeSchema = new mongoose.Schema(
       required: true,
     },
 
+    claimedRewards:{
+      type: Number,
+      default: 0
+    },
+
     dailyProfit: {
       type: Number,
       required: true,
