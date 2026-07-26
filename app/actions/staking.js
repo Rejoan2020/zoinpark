@@ -105,7 +105,12 @@ async function createStake(packageId, amount, paymentMode) {
 }
 
 async function getUserStakes() {
-    const history = await UserStake.find().lean();
+    const session = await auth();
+
+    const user = await User.findOne({
+        email: session.user.email,
+    });
+    const history = await UserStake.find({ user: user._id }).lean();
     return history;
 }
 
@@ -170,4 +175,40 @@ async function withdraw(stakeId) {
         amount: withdrawable,
     };
 }
-export { getPackages, createStake, getUserStakes, withdraw };
+
+async function getTotalStakes() {
+    const stakes = await UserStake.find();
+    const totalStaking = stakes.reduce(
+        (sum, stake) => sum + stake.amount,
+        0
+    );
+    return totalStaking;
+}
+
+async function getTotalDebitCredits() {
+    const session = await auth();
+
+    const user = await User.findOne({
+        email: session.user.email,
+    });
+
+    const wallet = await Wallet.findOne({ user: user._id });
+
+    const transactions = await WalletTransaction.find({
+        wallet: wallet._id,
+        source: "staking",
+        status: "completed",
+    });
+
+    const totalCredit = transactions
+        .filter(t => t.type === "credit")
+        .reduce((sum, t) => sum + t.amount, 0);
+
+    const totalDebit = transactions
+        .filter(t => t.type === "debit")
+        .reduce((sum, t) => sum + t.amount, 0);
+
+    return [totalDebit, totalCredit];
+}
+
+export { getPackages, createStake, getUserStakes, withdraw, getTotalStakes, getTotalDebitCredits };

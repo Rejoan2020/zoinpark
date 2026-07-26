@@ -6,7 +6,6 @@ export default async function page() {
   const packages = await getPackages();
   const history = await getUserStakes();
   const totalStaking = history.map((pkg) => pkg.amount);
-  console.log(totalStaking);
   let sum = 0;
   for(let i=0;i<totalStaking.length;i++)sum+=totalStaking[i];
 

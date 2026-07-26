@@ -1,20 +1,30 @@
-'use client'
 import React from 'react'
 import ZoinHeader from './components/ZoinHeader'
-import { useState } from 'react';
-import ZoinSummary from './components/ZoinSummary';
-import ZoinHistory from './components/ZoinHistory';
+import { getTotalStakes } from '@/app/actions/staking';
+import { getTotalDebitCredits } from '@/app/actions/staking';
+import { getWalletHistory } from '@/app/actions';
 
-export default function page() {
-  const [summary, setSummary] = useState(true);
-  const handleClick = (tab) => {
-    if (tab == 'summary') setSummary(true);
-    else setSummary(false);
-  }
+export default async function page() {
+
+  const totalStaking = await getTotalStakes();
+  const totalDebitCredits = await getTotalDebitCredits();
+  const walletHistory = await getWalletHistory();
+  const leanTransactions = walletHistory.map((t) => ({
+    ...t,
+    _id: t._id.toString(),
+    wallet: t.wallet.toString(),
+    referenceId: t.referenceId?.toString() ?? null,
+    createdAt: t.createdAt.toISOString(),
+    updatedAt: t.updatedAt.toISOString(),
+  }));
+  console.log(leanTransactions);
+
   return (
-    <div className='text-secondaryText'>
-      <ZoinHeader handleClick={handleClick} summary={summary}/>
-      {summary?<ZoinSummary/>:<ZoinHistory/>}
-    </div>
+    <ZoinHeader
+      totalStaking={totalStaking}
+      totalDebits={totalDebitCredits[0]}
+      totalCredits={totalDebitCredits[1]}
+      transactions = {leanTransactions}
+    />
   )
 }

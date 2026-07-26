@@ -519,3 +519,23 @@ export async function isRegistered(eventId) {
   }
   else return false;
 }
+
+export async function getWalletHistory() {
+  const session = await auth();
+  if (!session?.user?.email) {
+    throw new Error("Unauthorized");
+  }
+
+  const user = await User.findOne({
+    email: session.user.email,
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const wallet = await Wallet.findOne({ user: user._id });
+  const walletHistory = await WalletTransaction.find({ wallet: wallet._id}).lean();
+
+  return walletHistory;
+}
