@@ -1,10 +1,8 @@
 import SignUp from "../components/SignUp";
-import React from 'react'
-import { useSearchParams } from "next/navigation";
+import React from 'react' 
 
-export default function page() {
-  const params = useSearchParams();
+export default function page({searchParams}) { 
   return (
-    <SignUp params = {params}/>
+    <SignUp referralCode = {searchParams?.ref ?? ""}/>
   )
 }

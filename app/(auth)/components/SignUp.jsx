@@ -5,9 +5,8 @@ import React from 'react'
 import { useState } from 'react';
 import { signUp } from '@/app/actions';
 
-export default function SignUp({params}) {
-  const [email, setEmail] = useState(true);
-    const referralCode = params?.get('ref');
+export default function SignUp({referralCode}) {
+  const [email, setEmail] = useState(true); 
   return (
     <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
       <Link href={'/dashboard'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
