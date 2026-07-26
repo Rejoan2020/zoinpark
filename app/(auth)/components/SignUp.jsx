@@ -4,11 +4,9 @@ import Link from 'next/link'
 import React from 'react'
 import { useState } from 'react';
 import { signUp } from '@/app/actions';
-import { useSearchParams } from 'next/navigation';
 
-export default function SignUp() {
+export default function SignUp({params}) {
   const [email, setEmail] = useState(true);
-    const params = useSearchParams();
     const referralCode = params?.get('ref');
   return (
     <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
