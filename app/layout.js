@@ -3,6 +3,8 @@ import "./globals.css";
 import { dbconnect } from "@/lib/mongo.js";
 import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import { updateDailyCheckIn, updateDaysCheckIn } from "./actions/challenges";
+import User from "@/models/User";
+import { auth } from "@/auth";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,13 +20,6 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const conn = await dbconnect();
 
-  const dailyCheckIn = await userWeeklyChallenge.findOne({ challengeId: 'daily-checkin' });
-  const fiveDaysCheckIn = await userWeeklyChallenge.findOne({challengeId: 'visit-5'});
-  const sevenDaysCheckIn = await userWeeklyChallenge.findOne({challengeId: 'visit-7'});
-  // console.log(dailyCheckIn);
-  await updateDailyCheckIn(dailyCheckIn);
-  await updateDaysCheckIn(fiveDaysCheckIn, 5);
-  await updateDaysCheckIn(sevenDaysCheckIn, 7);
 
   return (
     <html

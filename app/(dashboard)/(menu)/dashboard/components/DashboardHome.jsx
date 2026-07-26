@@ -36,7 +36,7 @@ export default function DashboardHome({wallet}) {
             <div className='gradient'>Zoin balance</div>
           </div>
           <div className='gradient xl:text-[48px] lg:text-[32px]'>
-            {wallet.balance}
+            {wallet.balance.toFixed(4)}
           </div>
           <div className='flex text-[#4AE3C9]'>+1.2%<img src='icons/home/upArrow.svg' /></div>
         </div>

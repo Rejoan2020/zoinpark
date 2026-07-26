@@ -16,17 +16,18 @@ export default function CommunityEvents({ events }) {
         </div>
       </div>
       <div className='grid grid-cols-3 gap-2 md:gap-3 lg:gap-3 xl:gap-4'>
-        {events.map((item) => <Card2
-          key={item._id.toString()}
-          title={item.title}
-          description={item.description}
-          id={item._id.toString()}
-          image={item.image}
-          location={item.location}
-          eventDate={item.eventDate}
-          registrationLink={item.registrationLink}
-          status={item.status}
-        />)}
+        {events.map((item) =>
+          <Card2
+            key={item._id.toString()}
+            title={item.title}
+            description={item.description}
+            id={item._id.toString()}
+            image={item.image}
+            location={item.location}
+            eventDate={item.eventDate}
+            registrationLink={item.registrationLink}
+            status={item.status}
+          />)}
       </div>
     </div>
   )

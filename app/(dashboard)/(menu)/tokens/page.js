@@ -16,9 +16,8 @@ export default async function page() {
     referenceId: t.referenceId?.toString() ?? null,
     createdAt: t.createdAt.toISOString(),
     updatedAt: t.updatedAt.toISOString(),
-  }));
-  console.log(leanTransactions);
-
+  })); 
+  console.log(totalDebitCredits)
   return (
     <ZoinHeader
       totalStaking={totalStaking}

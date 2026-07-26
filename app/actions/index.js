@@ -471,6 +471,7 @@ export async function registerForEvent(eventId) {
     user: user._id,
     challengeId: 'community-event'
   })
+  console.log(challenge)
   if (!challenge) throw new Error("Challenge not found!");
   if (!challenge.claimed) {
     challenge.completed = true;
@@ -535,7 +536,7 @@ export async function getWalletHistory() {
   }
 
   const wallet = await Wallet.findOne({ user: user._id });
-  const walletHistory = await WalletTransaction.find({ wallet: wallet._id}).lean();
+  const walletHistory = await WalletTransaction.find({ wallet: wallet._id }).lean();
 
   return walletHistory;
 }

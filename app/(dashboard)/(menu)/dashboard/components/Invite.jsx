@@ -154,7 +154,7 @@ export default function Invite({ referral, users, successfulInvites }) {
                     }
                     <div className='md:pt-[1px] lg:pt-[3px] xl:pt-[6px]'>{item.user.name}</div>
                   </div>
-                  <div>{item.balance}</div>
+                  <div>{item.balance.toFixed(4)}</div>
                 </div>
               </div>
             )}

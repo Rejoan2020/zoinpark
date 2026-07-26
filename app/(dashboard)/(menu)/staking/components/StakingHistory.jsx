@@ -7,8 +7,7 @@ export default function StakingHistory({ history, totalStaking }) {
   const [searchKeyword, setSearchKeyword] = useState('');
   let serial = 0;
   function handleSearch(e) {
-    setSearchKeyword(e.target.value);
-    console.log("inside handleSearch")
+    setSearchKeyword(e.target.value); 
   }
   return (
     <div className='text-primaryText'>
@@ -17,7 +16,7 @@ export default function StakingHistory({ history, totalStaking }) {
           <ul><li className='list-disc ml-4'></li></ul>
           <div className='gradient'>Total Staking</div>
         </div>
-        <div className='gradient text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>{totalStaking} ZOIN</div>
+        <div className='gradient text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>{totalStaking.toFixed(4)} ZOIN</div>
       </div>
       <div className='p-4 md:p-5 lg:p-6 xl:p-7'>
         <div className='gradient text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>
@@ -30,7 +29,7 @@ export default function StakingHistory({ history, totalStaking }) {
             earchKeyword={searchKeyword} 
           />
         </div>
-        <div className='grid grid-cols-9 grid-cols-[60px_100px_repeat(7,minmax(0,1fr))] lg:grid-cols-[60px_200px_repeat(7,minmax(0,1fr))] text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
+        <div className='grid grid-cols-9 grid-cols-[1fr_2fr_1fr_1.5fr_1.5fr_1.5fr_1.5fr_1fr_1fr] text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
           <div className='p-4'>Serial No.</div>
           <div className='p-4 flex justify-center items-center'>Staking ID</div>
           <div className='p-4 flex justify-center items-center'>Investment Name</div>

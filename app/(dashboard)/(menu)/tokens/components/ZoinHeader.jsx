@@ -31,7 +31,7 @@ export default function ZoinHeader({ totalStaking, totalDebits, totalCredits, tr
             totalDebits={totalDebits}
             totalCredits={totalCredits}
           />
-          : <ZoinHistory transactions = {transactions}/>}
+          : <ZoinHistory transactions={transactions} />}
       </div>
     </>
   )

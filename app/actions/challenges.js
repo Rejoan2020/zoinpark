@@ -79,7 +79,7 @@ export async function claimRewardForDailyCheckIn(id, amount) {
     challenge.claimed = true;
     challenge.claimedAt = new Date();
     challenge.progress = 0;
-    
+
     wallet.balance += amount;
     wallet.totalCredit += amount;
 
@@ -113,4 +113,17 @@ export async function updateDaysCheckIn(challenge, days) {
         challenge.completedAt = new Date();
     }
     await challenge.save();
+}
+
+export async function getUserChallenges() {
+    const session = await auth();
+    const user = await User.findOne({ email: session.user.email });
+    if (!session?.user?.email) {
+        throw new Error("Unauthorized");
+    }
+    if (!user) {
+        throw new Error("User not found");
+    }
+    const challengeArray = await userWeeklyChallenge.find({user:user._id});
+    return challengeArray;
 }

@@ -177,7 +177,12 @@ async function withdraw(stakeId) {
 }
 
 async function getTotalStakes() {
-    const stakes = await UserStake.find();
+    const session = await auth();
+
+    const user = await User.findOne({
+        email: session.user.email,
+    });
+    const stakes = await UserStake.find({user: user._id});
     const totalStaking = stakes.reduce(
         (sum, stake) => sum + stake.amount,
         0
@@ -196,7 +201,6 @@ async function getTotalDebitCredits() {
 
     const transactions = await WalletTransaction.find({
         wallet: wallet._id,
-        source: "staking",
         status: "completed",
     });
 

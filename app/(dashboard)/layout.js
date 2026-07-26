@@ -6,13 +6,25 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import User from '@/models/User';
 import { dbconnect } from '@/lib/mongo';
+import { updateDailyCheckIn, updateDaysCheckIn } from '../actions/challenges';
+import userWeeklyChallenge from '@/models/userWeeklyChallenge';
 
 export default async function layout({children}) {
   await dbconnect();
-  console.log('in')
+  
   const session = await auth(); 
   const user = await User.findOne({email : session?.user?.email}).lean();
   if(user)user._id = user._id.toString();
+
+  const dailyCheckIn = await userWeeklyChallenge.findOne({ user: user._id, challengeId: 'daily-checkin' });
+  const fiveDaysCheckIn = await userWeeklyChallenge.findOne({ user: user._id, challengeId: 'visit-5' });
+  const sevenDaysCheckIn = await userWeeklyChallenge.findOne({ user: user._id, challengeId: 'visit-7' });
+  // console.log(dailyCheckIn);
+  await updateDailyCheckIn(dailyCheckIn);
+  await updateDaysCheckIn(fiveDaysCheckIn, 5);
+  await updateDaysCheckIn(sevenDaysCheckIn, 7);
+
+  
   
   if (!session) {
     redirect("/signin");
