@@ -1,121 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Searchbar from '@/app/components/Searchbar'
 import Row from './Row'
 import { differenceInCalendarDays } from 'date-fns'
 
 export default function StakingHistory({ history, totalStaking }) {
-  const rows = [
-    {
-      serial: 1,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    }, {
-      serial: 2,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    }, {
-      serial: 3,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 4,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 5,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 6,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 7,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 8,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 9,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 10,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    }
-  ]
+  const [searchKeyword, setSearchKeyword] = useState('');
   let serial = 0;
-
+  function handleSearch(e) {
+    setSearchKeyword(e.target.value);
+    console.log("inside handleSearch")
+  }
   return (
     <div className='text-primaryText'>
       <div className='border-b border-zinc-800 p-4 md:p-5 lg:p-6 xl:p-7 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'>
@@ -130,8 +24,11 @@ export default function StakingHistory({ history, totalStaking }) {
           Staking history
         </div>
         <div className='flex justify-between text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'>
-          <div className='text-secondaryText'>You can withdraw your principal USDT after 10days</div>
-          <Searchbar />
+          <div className='text-secondaryText'>You can withdraw your principal USDT after 1 month.</div>
+          <Searchbar
+            handleSearch={handleSearch}
+            earchKeyword={searchKeyword} 
+          />
         </div>
         <div className='grid grid-cols-9 grid-cols-[60px_100px_repeat(7,minmax(0,1fr))] lg:grid-cols-[60px_200px_repeat(7,minmax(0,1fr))] text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
           <div className='p-4'>Serial No.</div>
@@ -150,9 +47,9 @@ export default function StakingHistory({ history, totalStaking }) {
             new Date(),
             row.startDate
           );
-          const reward = Number((row.amount * (row.dailyProfit / 100) * daysPassed - row.claimedRewards).toFixed(4) );
+          const reward = Number((row.amount * (row.dailyProfit / 100) * daysPassed - row.claimedRewards).toFixed(4));
           const balance = row.amount + reward;
-
+          if(row._id.includes(searchKeyword))
           return <Row key={serial} serial={serial} id={row._id} name={row.packageName}
             principal={row.amount} withdrawal={reward} balance={balance} start={row.startDate}
             payment={row.packageName} action={'Withdraw'} status={row.status} />
