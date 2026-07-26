@@ -1,10 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { dbconnect } from "@/lib/mongo.js";
-import userWeeklyChallenge from "@/models/userWeeklyChallenge";
-import { updateDailyCheckIn, updateDaysCheckIn } from "./actions/challenges";
-import User from "@/models/User";
-import { auth } from "@/auth";
+import { dbconnect } from "@/lib/mongo.js"; 
 
 const inter = Inter({
   subsets: ["latin"],
