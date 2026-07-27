@@ -17,7 +17,12 @@ const userWeeklyChallengeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
+    weekKey: {
+      type: String,
+    },
+    weekly: {
+      type: Boolean,
+    },
     progress: {
       type: Number,
       default: 0,

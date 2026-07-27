@@ -1,25 +1,62 @@
 'use client'
 import React from 'react'
-import { claimRewardForDailyCheckIn } from '@/app/actions/challenges';
+import { claimReward } from '@/app/actions/challenges';
+import Image from 'next/image';
+import { useRouter } from "next/navigation";
+import { useTransition } from 'react';
 
 export default function Button({ challenge, title }) {
-  const handleClick = async () => {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-    if (challenge.challengeId === "daily-checkin") await claimRewardForDailyCheckIn(challenge.challengeId, 5);
-    if (challenge.challengeId === "visit-5") await claimRewardForDailyCheckIn(challenge.challengeId, 20);
-    if (challenge.challengeId === "visit-7") await claimRewardForDailyCheckIn(challenge.challengeId, 50);
-    if (challenge.challengeId === "refer-1") await claimRewardForDailyCheckIn(challenge.challengeId, 20);
-    if (challenge.challengeId === "community-event") await claimRewardForDailyCheckIn(challenge.challengeId, 100);
-    if (challenge.challengeId === "stake-100") await claimRewardForDailyCheckIn(challenge.challengeId, 100);
-  }
+  const handleClick = async () => {
+    await claimReward(challenge.challengeId);
+
+    startTransition(() => {
+      router.refresh();
+    });
+  };
+
   const disabled = challenge.claimed || !challenge.completed;
+
+  const rewards = {
+    "daily-checkin": 5,
+    "visit-5": 20,
+    "visit-7": 50,
+    "refer-1": 20,
+    "community-event": 100,
+    "stake-100": 100,
+  };
+
   return (
-    <button
-      className={`${disabled ? "bg-secondaryColor" : "bg-primaryColor cursor-pointer "} text-black rounded-md h-[24px] w-[58px] md:h-[28px] md:w-[66px] lg:h-[36px] lg:w-[74px] xl:h-[40px] xl:w-[83px] text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px]`}
-      disabled={disabled}
-      onClick={handleClick}
-    >
-      {title}
-    </button>
+    <div className='flex'>
+      <button
+        className={`${disabled ? challenge.claimed ? "bg-[#333C3C] text-white font-bold" : "bg-secondaryColor text-white" : "bg-primaryColor cursor-pointer "} text-black rounded-md p-2 text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px]`}
+        disabled={disabled || isPending}
+        onClick={handleClick}
+      >
+        {disabled ? challenge.claimed ?
+          <div className='flex lg:gap-1 justify-center items-center'>
+            <Image
+              alt='completed'
+              height={24}
+              width={24}
+              src={'/icons/completed.png'}
+              className='h-3 w-3 lg:h-6 lg:w-6'
+            />
+            Completed</div>
+          : "Incomplete" : <>{isPending ? "Claiming..." : <>+{title}</>}</>}
+      </button>
+      {challenge.claimed && <div className='pl-1 lg:pl-2 flex justify-center items-center text-primaryColor text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px]'>
+        <Image
+          alt='gold icon'
+          width={16}
+          height={16}
+          src={'/icons/goldicon2.svg'}
+          className='h-2 w-2 lg:h-4 lg:w-4'
+        />
+        +{rewards[challenge.challengeId]}
+      </div>}
+    </div>
   )
 }

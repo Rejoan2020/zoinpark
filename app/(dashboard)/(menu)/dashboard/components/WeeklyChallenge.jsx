@@ -5,7 +5,7 @@ import { getDaysRemaining } from '@/utils/getRemainingDay'
 
 export default function WeeklyChallenge({ challengeArray }) { 
 
-  const dummy1 = [
+  const w1 = [
     {
       id: "stake-100",
       image: '/icons/stakingC.svg',
@@ -26,7 +26,7 @@ export default function WeeklyChallenge({ challengeArray }) {
     },
 
   ]
-  const dummy2 = [
+  const w2 = [
     {
       id: "daily-checkin",
       image: '/icons/dailyCheckin.png',
@@ -72,14 +72,14 @@ export default function WeeklyChallenge({ challengeArray }) {
       </div>
       <div className='flex gap-4'>
         <div className='flex flex-col xl:gap-4 lg:gap-3 md:gap-2 gap-1'>
-          {dummy1.map((item) => {
+          {w1.map((item) => {
             const challenge = challengeArray.find((ch) => ch.challengeId == item.id);
             return <Box key={item.id} challenge={challenge} url={item.image} title={item.name} amount={item.amount} />
           }
           )}
         </div>
         <div className='flex flex-col xl:gap-4 lg:gap-3 md:gap-2 gap-1'>
-          {dummy2.map((item) => {
+          {w2.map((item) => {
             const challenge = challengeArray.find((ch) => ch.challengeId == item.id);
             return <Box key={item.id} challenge={challenge} url={item.image} title={item.name} amount={item.amount} />
           }

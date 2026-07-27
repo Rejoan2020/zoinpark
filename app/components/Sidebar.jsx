@@ -7,8 +7,8 @@ import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 
 export default function Sidebar() {
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const pathname = usePathname();
-  const subMenuOpen = pathname.startsWith("/helpandsupports");
   const menu = [
     {
       name: "Dashboard",
@@ -66,15 +66,21 @@ export default function Sidebar() {
       <Link href={'/'} className='flex border-b border-zinc-800 p-2 xl:p-7 lg:p-5 md:p-3 justify-center xl:h-24 lg:h-20 md:h-16 h-12 cursor-pointer'>
         <Image height={248} width={248} alt='Logo' src='/icons/logo.svg' />
       </Link>
-      {menu.map(m =>
-        <div
+      {menu.map(m => {
+        console.log("hihhh : ",m.url.split("/").slice(0, 2).join("/"));
+        console.log(m.url)
+        return <div
           key={m.name}>
           <Link
-            className={`${pathname.startsWith(m.url) ? "bg-[#0C1414] text-primaryColor" : ""} hover:bg-[#0C1414] flex items-center gap-2 p-6 pl-8 cursor-pointer`}
+            className={`${pathname.startsWith(m.url.split("/").slice(0, 2).join("/")) ? "bg-[#0C1414] text-primaryColor" : ""} hover:bg-[#0C1414] flex items-center gap-2 p-6 pl-8 cursor-pointer`}
             href={m.url}
+            onClick={() => {
+              if (m.name === 'Help & Support') setIsSubMenuOpen(!isSubMenuOpen);
+              else setIsSubMenuOpen(false);
+            }}
           >
             <img className='h-[10px] w-[10px]  md:h-[16px] md:w-[16px] lg:h-[20px] lg:w-[20px] xl:h-[24px] xl:w-[24px]'
-              src={`${pathname.startsWith(m.url) ? m.activeIcon : m.img}`}
+              src={`${pathname.startsWith(m.url.split("/").slice(0, 2).join("/")) ? m.activeIcon : m.img}`}
             />
             <div className={`text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px]`}
             >{m.name}</div>
@@ -85,7 +91,7 @@ export default function Sidebar() {
               />
             }
           </Link>
-          {m.name === 'Help & Support' && subMenuOpen && (
+          {(m.name === 'Help & Support' && isSubMenuOpen) && (
             <div>
               {supportSubMenu.map((item) => {
                 const active = pathname === item.href;
@@ -112,6 +118,7 @@ export default function Sidebar() {
             </div>
           )}
         </div>
+      }
       )}
 
     </div>

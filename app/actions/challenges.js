@@ -6,6 +6,8 @@ import WalletTransaction from "@/models/WalletTransaction";
 import { differenceInCalendarDays } from "date-fns";
 import { auth } from "@/auth";
 import userWeeklyChallenge from "@/models/userWeeklyChallenge";
+import { startOfWeek, format } from "date-fns";
+
 
 export async function updateDailyCheckIn(dailyCheckIn) {
     if (!dailyCheckIn.lastActivity && !dailyCheckIn.claimed) {
@@ -35,7 +37,7 @@ export async function updateDailyCheckIn(dailyCheckIn) {
     }
 }
 
-export async function claimRewardForDailyCheckIn(id, amount) {
+export async function claimReward(id) {
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });
     if (!session?.user?.email) {
@@ -49,7 +51,6 @@ export async function claimRewardForDailyCheckIn(id, amount) {
     if (!wallet) {
         throw new Error("Wallet not found");
     }
-
     const challenge = await userWeeklyChallenge.findOne({
         user: user._id,
         challengeId: id,
@@ -61,6 +62,16 @@ export async function claimRewardForDailyCheckIn(id, amount) {
     if (!challenge.completed) {
         throw new Error("Challenge not completed");
     }
+    const rewards = {
+        "daily-checkin": 5,
+        "visit-5": 20,
+        "visit-7": 50,
+        "refer-1": 20,
+        "community-event": 100,
+        "stake-100": 100,
+    };
+
+    const amount = rewards[id];
     try {
         const creditTransaction = await WalletTransaction.create({
             wallet: wallet._id,
@@ -116,6 +127,7 @@ export async function updateDaysCheckIn(challenge, days) {
 }
 
 export async function getUserChallenges() {
+
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });
     if (!session?.user?.email) {
@@ -124,6 +136,43 @@ export async function getUserChallenges() {
     if (!user) {
         throw new Error("User not found");
     }
-    const challengeArray = await userWeeklyChallenge.find({user:user._id});
+
+    const weekKey = format(
+        startOfWeek(new Date(), { weekStartsOn: 1 }),
+        "yyyy-MM-dd"
+    );
+
+    await userWeeklyChallenge.updateMany(
+        {
+            user: user._id,
+            weekly: true,
+            weekKey: { $ne: weekKey },
+        },
+        {
+            $set: {
+                weekKey: weekKey,
+                progress: 0,
+                completed: false,
+                claimed: false,
+                completedAt: null,
+                claimedAt: null,
+            },
+        }
+    );
+    // await userWeeklyChallenge.updateMany(
+    //     {
+    //         challengeId: {
+    //             $in: ["stake-100", "community-event", "refer-1"],
+    //         },
+    //     },
+    //     {
+    //         $set: {
+    //             weekly: true,
+    //             weekKey: '2026-07-13',
+    //         },
+    //     }
+    // );
+
+    const challengeArray = await userWeeklyChallenge.find({ user: user._id });
     return challengeArray;
 }

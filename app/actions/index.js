@@ -17,6 +17,7 @@ import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import WalletTransaction from "@/models/WalletTransaction";
 import Event from "@/models/Event";
 import EventRegistration from "@/models/EventRegistration";
+import { startOfWeek, format } from "date-fns";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -171,18 +172,30 @@ export async function signUp(formData) {
 }
 
 export async function createUserWeeklyChallenge(newUser) {
+
+  const weekKey = format(
+    startOfWeek(new Date(), { weekStartsOn: 1 }),
+    "yyyy-MM-dd"
+  );
+
   const challenges = [
     {
       id: "stake-100",
       title: "Stake at least 100 ZOINS this week",
+      weekly: true,
+      weekKey,
     },
     {
       id: "community-event",
       title: "Join this week's community event",
+      weekly: true,
+      weekKey,
     },
     {
       id: "refer-1",
       title: "Refer 1 friend this week",
+      weekly: true,
+      weekKey,
     },
     {
       id: "daily-checkin",
@@ -202,6 +215,8 @@ export async function createUserWeeklyChallenge(newUser) {
     challengeId: challenge.id,
     lastActivity: null,
     challenge: challenge.title,
+    weekly: challenge.weekly ?? false,
+    weekKey: challenge.weekly ? challenge.weekKey : null,
     progress: 0,
     completed: false,
     claimed: false,

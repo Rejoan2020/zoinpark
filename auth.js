@@ -37,7 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const user = await User.findOne({
           email: credentials.email,
         });
-        console.log("Cred: ", credentials)
+        
         if (!user) {
           return null;
         }
@@ -66,7 +66,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   events: {
     async createUser({ user }) {
       await dbconnect();
-
+      await createUserWeeklyChallenge(user);
       await User.findByIdAndUpdate(user.id, {
         $set: {
           zoiid: generateZoiId(),
@@ -86,7 +86,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       await Wallet.create({
         user: user.id,
       });
-      await createUserWeeklyChallenge(user);
     },
   }
 })
