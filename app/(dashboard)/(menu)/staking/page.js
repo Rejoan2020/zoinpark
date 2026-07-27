@@ -22,7 +22,6 @@ export default async function page() {
       user: item.user.toString(),
       package: item.package.toString(),
 
-      // Package info
       packageName: pkg?.name, 
 
       createdAt: item.createdAt.toString(),

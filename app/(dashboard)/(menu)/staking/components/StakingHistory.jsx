@@ -7,7 +7,7 @@ export default function StakingHistory({ history, totalStaking }) {
   const [searchKeyword, setSearchKeyword] = useState('');
   let serial = 0;
   function handleSearch(e) {
-    setSearchKeyword(e.target.value); 
+    setSearchKeyword(e.target.value);
   }
   return (
     <div className='text-primaryText'>
@@ -26,7 +26,7 @@ export default function StakingHistory({ history, totalStaking }) {
           <div className='text-secondaryText'>You can withdraw your principal USDT after 1 month.</div>
           <Searchbar
             handleSearch={handleSearch}
-            earchKeyword={searchKeyword} 
+            earchKeyword={searchKeyword}
           />
         </div>
         <div className='grid grid-cols-9 grid-cols-[1fr_2fr_1fr_1.5fr_1.5fr_1.5fr_1.5fr_1fr_1fr] text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
@@ -46,12 +46,14 @@ export default function StakingHistory({ history, totalStaking }) {
             new Date(),
             row.startDate
           );
+          //.15
           const reward = Number((row.amount * (row.dailyProfit / 100) * daysPassed - row.claimedRewards).toFixed(4));
+
           const balance = row.amount + reward;
-          if(row._id.includes(searchKeyword))
-          return <Row key={serial} serial={serial} id={row._id} name={row.packageName}
-            principal={row.amount} withdrawal={reward} balance={balance} start={row.startDate}
-            payment={row.packageName} action={'Withdraw'} status={row.status} />
+          if (row._id.includes(searchKeyword))
+            return <Row key={serial} serial={serial} id={row._id} name={row.packageName}
+              principal={row.amount} withdrawal={reward} balance={balance} start={row.startDate}
+              payment={row.packageName} action={'Withdraw'} status={row.status} />
         })}
         <div className='flex justify-between p-8 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px]'>
           <div className='text-secondaryText'>Showing 1 to 10 of 21 entries</div>

@@ -4,13 +4,15 @@ import { dbconnect } from '@/lib/mongo';
 import { auth } from '@/auth';
 import User from '@/models/User';
 import Wallet from '@/models/Wallet';
+import { getCompletedWC } from '@/app/actions/challenges';
 
 export default async function page() {
     await dbconnect();
     const session = await auth();
     const user = await User.findOne({email:session?.user?.email}); 
     const wallet = await Wallet.findOne({user:user._id});
+    const completed = await getCompletedWC();
     return (
-        <DashboardHome wallet = {wallet}/>
+        <DashboardHome wallet = {wallet} completed = {completed}/>
     )
 }

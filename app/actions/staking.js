@@ -84,18 +84,16 @@ async function createStake(packageId, amount, paymentMode) {
             user: user._id,
             challengeId: 'stake-100',
         });
-        if (!challenge) throw new Error("Challenge not found");
-        if (challenge.claimed) {
-            throw new Error("Reward already claimed");
-        }
+        
+        if (challenge && challenge.claimed) {
+            challenge.progress += amount;
+            if (challenge.progress >= 100) {
+                challenge.completed = true;
+                challenge.completedAt = new Date();
+            }
 
-        challenge.progress += amount;
-        if (challenge.progress >= 100) {
-            challenge.completed = true;
-            challenge.completedAt = new Date();
+            await challenge.save();
         }
-
-        await challenge.save();
 
     } catch (err) {
         throw err;
@@ -111,7 +109,7 @@ async function getUserStakes() {
         email: session.user.email,
     });
     const history = await UserStake.find({ user: user._id }).lean();
-    return history;
+    return history.reverse();
 }
 
 async function withdraw(stakeId) {
@@ -136,7 +134,7 @@ async function withdraw(stakeId) {
 
     const totalReward = stake.amount * (stake.dailyProfit / 100) * daysPassed;
     let withdrawable = totalReward - Number(stake.claimedRewards);
-    console.log(withdrawable);
+    
     if (withdrawable <= 0)
         throw new Error("No rewards available.");
 
@@ -182,7 +180,7 @@ async function getTotalStakes() {
     const user = await User.findOne({
         email: session.user.email,
     });
-    const stakes = await UserStake.find({user: user._id});
+    const stakes = await UserStake.find({ user: user._id });
     const totalStaking = stakes.reduce(
         (sum, stake) => sum + stake.amount,
         0

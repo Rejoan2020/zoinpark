@@ -553,5 +553,5 @@ export async function getWalletHistory() {
   const wallet = await Wallet.findOne({ user: user._id });
   const walletHistory = await WalletTransaction.find({ wallet: wallet._id }).lean();
 
-  return walletHistory;
+  return walletHistory.reverse();
 }

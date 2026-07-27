@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useTransition } from 'react'
 import Button from '@/app/components/Button'
 import { withdraw } from '@/app/actions/staking';
+import { useRouter } from "next/navigation";
 
 export default function Row({ serial, id, name, principal, withdrawal, balance, start, status, action }) {
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const handleWithdraw = async () => {
     try {
       await withdraw(id);
-    }catch(err){
+      startTransition(() => {
+        router.refresh();
+      });
+    } catch (err) {
       console.log(err.message);
     }
   }
@@ -23,8 +29,9 @@ export default function Row({ serial, id, name, principal, withdrawal, balance, 
       <div className='p-4 flex justify-center'>
         <Button
           onClick={handleWithdraw}
-          title={action} 
-          status = {status}
+          title={action}
+          status={withdrawal > 0 ? true : false}
+          isPending = {isPending}
         />
       </div>
     </div>

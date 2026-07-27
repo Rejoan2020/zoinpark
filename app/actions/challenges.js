@@ -176,3 +176,17 @@ export async function getUserChallenges() {
     const challengeArray = await userWeeklyChallenge.find({ user: user._id });
     return challengeArray;
 }
+
+export async function getCompletedWC(){
+    const session = await auth();
+    const user = await User.findOne({ email: session.user.email });
+    if (!session?.user?.email) {
+        throw new Error("Unauthorized");
+    }
+    if (!user) {
+        throw new Error("User not found");
+    }
+
+    const completed = await userWeeklyChallenge.find({user: user._id, completed: true, weekly:true});
+    return completed?.length;
+}

@@ -6,7 +6,7 @@ import CopyButton from './CopyButton'
 import InviteEmailForm from './InviteEmailForm'
 
 export default function Invite({ referral, users, successfulInvites }) {
-  
+
   let currentTotal = 3;
   if (successfulInvites < 3) currentTotal = 3;
   else if (successfulInvites < 10) currentTotal = 10;
@@ -51,6 +51,7 @@ export default function Invite({ referral, users, successfulInvites }) {
                 height={48}
                 width={48}
                 src={'/icons/telegramc.svg'}
+                alt='tg'
               />
             </a>
             <a
@@ -64,6 +65,7 @@ export default function Invite({ referral, users, successfulInvites }) {
                 height={48}
                 width={48}
                 src={'/icons/whatsappc.svg'}
+                alt='wp'
               />
             </a>
             {/* <Image
@@ -92,7 +94,10 @@ export default function Invite({ referral, users, successfulInvites }) {
             <div className='flex flex-col gap-2'>
               <div className='flex items-center justify-between p-4 gradientbg border border-zinc-800 h-[56px] w-[460px] md:h-[64px] md:w-[520px] lg:h-[72px] lg:w-[580px] xl:h-[80px] xl:w-[640px]'>
                 <div className='flex flex-row gap-2'>
-                  <img
+                  <Image
+                    height={40}
+                    width={40}
+                    alt='bronze'
                     className='h-[16px] w-[16px] md:h-[24px] md:w-[24px] lg:h-[32px] lg:w-[32px] xl:h-[40px] xl:w-[40px]'
                     src='/icons/bronze.svg'
                   />
@@ -102,7 +107,10 @@ export default function Invite({ referral, users, successfulInvites }) {
               </div>
               <div className='flex items-center justify-between p-4 gradientbg border border-zinc-800 h-[56px] w-[460px] md:h-[64px] md:w-[520px] lg:h-[72px] lg:w-[580px] xl:h-[80px] xl:w-[640px]'>
                 <div className='flex flex-row gap-2'>
-                  <img
+                  <Image
+                    height={40}
+                    width={40}
+                    alt='silver'
                     className='h-[16px] w-[16px] md:h-[24px] md:w-[24px] lg:h-[32px] lg:w-[32px] xl:h-[40px] xl:w-[40px]'
                     src='/icons/silver.svg'
                   />
@@ -143,7 +151,7 @@ export default function Invite({ referral, users, successfulInvites }) {
                 <div className='flex items-center justify-between p-4 gradientbg border border-zinc-800 h-[56px] w-[460px] md:h-[64px] md:w-[520px] lg:h-[72px] lg:w-[580px] xl:h-[80px] xl:w-[640px]'>
                   <div className='flex flex-row gap-2'>
                     {item.user?.image ?
-                      <Image 
+                      <Image
                         height={48}
                         width={48}
                         alt='user image'

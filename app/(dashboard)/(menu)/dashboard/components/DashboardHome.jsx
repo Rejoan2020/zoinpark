@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 
-export default function DashboardHome({ wallet }) {
+export default function DashboardHome({ wallet, completed }) {
   const cards = [
     {
       id: 1,
@@ -24,8 +24,7 @@ export default function DashboardHome({ wallet }) {
       image: "/icons/home/community.png",
       link: "/dashboard/community-events"
     }
-  ];
-  let completed = 3;
+  ]; 
   let progress = completed * 33.33;
   return (
     <div className='mb-32'>

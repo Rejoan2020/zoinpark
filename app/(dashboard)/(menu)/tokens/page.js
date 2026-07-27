@@ -16,14 +16,14 @@ export default async function page() {
     referenceId: t.referenceId?.toString() ?? null,
     createdAt: t.createdAt.toISOString(),
     updatedAt: t.updatedAt.toISOString(),
-  })); 
+  }));
   console.log(totalDebitCredits)
   return (
     <ZoinHeader
       totalStaking={totalStaking}
       totalDebits={totalDebitCredits[0]}
       totalCredits={totalDebitCredits[1]}
-      transactions = {leanTransactions}
+      transactions={leanTransactions}
     />
   )
 }
