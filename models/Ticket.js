@@ -20,6 +20,19 @@ const ticketSchema = new mongoose.Schema(
       required: true,
     },
 
+    category: {
+      type: String,
+      enum: ['Account',
+        'Wallet',
+        'Deposits & Withdrawals',
+        'Staking',
+        'Referral Program',
+        'Rewards & Challenges',
+        'Bug Report',
+        'Technical Issue',
+        'Other'],
+    },
+
     status: {
       type: String,
       enum: ["open", "pending", "resolved", "closed"],
@@ -31,6 +44,9 @@ const ticketSchema = new mongoose.Schema(
       enum: ["low", "medium", "high"],
       default: "medium",
     },
+    responseDate: {
+      type: Date,
+    }
   },
   {
     timestamps: true,

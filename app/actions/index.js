@@ -17,7 +17,7 @@ import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import WalletTransaction from "@/models/WalletTransaction";
 import Event from "@/models/Event";
 import EventRegistration from "@/models/EventRegistration";
-import { startOfWeek, format } from "date-fns";
+import { startOfWeek, format } from "date-fns"; 
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -555,3 +555,4 @@ export async function getWalletHistory() {
 
   return walletHistory.reverse();
 }
+

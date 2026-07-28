@@ -48,12 +48,12 @@ export default function Sidebar() {
       icon: "/icons/tickets.svg",
       activeIcon: "/icons/ticketsC.svg",
     },
-    {
-      name: "Tutorials",
-      href: "/helpandsupports/tutorials",
-      icon: "/icons/tutorials.svg",
-      activeIcon: "/icons/tutorialsC.svg",
-    },
+    // {
+    //   name: "Tutorials",
+    //   href: "/helpandsupports/tutorials",
+    //   icon: "/icons/tutorials.svg",
+    //   activeIcon: "/icons/tutorialsC.svg",
+    // },
     {
       name: "Contact Us",
       href: "/helpandsupports/contactus",

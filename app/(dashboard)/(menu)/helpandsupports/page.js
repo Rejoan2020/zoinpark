@@ -1,11 +1,6 @@
-import React from 'react'
-import TicketHeader from './components/ticket/TicketHeader'
+import React from 'react' 
+import { redirect } from 'next/navigation';
 
-export default function page() {
-  
-  return (
-    <div className='text-primaryText'>
-      <TicketHeader/>
-    </div>
-  )
+export default async function page() {
+  redirect('/helpandsupports/tickets')
 }

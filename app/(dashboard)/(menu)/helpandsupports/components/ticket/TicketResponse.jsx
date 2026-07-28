@@ -1,118 +1,18 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import Row from './Row'
-import Searchbar from '@/app/components/Searchbar'
+import Searchbar from '@/app/components/Searchbar';
+import ResponseModal from './ResponseModal';
 
-export default function TicketResponse() {
-  const rows = [
-    {
-      serial: 1,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    }, {
-      serial: 2,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    }, {
-      serial: 3,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 4,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 5,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 6,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 7,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 8,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 9,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    },
-    {
-      serial: 10,
-      id: 'LJ12314345008980',
-      name: "Silver",
-      principal: 1000,
-      withdrawal: 0,
-      balance: 1000,
-      start: '2025-05-01',
-      payment: "Capital Wallet",
-      action: "withdraw"
-    }
-  ]
+export default function TicketResponse({ tickets }) {
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [open, setOpen] = useState(false);
+  function handleSearch(e) {
+    setSearchKeyword(e.target.value);
+  }
+
+  let serial = 0;
   return (
     <div className='text-primaryText'>
 
@@ -121,23 +21,37 @@ export default function TicketResponse() {
           Ticket Responses
         </div>
         <div className='flex justify-between text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'>
-          <div className='text-secondaryText'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi fuga ipsam corporis aliquam repellendus expedita quo commodi molestias at mollitia, sunt, dignissimos ad qui illo aliquid. Neque tempore delectus saepe.</div>
-          <Searchbar />
+          <div className='text-secondaryText'>
+            View the conversation history for this ticket, including updates from our support team and your replies.
+          </div>
+          <Searchbar handleSearch={handleSearch} searchKeyword={searchKeyword} />
         </div>
-        <div className='p-4 grid justify-center items-center grid-cols-9 grid-cols-[1fr_2fr_1fr_1.5fr_1.5fr_1.5fr_1.5fr_1fr_1fr] text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
-          <div >Serial No.</div>
-          <div >Staking ID</div>
-          <div >Investment Name</div>
-          <div >Principal (ZOIN)</div>
-          <div >Withdrawable (ZOIN)</div>
-          <div >Balance (ZOIN)</div>
-          <div >Investment Start</div>
-          <div >Payment Mode</div>
-          <div >Action</div>
+        <div className='p-4 grid justify-center items-center grid-cols-9 grid-cols-[1fr_2.5fr_1fr_1.5fr_1.5fr_1.5fr_1.5fr_1fr_1fr] text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
+          <div className='flex justify-center'>Serial No.</div>
+          <div className='flex justify-center'>Ticket No.</div>
+          <div className='flex justify-center'>Subject</div>
+          <div className='flex justify-center'>Category</div>
+          <div className='flex justify-center'>Request Date</div>
+          <div className='flex justify-center'>status</div>
+          <div className='flex justify-center'>Query</div>
+          <div className='flex justify-center'>Response Date</div>
+          <div className='flex justify-center'>Response</div>
         </div>
-        {rows.map((row) => <Row key={row.serial} serial={row.serial} id={row.id} name={row.name}
-          principal={row.principal} withdrawal={row.withdrawal} balance={row.balance} start={row.start}
-          payment={row.payment} action={row.action} />)}
+        {tickets.map((row) => {
+          serial++
+          if (row._id.includes(searchKeyword))
+            return <Row key={row._id} serial={serial} id={row._id} subject={row.subject}
+              category={row.category} reqDate={row.createdAt} status={row.status} query={row.message}
+              resDate={serial} res={'View'} onView={() => {
+                setSelectedTicket(row);
+                setOpen(true);
+              }} />
+        })}
+        <ResponseModal
+          open={open}
+          ticket={selectedTicket}
+          onClose={() => setOpen(false)}
+        />
         <div className='flex justify-between p-8 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px]'>
           <div className='text-secondaryText'>Showing 1 to 10 of 21 entries</div>
           <div className='flex gap-4'>
