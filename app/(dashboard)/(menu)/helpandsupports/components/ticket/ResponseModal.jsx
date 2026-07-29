@@ -9,7 +9,7 @@ export default function ResponseModal({ open, onClose, ticket }) {
             onClick={onClose}
         >
             <div
-                className="bg-[#1B2222] rounded-lg w-[90%] max-w-2xl p-6 border border-zinc-700"
+                className="bg-[#1B2222] rounded-lg w-[90%] max-w-2xl p-6 border border-zinc-800"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="flex justify-between items-center mb-6">
