@@ -5,14 +5,23 @@ import Searchbar from '@/app/components/Searchbar';
 import ResponseModal from './ResponseModal';
 
 export default function TicketResponse({ tickets }) {
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [selectedTicket, setSelectedTicket] = useState(false);
   const [open, setOpen] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [startIndex, setStartIndex] = useState(1); 
+  const rowsPerPage = 10;
+
   function handleSearch(e) {
     setSearchKeyword(e.target.value);
+    setSearchKeyword(1);
   }
 
-  let serial = 0;
+  const filteredTickets = tickets.filter((row) =>
+    row._id.toLowerCase().includes(searchKeyword.toLowerCase())
+  );
+
+  const totalPage = Math.ceil(filteredTickets.length / rowsPerPage);
+  const slicedTickets = filteredTickets.slice(startIndex - 1, startIndex + rowsPerPage - 1);
   return (
     <div className='text-primaryText'>
 
@@ -37,15 +46,13 @@ export default function TicketResponse({ tickets }) {
           <div className='flex justify-center'>Response Date</div>
           <div className='flex justify-center'>Response</div>
         </div>
-        {tickets.map((row) => {
-          serial++
-          if (row._id.includes(searchKeyword))
-            return <Row key={row._id} serial={serial} id={row._id} subject={row.subject}
-              category={row.category} reqDate={row.createdAt} status={row.status} query={row.message}
-              resDate={serial} res={'View'} onView={() => {
-                setSelectedTicket(row);
-                setOpen(true);
-              }} />
+        {tickets.map((row, index) => { 
+          return <Row key={row._id} serial={startIndex + index} id={row._id} subject={row.subject}
+            category={row.category} reqDate={row.createdAt} status={row.status} query={row.message}
+            resDate={'N/A'} res={'View'} onView={() => {
+              setSelectedTicket(row);
+              setOpen(true);
+            }} />
         })}
         <ResponseModal
           open={open}
@@ -53,16 +60,41 @@ export default function TicketResponse({ tickets }) {
           onClose={() => setOpen(false)}
         />
         <div className='flex justify-between p-8 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px]'>
-          <div className='text-secondaryText'>Showing 1 to 10 of 21 entries</div>
+          <div className='text-secondaryText'>Showing {startIndex} to {startIndex + slicedTickets.length - 1} of {filteredTickets.length} entries</div>
           <div className='flex gap-4'>
-            <button className='p-2 pl-8 pr-8 bg-[#242B2B] rounded-md'>Previous</button>
-            <button className='p-2 pl-8 pr-8 bg-primaryColor text-black rounded-md'>Next</button>
+            <button
+              className='p-2 pl-8 pr-8 bg-[#242B2B] rounded-md'
+              onClick={() => {
+                return setStartIndex((i) => {
+                  if (i - rowsPerPage < 1) return ((totalPage - 1) * rowsPerPage + 1);
+                  return (i - rowsPerPage)
+                })
+              }}
+
+            >Previous</button>
+            <button
+              className='p-2 pl-8 pr-8 bg-primaryColor text-black rounded-md'
+              onClick={() =>
+                setStartIndex((i) => {
+                  if (i + rowsPerPage > filteredTickets.length) return (1);
+                  return (i + rowsPerPage)
+                })
+              }
+            >Next</button>
           </div>
           <div className='flex gap-4'>
-            <div className='text-primaryColor'>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
+            {Array.from({ length: totalPage }, (x, i) => (
+              <button
+                key={i}
+                onClick={() => setStartIndex(i * rowsPerPage + 1)}
+                className={`${Math.ceil(startIndex / rowsPerPage) === i + 1
+                  ? "text-primaryColor"
+                  : ""
+                  } cursor-pointer`}
+              >
+                {i + 1}
+              </button>
+            ))}
           </div>
         </div>
       </div>

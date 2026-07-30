@@ -12,12 +12,5 @@ export async function getAnnouncements(){
 
     if(!user) throw new Error("Email not found!");
 
-    // announcement.create({
-    //     user: user._id,
-    //     subject: "Testing announcement2",
-    //     details: "lorem ipsumd lorem ipsum",
-    //     createdAt: new Date()
-    // })
-
     return (await announcement.find({id: user._id}).lean()).reverse();
 }

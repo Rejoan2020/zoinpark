@@ -5,10 +5,21 @@ import { differenceInCalendarDays } from 'date-fns'
 
 export default function StakingHistory({ history, totalStaking }) {
   const [searchKeyword, setSearchKeyword] = useState('');
-  let serial = 0;
+  const [startIndex, setStartIndex] = useState(1);
+  const rowsPerPage = 10;
+  console.log(startIndex)
   function handleSearch(e) {
     setSearchKeyword(e.target.value);
+    setSearchKeyword(1);
   }
+
+  const filteredHistory = history.filter((row) =>
+    row._id.toLowerCase().includes(searchKeyword.toLowerCase())
+  );
+
+  const totalPage = Math.ceil(filteredHistory.length / rowsPerPage);
+  const slicedHistory = filteredHistory.slice(startIndex - 1, startIndex + rowsPerPage - 1);
+
   return (
     <div className='text-primaryText'>
       <div className='border-b border-zinc-800 p-4 md:p-5 lg:p-6 xl:p-7 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'>
@@ -40,32 +51,55 @@ export default function StakingHistory({ history, totalStaking }) {
           <div className='p-4 flex justify-center items-center'>Payment Mode</div>
           <div className='p-4 flex justify-center items-center'>Action</div>
         </div>
-        {history.map((row) => {
-          serial++;
+        {slicedHistory.map((row, index) => {
           const daysPassed = differenceInCalendarDays(
             new Date(),
             row.startDate
           );
-          //.15
+          
           const reward = Number((row.amount * (row.dailyProfit / 100) * daysPassed - row.claimedRewards).toFixed(4));
-
           const balance = row.amount + reward;
-          if (row._id.includes(searchKeyword))
-            return <Row key={serial} serial={serial} id={row._id} name={row.packageName}
-              principal={row.amount} withdrawal={reward} balance={balance} start={row.startDate}
-              payment={row.packageName} action={'Withdraw'} status={row.status} />
+
+          return <Row key={row._id} serial={startIndex + index} id={row._id} name={row.packageName}
+            principal={row.amount} withdrawal={reward} balance={balance} start={row.startDate}
+            payment={row.packageName} action={'Withdraw'} status={row.status} />
         })}
         <div className='flex justify-between p-8 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px]'>
-          <div className='text-secondaryText'>Showing 1 to 10 of 21 entries</div>
+          <div className='text-secondaryText'>Showing {startIndex} to {startIndex + slicedHistory.length - 1} of {filteredHistory.length} entries</div>
           <div className='flex gap-4'>
-            <button className='p-2 pl-8 pr-8 bg-[#242B2B] rounded-md'>Previous</button>
-            <button className='p-2 pl-8 pr-8 bg-primaryColor text-black rounded-md'>Next</button>
+            <button
+              className='p-2 pl-8 pr-8 bg-[#242B2B] rounded-md'
+              onClick={() => {
+                return setStartIndex((i) => {
+                  if (i - rowsPerPage < 1) return ((totalPage - 1) * rowsPerPage + 1);
+                  return (i - rowsPerPage)
+                })
+              }}
+
+            >Previous</button>
+            <button
+              className='p-2 pl-8 pr-8 bg-primaryColor text-black rounded-md'
+              onClick={() =>
+                setStartIndex((i) => {
+                  if (i + rowsPerPage > filteredHistory.length) return (1);
+                  return (i + rowsPerPage)
+                })
+              }
+            >Next</button>
           </div>
           <div className='flex gap-4'>
-            <div className='text-primaryColor'>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
+            {Array.from({ length: totalPage }, (x, i) => (
+              <button
+                key={i}
+                onClick={() => setStartIndex(i * rowsPerPage + 1)}
+                className={`${Math.ceil(startIndex / rowsPerPage) === i + 1
+                  ? "text-primaryColor"
+                  : ""
+                  } cursor-pointer`}
+              >
+                {i + 1}
+              </button>
+            ))}
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ export default async function page() {
     createdAt: t.createdAt.toISOString(),
     updatedAt: t.updatedAt.toISOString(),
   }));
-  console.log(totalDebitCredits)
+  
   return (
     <ZoinHeader
       totalStaking={totalStaking}
