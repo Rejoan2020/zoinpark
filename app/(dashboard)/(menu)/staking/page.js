@@ -13,6 +13,8 @@ export default async function page() {
     packages.map(pkg => [pkg._id.toString(), pkg])
   );
 
+  // console.log(packages)
+
   const leanHistory = history.map(item => {
     const pkg = packageMap.get(item.package.toString());
 

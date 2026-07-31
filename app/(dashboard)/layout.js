@@ -7,7 +7,8 @@ import { redirect } from 'next/navigation';
 import User from '@/models/User';
 import { dbconnect } from '@/lib/mongo';
 import { updateDailyCheckIn, updateDaysCheckIn } from '../actions/challenges';
-import userWeeklyChallenge from '@/models/userWeeklyChallenge'; 
+import userWeeklyChallenge from '@/models/userWeeklyChallenge';
+import Notification from '@/models/Notification';
 
 export default async function layout({ children }) {
   await dbconnect();
@@ -28,11 +29,24 @@ export default async function layout({ children }) {
     redirect("/signin");
   }
 
+  const unread = await Notification.countDocuments({
+    user: user._id,
+    read: false,
+  });
+
+  const notifications = await Notification.find({ user: user._id }).lean();
+  const leanNotifications = notifications.map(notification => {
+    return {
+      ...notification, _id: notification._id.toString(), user: notification.user.toString(),
+      createdAt: notification.createdAt.toString(), updatedAt: notification.updatedAt.toString()
+    }
+  })
+
   return (
     <div className="flex min-h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col">
-        <Header user={user} />
+        <Header user={user} unread={unread} notifications={leanNotifications} />
         <main className="flex-1 bg-background">
           {children}
         </main>

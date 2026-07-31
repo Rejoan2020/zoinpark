@@ -85,7 +85,7 @@ async function createStake(packageId, amount, paymentMode) {
             challengeId: 'stake-100',
         });
         
-        if (challenge && challenge.claimed) {
+        if (challenge && !challenge.claimed) {
             challenge.progress += amount;
             if (challenge.progress >= 100) {
                 challenge.completed = true;

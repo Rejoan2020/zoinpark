@@ -7,7 +7,7 @@ import { differenceInCalendarDays } from "date-fns";
 import { auth } from "@/auth";
 import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import { startOfWeek, format } from "date-fns";
-
+import Notification from "@/models/Notification";
 
 export async function updateDailyCheckIn(dailyCheckIn) {
     if (!dailyCheckIn.lastActivity && !dailyCheckIn.claimed) {
@@ -96,9 +96,17 @@ export async function claimReward(id) {
 
     await wallet.save();
     await challenge.save();
+
+    await Notification.create({
+        user: user.id,
+        title: "Reward claimed",
+        message: `You claimed ${amount} ZOINS successfully.`,
+        read: false,
+    });
 }
 
 export async function updateDaysCheckIn(challenge, days) {
+    console.log(challenge)
     if (!challenge.lastActivity) {
         challenge.progress = 1;
         challenge.lastActivity = new Date();
@@ -106,6 +114,7 @@ export async function updateDaysCheckIn(challenge, days) {
         return;
     }
     const dayDiff = differenceInCalendarDays(new Date(), challenge.lastActivity);
+    // console.log(challenge, challenge.lastActivity)
     if (dayDiff == 0) {
         return;
     }
@@ -169,6 +178,7 @@ export async function getUserChallenges() {
     //         $set: {
     //             weekly: true,
     //             weekKey: '2026-07-13',
+    //             lastActivity: '2026-07-13'
     //         },
     //     }
     // );
@@ -177,7 +187,7 @@ export async function getUserChallenges() {
     return challengeArray;
 }
 
-export async function getCompletedWC(){
+export async function getCompletedWC() {
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });
     if (!session?.user?.email) {
@@ -187,6 +197,6 @@ export async function getCompletedWC(){
         throw new Error("User not found");
     }
 
-    const completed = await userWeeklyChallenge.find({user: user._id, completed: true, weekly:true});
+    const completed = await userWeeklyChallenge.find({ user: user._id, completed: true, weekly: true });
     return completed?.length;
 }

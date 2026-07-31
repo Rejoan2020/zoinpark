@@ -10,6 +10,7 @@ export default function Card({ _id, name, minAmount, maxAmount, dailyProfit, dur
   const [modeErr, setModeErr] = useState("");
   const [serverErr, setServerErr] = useState("");
   const [success, setSuccess] = useState("");
+  
   async function handleStake() {
     setServerErr("");
     setSuccess("")

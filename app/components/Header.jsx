@@ -4,13 +4,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { signOutWithGoogle } from '../actions';
+import NotificationDropdown from './NoticationDropdown';
 
-export default function Header({ user }) {
+export default function Header({ user, unread, notifications }) {
   const loggedin = !!user;
-  
+
   const submenuRef = useRef();
   const path = usePathname();
   const [modal, setModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     function handleClickOutSide(e) {
@@ -23,10 +25,11 @@ export default function Header({ user }) {
       document.removeEventListener('click', handleClickOutSide);
     }
   }, []);
-
   useEffect(() => {
     setModal(false);
+    setOpen(false);
   }, [path])
+
 
   return (
     <>
@@ -39,14 +42,30 @@ export default function Header({ user }) {
               </div> : <div></div>}
         </div>
 
-        <div className='flex gap-4 md:gap-8 lg:gap-12 xl:gap-16'>
+        <div className=' flex gap-4 md:gap-8 lg:gap-12 xl:gap-16'>
           <div
             className='cursor-pointer flex items-center justify-evenly border border-background rounded bg-secondaryColor w-[200px] md:w-[220px] lg:w-[249px] xl:w-[279px]
           xl:text-[18px] lg:text-[16px] md:text-[12px] text-[10px]'>
             <Image height={24} width={24} alt='pdf' src={'/icons/pdf.svg'} /> Download Whitepaper PDF
           </div>
-          <div className='flex border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor cursor-pointer'>
-            <img src='/icons/notification.svg' />
+          <div className={`relative flex border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor cursor-pointer`}>
+
+            <button className='cursor-pointer' onClick={() => setOpen(!open)}>
+              {unread === 0 ? <Image
+                className='w-6 h-6 lg:w-12 lg:h-12'
+                height={24} width={24} alt='notification' src='/icons/notification.svg' />
+                :
+                <div >
+                  <div className='absolute -right-2 -top-2 flex justify-center items-center h-4 w-4 lg:h-6 lg:w-6 text-black p-1 border border-white bg-white rounded-full'>{unread}</div>
+                  <Image
+                    className='w-6 h-6 lg:w-12 lg:h-12'
+                    height={24} width={24} alt='notification!' src={'/icons/notificationalert.svg'} />
+                </div>
+              }
+            </button>
+            {open && (
+              <NotificationDropdown notifications={notifications} />
+            )}
           </div>
           <div className='cursor-pointer flex items-center border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor text-primaryColor'>
             <div className=''>language</div>
@@ -58,13 +77,13 @@ export default function Header({ user }) {
             </Link> :
             <div ref={submenuRef} className='cursor-pointer flex items-center relative'>
               <button className='cursor-pointer' onClick={() => setModal(!modal)}>
-                {user?.image ? 
-                <Image
-                  className='rounded-full border w-6 h-6 md:w-8 md:h-8 g:w-10 lg:h-10 xl:w-12 xl:h-12'
-                  alt={user?.name}
-                  height={48}
-                  width={48}
-                  src={user?.image} /> :
+                {user?.image ?
+                  <Image
+                    className='rounded-full border w-6 h-6 md:w-8 md:h-8 g:w-10 lg:h-10 xl:w-12 xl:h-12'
+                    alt={user?.name}
+                    height={48}
+                    width={48}
+                    src={user?.image} /> :
                   <div
                     className='rounded-full border w-6 h-6 md:w-8 md:h-8 g:w-10 lg:h-10 xl:w-12 xl:h-12 flex justify-center items-center'
                   >{user?.name.charAt(0).toUpperCase()}</div>}

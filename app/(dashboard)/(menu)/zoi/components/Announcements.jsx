@@ -6,10 +6,19 @@ import Row from './Row';
 
 export default function Announcements({ rows }) {
     const [searchKeyword, setSearchKeyword] = useState('');
-    function handleSearch(e) {
+    const [startIndex, setStartIndex] = useState(1);
+    const rowsPerPage = 10;
+
+    const handleSearch = (e) => {
         setSearchKeyword(e.target.value);
+        setStartIndex(1);
     }
-    let serial = 0;
+    const filteredRows = rows.filter((row) =>
+        row._id.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
+
+    const totalPage = Math.ceil(filteredRows.length / rowsPerPage);
+    const slicedRows = filteredRows.slice(startIndex - 1, startIndex + rowsPerPage - 1);
     return (
         <div className='text-primaryText'>
 
@@ -18,7 +27,7 @@ export default function Announcements({ rows }) {
                     ZOI Announcements
                 </div>
                 <div className='flex justify-between text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'>
-                    <div className='text-secondaryText'>You can withdraw your principal USDT after 10days</div>
+                    <div className='text-secondaryText'>You can withdraw your principal USDT after 30 days</div>
                     <Searchbar handleSearch={handleSearch} searchKeyword={searchKeyword} />
                 </div>
                 <div className='grid grid-cols-5 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px] bg-[#032E2F] mt-4'>
@@ -28,25 +37,50 @@ export default function Announcements({ rows }) {
                     <div className='p-4 flex justify-center '>Time</div>
                     <div className='p-4 flex justify-center'>Details</div>
                 </div>
-                {rows.map((row) => {
-                    serial++;
+                {rows.map((row, index) => {
+
                     const date = row.createdAt.toLocaleDateString().toString();
                     const time = row.createdAt.toLocaleTimeString().toString();
-                    if(row.subject.toLowerCase().includes(searchKeyword.toLowerCase()))
-                    return <Row key={row._id.toString()} serial={serial} subject={row.subject} date={date}
+
+                    return <Row key={row._id.toString()} serial={startIndex + index} subject={row.subject} date={date}
                         time={time} details={row.details} />
                 })}
                 <div className='flex justify-between p-8 text-[8px] md:text-[10px] lg:text-[14px] xl:text-[18px]'>
-                    <div className='text-secondaryText'>Showing 1 to 10 of 21 entries</div>
+                    <div className='text-secondaryText'>Showing {startIndex} to {startIndex + slicedRows.length - 1} of {filteredRows.length} entries</div>
                     <div className='flex gap-4'>
-                        <button className='p-2 pl-8 pr-8 bg-[#242B2B] rounded-md'>Previous</button>
-                        <button className='p-2 pl-8 pr-8 bg-primaryColor text-black rounded-md'>Next</button>
+                        <button
+                            className='cursor-pointer p-2 pl-8 pr-8 bg-[#242B2B] rounded-md'
+                            onClick={() => {
+                                return setStartIndex((i) => {
+                                    if (i - rowsPerPage < 1) return ((totalPage - 1) * rowsPerPage + 1);
+                                    return (i - rowsPerPage)
+                                })
+                            }}
+
+                        >Previous</button>
+                        <button
+                            className='cursor-pointer p-2 pl-8 pr-8 bg-primaryColor text-black rounded-md'
+                            onClick={() =>
+                                setStartIndex((i) => {
+                                    if (i + rowsPerPage > filteredRows.length) return (1);
+                                    return (i + rowsPerPage)
+                                })
+                            }
+                        >Next</button>
                     </div>
                     <div className='flex gap-4'>
-                        <div className='text-primaryColor'>1</div>
-                        <div>2</div>
-                        <div>3</div>
-                        <div>4</div>
+                        {Array.from({ length: totalPage }, (x, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setStartIndex(i * rowsPerPage + 1)}
+                                className={`${Math.ceil(startIndex / rowsPerPage) === i + 1
+                                    ? "text-primaryColor"
+                                    : ""
+                                    } cursor-pointer`}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
                     </div>
                 </div>
             </div>
