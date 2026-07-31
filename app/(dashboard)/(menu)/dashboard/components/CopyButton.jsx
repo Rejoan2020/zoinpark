@@ -16,7 +16,7 @@ export default function Button({ title, referral }) {
             onClick={copyLink}
             className={`${copied?'bg-white':'bg-primaryColor'} text-black rounded-md p-2 xl:p-4 cursor-pointer`}
         >
-            {copied ? "Copied ✓" : "Copy Link"}
+            {copied ? "Copied " : "Copy"}
         </button>
     )
 }

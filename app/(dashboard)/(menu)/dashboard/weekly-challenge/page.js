@@ -1,6 +1,5 @@
 import React from 'react'
-import WeeklyChallenge from '../components/WeeklyChallenge'
-import userWeeklyChallenge from '@/models/userWeeklyChallenge';
+import WeeklyChallenge from '../components/WeeklyChallenge' 
 import { getUserChallenges } from '@/app/actions/challenges';
 
 export default async function page() {

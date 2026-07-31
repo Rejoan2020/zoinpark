@@ -31,7 +31,7 @@ export default function Invite({ referral, users, successfulInvites }) {
               <input
                 readOnly
                 value={`${process.env.NEXTAUTH_URL}/signup?ref=${referral}`}
-                className="rounded-md bg-[#242B2B] px-4 py-3 h-[40px] w-[350px] md:h-[48px] md:w-[400px] lg:h-[56px] lg:w-[450px] xl:h-[64px] xl:w-[500px]"
+                className="rounded-md bg-[#242B2B] px-4 py-3 h-[40px] w-[300px] md:h-[48px] md:w-[350px] lg:h-[56px] lg:w-[400px] xl:h-[64px] xl:w-[450px]"
               />
               <CopyButton
                 title='Copy Link'

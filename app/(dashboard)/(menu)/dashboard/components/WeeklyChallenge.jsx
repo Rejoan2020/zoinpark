@@ -67,7 +67,7 @@ export default function WeeklyChallenge({ challengeArray }) {
         </div>
 
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Complete weekly and daily challenges to earn ZOINS. Weekly challenges reset every Monday.
         </div>
       </div>
       <div className='flex gap-4'>

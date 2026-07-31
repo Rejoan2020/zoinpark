@@ -14,15 +14,13 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const conn = await dbconnect();
-
-
+  await dbconnect();
   return (
     <html
       lang="en"
       className={inter.variable}
     >
-      <body className="min-h-full flex flex-col gradientbg2">
+      <body className="min-h-screen flex flex-col gradientbg2">
         {children}
       </body>
     </html>
