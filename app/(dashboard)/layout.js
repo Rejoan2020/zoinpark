@@ -9,6 +9,7 @@ import { dbconnect } from '@/lib/mongo';
 import { updateDailyCheckIn, updateDaysCheckIn } from '../actions/challenges';
 import userWeeklyChallenge from '@/models/userWeeklyChallenge';
 import Notification from '@/models/Notification';
+import MobileFooter from '../components/MobileFooter';
 
 export default async function layout({ children }) {
   await dbconnect();
@@ -43,14 +44,21 @@ export default async function layout({ children }) {
   })
 
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
+    <div className="flex min-h-screen bg-background">
+      <div className='hidden lg:block border-r border-zinc-800'>
+        <Sidebar />
+      </div>
       <div className="flex-1 flex flex-col">
         <Header user={user} unread={unread} notifications={leanNotifications} />
-        <main className="flex-1 bg-background">
+        <main className="flex-1">
           {children}
         </main>
-        <Footer />
+        <div className='max-lg:hidden'>
+          <Footer />
+        </div> 
+        <div className='lg:hidden h-20 border-t border-zinc-800 grid grid-cols-5 fixed bottom-0 left-0 right-0 bg-background'>
+            <MobileFooter/>
+        </div>
       </div>
     </div>
   )

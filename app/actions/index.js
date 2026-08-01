@@ -17,7 +17,8 @@ import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import WalletTransaction from "@/models/WalletTransaction";
 import Event from "@/models/Event";
 import EventRegistration from "@/models/EventRegistration";
-import { startOfWeek, format } from "date-fns"; 
+import { startOfWeek, format } from "date-fns";
+import Notification from "@/models/Notification";
 
 export async function signInWithGoogle() {
   await signIn("google", {
@@ -556,3 +557,32 @@ export async function getWalletHistory() {
   return walletHistory.reverse();
 }
 
+export async function readAll() {
+  await dbconnect();
+
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    throw new Error("Unauthorized");
+  }
+
+  const user = await User.findOne({
+    email: session.user.email,
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  await Notification.updateMany(
+    {
+      user: user._id,
+      read: false,
+    },
+    {
+      $set: {
+        read: true,
+      }
+    }
+  )
+}

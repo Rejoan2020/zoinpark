@@ -67,13 +67,7 @@ export default function Invite({ referral, users, successfulInvites }) {
                 src={'/icons/whatsappc.svg'}
                 alt='wp'
               />
-            </a>
-            {/* <Image
-              className='h-[24px] w-[24px] md:h-[32px] md:w-[32px] lg:h-[40px] md:w-[40px] xl:h-[48px] md:w-[48px]'
-              height={48}
-              width={48}
-              src={'/icons/messengerc.svg'}
-            /> */}
+            </a> 
           </div>
           <div className='flex flex-col gap-2'>
             <div className='text-primaryText'>Invite by Email</div>

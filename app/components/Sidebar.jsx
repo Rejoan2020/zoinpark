@@ -62,13 +62,11 @@ export default function Sidebar() {
     },
   ];
   return (
-    <div className='flex flex-col shrink-0 bg-background text-primaryText xl:w-[320px] lg:w-[260px] md:w-[200px] w-[180px] border-r border-zinc-800 text-secondaryText'>
+    <div className='flex flex-col shrink-0 bg-background text-primaryText xl:w-[320px] lg:w-[260px] md:w-[200px] w-[180px]  text-secondaryText'>
       <Link href={'/'} className='flex border-b border-zinc-800 p-2 xl:p-7 lg:p-5 md:p-3 justify-center xl:h-24 lg:h-20 md:h-16 h-12 cursor-pointer'>
         <Image height={248} width={248} alt='Logo' src='/icons/logo.svg' />
       </Link>
       {menu.map(m => {
-        console.log("hihhh : ",m.url.split("/").slice(0, 2).join("/"));
-        console.log(m.url)
         return <div
           key={m.name}>
           <Link
