@@ -16,14 +16,14 @@ export default function InviteEmailForm() {
     );
     return (
         <>
-        <form action={formAction} className='flex gap-2'>
+        <form action={formAction} className='flex max-lg:flex-col gap-2'>
             <input
                 name='email'
                 type='email'
                 placeholder={'Enter email address'}
-                className="rounded-md bg-[#242B2B] px-4 py-3 h-[40px] w-[300px] md:h-[48px] md:w-[350px] lg:h-[56px] lg:w-[400px] xl:h-[64px] xl:w-[450px]"
+                className="rounded-md bg-[#242B2B] px-4 py-3 h-[48px] w-full xl:h-[64px] xl:w-[450px]"
             />
-            <Button title='Invite' />
+            <Button title='Invite' isPending={pending} status={true}/>
         </form>
         {state.message && <p>{state.message}</p>}
         </>

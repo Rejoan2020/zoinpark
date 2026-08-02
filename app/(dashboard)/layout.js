@@ -56,7 +56,7 @@ export default async function layout({ children }) {
         <div className='max-lg:hidden'>
           <Footer />
         </div> 
-        <div className='lg:hidden h-20 border-t border-zinc-800 grid grid-cols-5 fixed bottom-0 left-0 right-0 bg-background'>
+        <div className='lg:hidden h-20 border-t border-zinc-800 grid grid-cols-4 fixed bottom-0 left-0 right-0 bg-background'>
             <MobileFooter/>
         </div>
       </div>

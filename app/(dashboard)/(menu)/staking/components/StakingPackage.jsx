@@ -17,7 +17,7 @@ export default function StakingPackage({ packages }) {
           <div className='gradient text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>Staking Package</div>
           <div className='text-secondaryText'>Grow your ZOINS by staking them and earning daily rewards. Choose a package that matches your investment goals and start earning passive income immediately.</div>
         </div>
-        <div className='flex gap-4'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-lg:pb-20'>
           {
             packages.map((pkg) => <Card key={pkg._id} {...pkg} />)
           }

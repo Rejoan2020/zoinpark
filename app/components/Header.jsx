@@ -9,8 +9,7 @@ import { readAll } from '../actions';
 
 export default function Header({ user, unread, notifications }) {
   const loggedin = !!user;
-
-  const submenuRef = useRef();
+ 
   const path = usePathname();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

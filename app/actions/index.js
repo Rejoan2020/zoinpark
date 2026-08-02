@@ -340,7 +340,7 @@ export async function inviteByEmail(initailState, formData) {
   const user = await User.findOne({ email: session.user.email });
 
   const referralLink = `${process.env.NEXTAUTH_URL}/signup?ref=${user.referralCode}`;
-  console.log(referralLink);
+
   const { data, error } = await resend.emails.send({
     from: "ZoinPark <onboarding@resend.dev>",
     to: email,
@@ -362,6 +362,7 @@ export async function inviteByEmail(initailState, formData) {
     `,
   });
   if (error) {
+    console.log('error', error)
     return {
       success: false,
       message: error.message,
@@ -487,7 +488,7 @@ export async function registerForEvent(eventId) {
     user: user._id,
     challengeId: 'community-event'
   })
-  console.log(challenge)
+  
   if (!challenge) throw new Error("Challenge not found!");
   if (!challenge.claimed) {
     challenge.completed = true;
