@@ -119,7 +119,7 @@ export default function Header({ user, unread, notifications }) {
           xl:text-[18px] lg:text-[16px] md:text-[12px] text-[10px]'>
             <Image height={24} width={24} alt='pdf' src={'/icons/pdf.svg'} /> Download Whitepaper PDF
           </div>
-          <div className='lg:hidden max-lg:w-full flex gap-2 justify-end '>
+          <div className=' max-lg:w-full flex gap-2 justify-end '>
             <div className={`relative flex border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor cursor-pointer`}>
 
               <button className='cursor-pointer' onClick={() => handleNotification()}>
@@ -140,7 +140,7 @@ export default function Header({ user, unread, notifications }) {
               )}
             </div>
 
-            <div className='max-lg:hidden cursor-pointer flex items-center border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor text-primaryColor'>
+            <div className='hidden cursor-pointer flex items-center border rounded xl:p-4 lg:p-2 p-1 border-secondaryColor text-primaryColor'>
               <div className=''>language</div>
               <Image height={24} width={24} alt='dropdown' src='/icons/dropdown.svg' />
             </div>

@@ -14,13 +14,13 @@ export default function Middle() {
             id: 2,
             image: "/icons/home/zoiac.svg",
             text: 'Zoi announcements',
-            link: "https://chat.whatsapp.com/xyz",
+            link: "/zoi",
         },
         {
             id: 3,
             image: '/icons/contactusC.svg',
             text: 'Contact Us',
-            link: "https://t.me/zoichain",
+            link: "/helpandsupports/contactus",
         },
     ]
     return (

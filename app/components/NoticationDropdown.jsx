@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotificationDropdown({ notifications }) {
     return (
-        <div className="absolute right-0 top-12 w-96 rounded-lg border border-zinc-800 bg-[#1B2222] shadow-xl z-50">
+        <div className="absolute right-0 top-12 w-48 lg:w-96 rounded-lg border border-zinc-800 bg-[#1B2222] shadow-xl z-50">
 
             <div className="p-4 border-b border-zinc-800">
                 <div className="text-primaryText font-semibold">

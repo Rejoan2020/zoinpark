@@ -26,7 +26,7 @@ export default function MobileFooter() {
         },
         {
             name: "Help & Support",
-            url: "/helpandsupports/tickets",
+            url: "/helpandsupports/middle",
             img: "/icons/support.svg",
             activeIcon: "/icons/home/supportac.svg",
         },

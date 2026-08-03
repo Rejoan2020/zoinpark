@@ -23,9 +23,16 @@ export default function Profile({ user }) {
           <div className='text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px]'>{user?.name}</div>
           <div className='text-primaryColor text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>{user?.zoiid ? user?.zoiid : "----"}</div>
         </div>
-        <div className='text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'>
-          <Link className='p-2 bg-primaryColor text-black m-2' href={'/user/settings/edit-profile'}>Edit profile</Link>
-          <Link className='p-2 bg bg-[#242B2B] m-2' href={'/user/settings/changepassword'}>Change password</Link>
+
+        <div className=' text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] '>
+
+          <div className='p-2 bg-primaryColor text-black m-2 flex justify-center items-center' >
+            <Link href={'/user/settings/edit-profile'}>Edit profile</Link>
+          </div>
+          
+          <div className='p-2 bg bg-[#242B2B] m-2 flex justify-center items-center'>
+            <Link href={'/user/settings/changepassword'}>Change password</Link>
+          </div>
         </div>
       </div>
       <div className='border-b border-zinc-800'></div>
