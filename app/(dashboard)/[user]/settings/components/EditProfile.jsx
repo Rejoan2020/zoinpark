@@ -47,7 +47,7 @@ export default function EditProfile({ user }) {
             name='address'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'House#497, Chorail Club Road, Keraniganj, Dhaka'}
+            placeholder={'742 Evergreen Terrace, Springfield, OR 97477.'}
           />
         </div>
         <div className='w-full'>
@@ -56,7 +56,7 @@ export default function EditProfile({ user }) {
             name='name'
             type='string'
             className='rounded-md text-secondaryText text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 p-1 mt-2'
-            placeholder={'Md. Rejoanur Rahman Apu'}
+            placeholder={'John'}
           />
         </div>
         <div className='w-full'>

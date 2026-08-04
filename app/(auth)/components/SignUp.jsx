@@ -9,8 +9,8 @@ export default function SignUp({referralCode}) {
   const [email, setEmail] = useState(true); 
   return (
     <div className='flex flex-col items-center gap-16 text-primaryText mt-12'>
-      <Link href={'/dashboard'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
-      <div className='flex flex-col gap-2 items-center w-100 md:w-120 lg:w-130 xl:w-140'>
+      <Link href={'/signin'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
+      <div className='flex flex-col gap-2 items-center w-80 md:w-120 lg:w-130 xl:w-140'>
         <div className='mb-12'>
           <div className='text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>Create your account</div>
           <div className='flex justify-center text-secondaryText text-[8px] md:text-[12px] lg:text-[16px] xl:text-[20px]'>
@@ -38,8 +38,8 @@ export default function SignUp({referralCode}) {
             placeholder={"Enter your name"}
           />
           <div className='flex justify-start w-full gap-4 mt-4'>
-            <div onClick={() => setEmail(true)} className={`${email ? "underline underline-offset-4" : "text-secondaryText"} cursor-pointer`}>Email</div>
-            <div onClick={() => setEmail(false)} className={`${!email ? "underline underline-offset-4" : "text-secondaryText"} cursor-pointer`}>Phone number</div>
+            <div onClick={() => setEmail(true)} className={` cursor-pointer`}>Email</div>
+            {/* <div onClick={() => setEmail(false)} className={`${!email ? "underline underline-offset-4" : "text-secondaryText"} cursor-pointer`}>Phone number</div> */}
           </div>
           <input
             name={`${email ? "email" : "phone"}`}
@@ -50,7 +50,7 @@ export default function SignUp({referralCode}) {
 
           <div className='flex justify-between w-full gap-4 mt-4'>
             <div className=''>Password</div>
-            <Link href={'/forgetpassword'} className='underline text-secondaryText cursor-pointer'>Forgot Password?</Link>
+            <Link href={'/forgetpassword'} className='hover:text-primaryText underline text-secondaryText cursor-pointer'>Forgot Password?</Link>
           </div>
           <input
             name='password'

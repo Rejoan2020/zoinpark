@@ -18,9 +18,9 @@ export default async function layout({ children }) {
   const user = await User.findOne({ email: session?.user?.email }).lean();
   if (user) user._id = user._id.toString();
 
-  const dailyCheckIn = await userWeeklyChallenge.findOne({ user: user._id, challengeId: 'daily-checkin' });
-  const fiveDaysCheckIn = await userWeeklyChallenge.findOne({ user: user._id, challengeId: 'visit-5' });
-  const sevenDaysCheckIn = await userWeeklyChallenge.findOne({ user: user._id, challengeId: 'visit-7' });
+  const dailyCheckIn = await userWeeklyChallenge.findOne({ user: user?._id, challengeId: 'daily-checkin' });
+  const fiveDaysCheckIn = await userWeeklyChallenge.findOne({ user: user?._id, challengeId: 'visit-5' });
+  const sevenDaysCheckIn = await userWeeklyChallenge.findOne({ user: user?._id, challengeId: 'visit-7' });
 
   if (dailyCheckIn) await updateDailyCheckIn(dailyCheckIn);
   if (fiveDaysCheckIn) await updateDaysCheckIn(fiveDaysCheckIn, 5);

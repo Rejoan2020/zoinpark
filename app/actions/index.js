@@ -27,10 +27,9 @@ export async function signInWithGoogle() {
 }
 
 export async function logIn(initailState, formData) {
+  await dbconnect();
   const email = formData.get('email');
   const pass = formData.get('password');
-
-  // console.log(email, pass)
   try {
     await signIn("credentials", {
       email: email,
@@ -173,6 +172,7 @@ export async function signUp(formData) {
 }
 
 export async function createUserWeeklyChallenge(newUser) {
+  await dbconnect();
 
   const weekKey = format(
     startOfWeek(new Date(), { weekStartsOn: 1 }),
@@ -266,6 +266,7 @@ export async function updateProfile(formData) {
 }
 
 export async function sendOTP(formData) {
+  await dbconnect();
   const email = formData.get("email");
   const user = await User.findOne({ email });
 
@@ -300,6 +301,7 @@ export async function sendOTP(formData) {
 }
 
 export async function getToken(hashedToken) {
+  await dbconnect();
   const token = await PasswordResetToken.findOne({ token: hashedToken });
   if (!token) throw new Error("Invalid reset link");
   if (token.expiresAt < new Date()) throw new Error("Reset link has expired");
@@ -307,7 +309,9 @@ export async function getToken(hashedToken) {
 }
 
 export async function changePass(email, newPass) {
-  const user = await User.findOne({ email });
+  await dbconnect();
+  const session = await auth();
+  const user = await User.findOne({ email: session?.user?.email });
   const hashedPass = await bcrypt.hash(newPass, 12);
   user.password = hashedPass;
   user.save();
@@ -315,9 +319,16 @@ export async function changePass(email, newPass) {
 }
 
 export async function resetPassword(formData) {
+  await dbconnect();
+  const session = await auth();
+  const user = await User.findOne({ email: session?.user?.email });
+
   const newPass = formData.get('newPass');
   const retypedNewPass = formData.get('retypedNewPass');
   const email = formData.get('email');
+
+  if (email !== user.email) throw new error("Email is not correct");
+
   if (newPass === retypedNewPass) {
     await changePass(email, newPass);
     console.log('Password changed!')
@@ -488,7 +499,7 @@ export async function registerForEvent(eventId) {
     user: user._id,
     challengeId: 'community-event'
   })
-  
+
   if (!challenge) throw new Error("Challenge not found!");
   if (!challenge.claimed) {
     challenge.completed = true;
@@ -539,6 +550,7 @@ export async function isRegistered(eventId) {
 }
 
 export async function getWalletHistory() {
+  await dbconnect();
   const session = await auth();
   if (!session?.user?.email) {
     throw new Error("Unauthorized");
@@ -586,4 +598,25 @@ export async function readAll() {
       }
     }
   )
+}
+
+export async function updatePassword(form) {
+  await dbconnect();
+  const session = await auth();
+  const email = session?.user?.email;
+  const { currentPass, newPass, rePass } = form;
+  const user = await User.findOne({ email });
+  if (newPass !== rePass) throw error("Passowrds do not match");
+
+  const match = await bcrypt.compare(
+    currentPass,
+    user.password
+  );
+
+  if (match) {
+    const hashedPass = await bcrypt.hash(newPass, 12);
+    user.password = hashedPass;
+    user.save();
+    await signOutWithGoogle();
+  }
 }

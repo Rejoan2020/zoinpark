@@ -8,8 +8,10 @@ import { auth } from "@/auth";
 import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import { startOfWeek, format } from "date-fns";
 import Notification from "@/models/Notification";
+import { dbconnect } from "@/lib/mongo";
 
 export async function updateDailyCheckIn(dailyCheckIn) {
+    await dbconnect();
     if (!dailyCheckIn.lastActivity && !dailyCheckIn.claimed) {
         dailyCheckIn.lastActivity = new Date();
         dailyCheckIn.progress = 1;
@@ -38,6 +40,7 @@ export async function updateDailyCheckIn(dailyCheckIn) {
 }
 
 export async function claimReward(id) {
+    await dbconnect();
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });
     if (!session?.user?.email) {
@@ -106,7 +109,7 @@ export async function claimReward(id) {
 }
 
 export async function updateDaysCheckIn(challenge, days) {
-    console.log(challenge)
+    await dbconnect();
     if (!challenge.lastActivity) {
         challenge.progress = 1;
         challenge.lastActivity = new Date();
@@ -135,8 +138,8 @@ export async function updateDaysCheckIn(challenge, days) {
     await challenge.save();
 }
 
-export async function getUserChallenges() {
-
+export async function getUserChallenges() { 
+    await dbconnect();
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });
     if (!session?.user?.email) {
@@ -188,6 +191,7 @@ export async function getUserChallenges() {
 }
 
 export async function getCompletedWC() {
+    await dbconnect();
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });
     if (!session?.user?.email) {

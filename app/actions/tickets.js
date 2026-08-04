@@ -2,6 +2,7 @@
 import User from "@/models/User";
 import Ticket from "@/models/Ticket";
 import { auth } from "@/auth";
+import { dbconnect } from "@/lib/mongo";
 
 export async function createTicket(formData) {
     const category = formData.get('category');
@@ -33,6 +34,7 @@ export async function createTicket(formData) {
 }
 
 export async function getTickets() {
+    await dbconnect();
     const session = await auth();
     const userEmail = session?.user?.email;
     if (!userEmail) {

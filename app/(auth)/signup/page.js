@@ -1,8 +1,9 @@
 import SignUp from "../components/SignUp";
 import React from 'react' 
 
-export default function page({searchParams}) { 
+export default async function page({searchParams}) { 
+  const searchParam = await searchParams;
   return (
-    <SignUp referralCode = {searchParams?.ref ?? ""}/>
+    <SignUp referralCode = {searchParam?.ref ?? ""}/>
   )
 }

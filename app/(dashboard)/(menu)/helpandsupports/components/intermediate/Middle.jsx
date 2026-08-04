@@ -28,7 +28,7 @@ export default function Middle() {
             <div className='text-primaryText grid grid-cols-2 gap-4 p-4'>
                 {cards.map(card =>
                     <Link key={card.id}
-                        className="gradientbg cursor-pointer border border-zinc-800 rounded-xl p-4 flex flex-col items-center justify-center gap-4 min-h-[180px] transition-all duration-200 hover:border-primaryColor"
+                        className="gradientbg cursor-pointer border border-zinc-800 rounded-xl p-2 flex flex-col items-center justify-center gap-4 min-h-[180px] transition-all duration-200 hover:border-primaryColor"
                         href={card.link}
                     >
                         <Image className='' alt={card.text} width={32} height={32} src={card.image} />

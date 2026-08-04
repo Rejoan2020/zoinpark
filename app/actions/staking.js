@@ -7,8 +7,10 @@ import UserStake from "@/models/UserStake";
 import WalletTransaction from "@/models/WalletTransaction";
 import userWeeklyChallenge from "@/models/userWeeklyChallenge";
 import { differenceInCalendarDays } from "date-fns";
+import { dbconnect } from "@/lib/mongo";
 
 async function getPackages() {
+    await dbconnect();
     const packages = await StakePackage.find().lean();
     return packages.map((pkg) => ({
         ...pkg,
@@ -19,6 +21,7 @@ async function getPackages() {
 }
 
 async function createStake(packageId, amount, paymentMode) {
+    await dbconnect();
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });
     if (!session?.user?.email) {
@@ -84,7 +87,7 @@ async function createStake(packageId, amount, paymentMode) {
             user: user._id,
             challengeId: 'stake-100',
         });
-        
+
         if (challenge && !challenge.claimed) {
             challenge.progress += amount;
             if (challenge.progress >= 100) {
@@ -103,6 +106,7 @@ async function createStake(packageId, amount, paymentMode) {
 }
 
 async function getUserStakes() {
+    await dbconnect();
     const session = await auth();
 
     const user = await User.findOne({
@@ -113,6 +117,7 @@ async function getUserStakes() {
 }
 
 async function withdraw(stakeId) {
+    await dbconnect();
     const stake = await UserStake.findById(stakeId);
 
     if (!stake)
@@ -134,7 +139,7 @@ async function withdraw(stakeId) {
 
     const totalReward = stake.amount * (stake.dailyProfit / 100) * daysPassed;
     let withdrawable = totalReward - Number(stake.claimedRewards);
-    
+
     if (withdrawable <= 0)
         throw new Error("No rewards available.");
 
@@ -175,6 +180,7 @@ async function withdraw(stakeId) {
 }
 
 async function getTotalStakes() {
+    await dbconnect();
     const session = await auth();
 
     const user = await User.findOne({
@@ -189,6 +195,7 @@ async function getTotalStakes() {
 }
 
 async function getTotalDebitCredits() {
+    await dbconnect();
     const session = await auth();
 
     const user = await User.findOne({

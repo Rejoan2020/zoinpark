@@ -14,7 +14,7 @@ export default function SignIn() {
   const [state, formAction, pending] = useActionState(logIn, initialState)
   return (
     <div className='flex flex-col min-h-full items-center gap-16 text-primaryText mt-12'>
-      <Link href={'/dashboard'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
+      <Link href={'/signin'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
       <div className='flex flex-col gap-2 items-center'>
         <div className='mb-12'>
           <div className='text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>Welcome to ZOI Community</div>
@@ -25,8 +25,8 @@ export default function SignIn() {
           action={formAction}
         >
           <div className='flex justify-start w-full gap-4 mt-4'>
-            <div onClick={() => setEmail(true)} className={`${email ? "underline underline-offset-4" : "text-secondaryText"} cursor-pointer`}>Email</div>
-            <div onClick={() => setEmail(false)} className={`${!email ? "underline underline-offset-4" : "text-secondaryText"} cursor-pointer`}>Phone number</div>
+            <div onClick={() => setEmail(true)} className={`cursor-pointer`}>Email</div>
+            {/* <div onClick={() => setEmail(false)} className={`${!email ? "underline underline-offset-4" : "text-secondaryText"} cursor-pointer`}>Phone number</div> */}
           </div>
           <input
             name={`${email ? "email" : "phone"}`}
