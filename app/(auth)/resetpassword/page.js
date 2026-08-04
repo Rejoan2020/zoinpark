@@ -12,12 +12,7 @@ export default async function page({ searchParams }) {
   const storedToken = await getToken(hashedToken);
   const matched = storedToken ? true : false;
   const email = storedToken?.email;
-
-  // if(matched){
-  //   await changePass(email);
-  // }
-  //This change function should be called from the ResetPass component as it will need new pass value
-  //from the user.
+ 
 
   return (
     <>
