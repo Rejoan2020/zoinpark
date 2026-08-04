@@ -2,7 +2,7 @@ import React from 'react'
 import ResetPass from '../components/ResetPass'
 import crypto from 'crypto'
 import { getToken } from '@/app/actions';
-
+import { dbconnect } from '@/lib/mongo';
 
 export default async function page({ searchParams }) { 
   await dbconnect();
