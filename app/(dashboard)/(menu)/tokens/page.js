@@ -3,6 +3,7 @@ import ZoinHeader from './components/ZoinHeader'
 import { getTotalStakes } from '@/app/actions/staking';
 import { getTotalDebitCredits } from '@/app/actions/staking';
 import { getWalletHistory } from '@/app/actions';
+import { dbconnect } from '@/lib/mongo';
 
 export default async function page() {
   await dbconnect();

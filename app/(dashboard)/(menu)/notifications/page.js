@@ -3,6 +3,7 @@ import React from 'react'
 import Notification from '@/models/Notification';
 import Notifications from '@/app/components/Notifications';
 import User from '@/models/User';
+import { dbconnect } from '@/lib/mongo';
 
 export default async function page() {
     await dbconnect();

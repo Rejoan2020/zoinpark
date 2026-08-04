@@ -3,6 +3,7 @@ import Invite from '../components/Invite'
 import { auth } from '@/auth'
 import User from '@/models/User';
 import Wallet from '@/models/Wallet';
+import { dbconnect } from '@/lib/mongo';
 
 export default async function page() {
   await dbconnect();

@@ -1,6 +1,7 @@
 import React from 'react'
 import StakingPageClient from './components/StakingPageClient'
 import { getPackages, getUserStakes } from '@/app/actions/staking';
+import { dbconnect } from '@/lib/mongo';
 
 export default async function page() {
   await dbconnect();

@@ -49,7 +49,7 @@ export default async function layout({ children }) {
         <Sidebar />
       </div>
       <div className="flex-1 flex flex-col">
-        <Header user={user} unread={unread} notifications={leanNotifications} />
+        <Header user={user} unread={unread} notifications={leanNotifications.reverse()} />
         <main className="flex-1 max-lg:pb-20">
           {children}
         </main>

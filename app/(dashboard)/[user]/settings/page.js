@@ -1,5 +1,4 @@
-import React from 'react'
-import Profile from './components/Profile' 
+import React from 'react' 
 import { redirect } from 'next/navigation'
 
 export default function page() {

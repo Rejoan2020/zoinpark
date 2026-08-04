@@ -1,6 +1,7 @@
 import React from 'react'
 import CommunityEvents from '../components/CommunityEvents'
 import Event from '@/models/Event'
+import { dbconnect } from '@/lib/mongo';
 
 export default async function page() {
   await dbconnect();

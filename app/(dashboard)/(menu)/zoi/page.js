@@ -1,6 +1,7 @@
 import React from 'react';
 import { getAnnouncements } from '@/app/actions/announcements';
 import Announcements from './components/Announcements';
+import { dbconnect } from '@/lib/mongo';
 
 export default async function page() {
     await dbconnect();
