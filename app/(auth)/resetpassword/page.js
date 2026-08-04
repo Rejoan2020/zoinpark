@@ -1,10 +1,11 @@
 import React from 'react'
 import ResetPass from '../components/ResetPass'
 import crypto from 'crypto'
-import { getToken } from '@/app/actions'; 
+import { getToken } from '@/app/actions';
 
 
-export default async function page({ searchParams }) {
+export default async function page({ searchParams }) { 
+  await dbconnect();
   const { token } = await searchParams;
 
   const hashedToken = token ? crypto.createHash("sha256").update(token).digest("hex") : undefined;
@@ -20,7 +21,7 @@ export default async function page({ searchParams }) {
 
   return (
     <>
-      {matched ? <ResetPass email = {email}/> : <div>Wrong token!</div>}
+      {matched ? <ResetPass email={email} /> : <div>Wrong token!</div>}
     </>
   )
 }

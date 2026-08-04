@@ -5,6 +5,7 @@ import User from '@/models/User';
 import Wallet from '@/models/Wallet';
 
 export default async function page() {
+  await dbconnect();
   const session = await auth();
   const user = await User.findOne({ email: session?.user?.email }); 
   const successfulInvites = user.successfulInvites;

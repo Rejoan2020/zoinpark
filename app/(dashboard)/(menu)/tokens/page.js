@@ -5,6 +5,7 @@ import { getTotalDebitCredits } from '@/app/actions/staking';
 import { getWalletHistory } from '@/app/actions';
 
 export default async function page() {
+  await dbconnect();
 
   const totalStaking = await getTotalStakes();
   const totalDebitCredits = await getTotalDebitCredits();

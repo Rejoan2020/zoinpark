@@ -3,6 +3,7 @@ import StakingPageClient from './components/StakingPageClient'
 import { getPackages, getUserStakes } from '@/app/actions/staking';
 
 export default async function page() {
+  await dbconnect();
   const packages = await getPackages();
   const history = await getUserStakes();
   const totalStaking = history.map((pkg) => pkg.amount);

@@ -5,6 +5,7 @@ import Notifications from '@/app/components/Notifications';
 import User from '@/models/User';
 
 export default async function page() {
+    await dbconnect();
     const session = await auth();
     const user = await User.findOne({ email: session?.user?.email }).lean();
     const notifications = await Notification.find({ user: user._id }).lean();

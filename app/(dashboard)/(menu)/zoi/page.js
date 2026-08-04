@@ -3,6 +3,7 @@ import { getAnnouncements } from '@/app/actions/announcements';
 import Announcements from './components/Announcements';
 
 export default async function page() {
+    await dbconnect();
 
     const announcements = await getAnnouncements();
 

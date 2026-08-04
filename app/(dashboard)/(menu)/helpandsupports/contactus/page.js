@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { dbconnect } from '@/lib/mongo';
 
-export default function page() {
+export default async function page() {
+  await dbconnect();
   const cards = [
     {
       id: 1,

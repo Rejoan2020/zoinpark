@@ -5,6 +5,7 @@ import { getTickets } from '@/app/actions/tickets';
 
 
 export default async function page() {
+  await dbconnect();
   const tickets = await getTickets();
 
   return (
