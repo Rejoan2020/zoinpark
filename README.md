@@ -179,9 +179,9 @@ styles/
 </div>
 
 <div>
-<code>
 <h2>⚙️Installation</h2>
 
+<code>
 Clone the repository
 
 git clone https://github.com/Rejoan2020/zoinpark.git
@@ -195,18 +195,14 @@ Install dependencies
 npm install
 
 Create a .env.local
+MONGODB_URI= 
 
-MONGODB_URI=
-
-NEXTAUTH_SECRET=
-
-NEXTAUTH_URL=
-
-AUTH_TRUST_HOST=
-
+AUTH_SECRET=
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
 RESEND_API_KEY=
 
-RESEND_FROM=
+NEXTAUTH_URL = 
 
 Run the development server
 
@@ -278,8 +274,6 @@ This project is licensed under the MIT License.
 
 <div align="center">
 
-⭐ If you found this project interesting, consider giving it a star!
-
-Made with ❤️ using Next.js & MongoDB
+⭐ If you found this project interesting, consider giving it a star! 
 
 </div>
