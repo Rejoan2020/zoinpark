@@ -137,24 +137,78 @@ The application enables users to securely create an account, stake virtual asset
 <h2>📂 Project Structure</h2>
 
 <code>
-app/
+```text
+zoinpark/
 │
-├── actions/
-├── (auth)/
-├── (dashboard)/
-├── api/
+├── app/
+│   ├── actions/                  # Server Actions
+│   ├── api/                      # API Routes
+│   ├── (auth)/                   # Authentication pages
+│   │   ├── signin/
+│   │   ├── signup/
+│   │   ├── forgetpassword/
+│   │   ├── resetpassword/
+│   │   └── components/
+│   │
+│   ├── (dashboard)/              # Protected Dashboard
+|   |   ├──(menu)
+│   │      ├── dashboard/
+│   │      ├── helpandsupports/
+│   │      ├── notifications/
+│   │      ├── staking/
+│   │      ├── tokens/
+│   │      ├── zoi/
+│   │   ├── [user]/settings
+│   │              ├── changepassword/
+|   |              ├── components
+|   |              ├── edit-profile
+|   |              └── profile
+│   │
+│   ├── components/               # Shared UI Components
+│   ├── layout.js
+│   └── page.js
 │
-components/
 │
-lib/
+├── lib/                          # Database & External Services
+│   ├── mongo.js 
+│   ├── mail.js
+│   └── client.js
 │
-models/
+├── models/                       # Mongoose Models
+|   ├── Announcement.js
+│   ├── User.js
+│   ├── Wallet.js
+│   ├── WalletTransaction.js
+│   ├── StakePackage.js
+│   ├── UserStake.js
+│   ├── Event.js
+│   ├── EventRegistration.js
+│   ├── Referral.js
+│   ├── weeklyChallenge.js
+│   ├── userWeeklyChallenge.js
+│   ├── Notification.js
+│   ├── Ticket.js
+│   └── PasswordResetToken.js
 │
-public/
+├── public/                       # Static Assets
+│   ├── icons/
+│   ├── images/
+│   └── events/
 │
-scripts/
+├── scripts/                      # Database Seed Scripts
+│   ├── seedEvents.js
+│   └── seedPackages.js
 │
-styles/
+├── utils/                        # Helper Functions
+│
+├── screenshots/                  # README Screenshots
+│
+├── .env.local
+├── package.json
+├── tailwind.config.js
+├── next.config.js
+└── README.md
+```
 </code>
 </div>
 
@@ -195,6 +249,10 @@ Weekly Challenges
 Staking
 
 <img src="./screenshots/stakingCenter.png" width="100%"/>
+
+Staking History
+
+<img src="./screenshots/stakingHistory.png" width="100%"/>
 
 Ticket Response
 
