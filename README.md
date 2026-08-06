@@ -179,6 +179,33 @@ styles/
 </div>
 
 <div>
+<h2>Screenshots</h2>
+Login
+
+<img src="./screenshots/login.png" width="100%"/>
+
+Dashboard
+
+<img src="./screenshots/dashboard.png" width="100%"/>
+
+Weekly Challenges
+
+<img src="./screenshots/weeklyChallenge.png" width="100%"/>
+
+Staking
+
+<img src="./screenshots/stakingCenter.png" width="100%"/>
+
+Ticket Response
+
+<img src="./screenshots/ticketResponse.png" width="100%"/>
+
+Wallet
+
+<img src="./screenshots/walletHistory.png" width="100%"/>
+</div>
+
+<div>
 <h2>⚙️Installation</h2>
 
 <code>
