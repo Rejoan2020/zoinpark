@@ -159,6 +159,7 @@ styles/
 </div>
 
 <div>
+<h2>Database Models</h2>
 <ul>
 <li>Announcement</li>
 <li>Event</li>
@@ -179,7 +180,7 @@ styles/
 
 <div>
 <code>
-⚙️Installation
+<h2>⚙️Installation</h2>
 
 Clone the repository
 
