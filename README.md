@@ -134,8 +134,9 @@ The application enables users to securely create an account, stake virtual asset
 </div>
 
 <div>
-<h1>📂 Project Structure</h1>
-```
+<h2>📂 Project Structure</h2>
+
+<code>
 app/
 │
 ├── actions/
@@ -154,7 +155,7 @@ public/
 scripts/
 │
 styles/
-```
+</code>
 </div>
 
 <div>
@@ -177,7 +178,8 @@ styles/
 </div>
 
 <div>
-⚙️```Installation
+<code>
+⚙️Installation
 
 Clone the repository
 
@@ -207,7 +209,8 @@ RESEND_FROM=
 
 Run the development server
 
-npm run dev```
+npm run dev
+</code>
 
 </div>
 
