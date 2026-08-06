@@ -136,8 +136,7 @@ The application enables users to securely create an account, stake virtual asset
 <div>
 <h2>📂 Project Structure</h2>
 
-<code>
-```text
+<code> 
 zoinpark/
 │
 ├── app/
@@ -207,8 +206,7 @@ zoinpark/
 ├── package.json
 ├── tailwind.config.js
 ├── next.config.js
-└── README.md
-```
+└── README.md 
 </code>
 </div>
 
@@ -234,6 +232,8 @@ zoinpark/
 
 <div>
 <h2>Screenshots</h2>
+
+<h3>In larger device</h3>
 Login
 
 <img src="./screenshots/login.png" width="100%"/>
@@ -261,6 +261,37 @@ Ticket Response
 Wallet
 
 <img src="./screenshots/walletHistory.png" width="100%"/>
+
+<h3>In smaller devices</h3>
+
+Login
+
+<img src="./screenshots/small-device/login.png" width="100%"/>
+
+Dashboard
+
+<img src="./screenshots/small-device/home.png" width="100%"/>
+
+Weekly Challenges
+
+<img src="./screenshots/small-device/challenges.png" width="100%"/>
+
+Staking
+
+<img src="./screenshots/small-device/stakingPackages.png" width="100%"/>
+
+Staking History
+
+<img src="./screenshots/small-device/stakingHistory.png" width="100%"/>
+
+Ticket Response
+
+<img src="./screenshots/small-device/ticketResponses.png" width="100%"/>
+
+Total debit-credit
+
+<img src="./screenshots/small-device/total.png" width="100%"/>
+
 </div>
 
 <div>
