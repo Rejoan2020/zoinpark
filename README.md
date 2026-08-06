@@ -266,31 +266,31 @@ Wallet
 
 Login
 
-<img src="./screenshots/small-device/login.png" width="100%"/>
+<img src="./screenshots/small-device/login.png"/>
 
 Dashboard
 
-<img src="./screenshots/small-device/home.png" width="100%"/>
+<img src="./screenshots/small-device/home.png" />
 
 Weekly Challenges
 
-<img src="./screenshots/small-device/challenges.png" width="100%"/>
+<img src="./screenshots/small-device/challenges.png"/>
 
 Staking
 
-<img src="./screenshots/small-device/stakingPackages.png" width="100%"/>
+<img src="./screenshots/small-device/stakingPackages.png" "/>
 
 Staking History
 
-<img src="./screenshots/small-device/stakingHistory.png" width="100%"/>
+<img src="./screenshots/small-device/stakingHistory.png" />
 
 Ticket Response
 
-<img src="./screenshots/small-device/ticketResponses.png" width="100%"/>
+<img src="./screenshots/small-device/ticketResponses.png" />
 
 Total debit-credit
 
-<img src="./screenshots/small-device/total.png" width="100%"/>
+<img src="./screenshots/small-device/total.png" />
 
 </div>
 
