@@ -5,6 +5,30 @@
 
 Built with <b>Next.js 16, React 19, MongoDB, NextAuth, Tailwind CSS, and Server Actions</b>.
 
-<p> <a href="https://zoinpark.vercel.app/">Live Demo</a> • <a href="https://github.com/Rejoan2020/zoinpark">📂 Repository</a> </p>
+<p> <a href="https://zoinpark.vercel.app/">🌐 Live Demo</a> • <a href="https://github.com/Rejoan2020/zoinpark">📂 Repository</a> </p>
 
+</div>
+
+<div>
+<h2>Overview</h2>
+
+<p>
+ZoinPark is a modern full-stack investment dashboard that simulates the core features of a real-world Web3 platform.
+
+The application enables users to securely create an account, stake virtual assets, participate in community events, complete weekly challenges, earn rewards, manage their wallet, track referrals, and receive email notifications.
+</p>
+</div>
+
+<div>
+<h2>Features</h2>
+
+<h3>Authentication</h3>
+<ul>
+<li>User Registration</li>
+<li>Secure Login</li>
+<li>Protected Routes</li>
+<li>Password Reset via Email</li>
+<li>Change Password</li>
+<li>Session Management using NextAuth</li>
+</ul>
 </div>
