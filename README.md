@@ -190,7 +190,7 @@ Dashboard
 
 Weekly Challenges
 
-<img src="./screenshots/weeklyChallenge.png" width="100%"/>
+<img src="./screenshots/weeklychallenge.png" width="100%"/>
 
 Staking
 
