@@ -30,5 +30,18 @@ The application enables users to securely create an account, stake virtual asset
 <li>Password Reset via Email</li>
 <li>Change Password</li>
 <li>Session Management using NextAuth</li>
+</ul> 
+
+<h3>Weekly Challenges</h3>
+<ul>
+<li>Referral Challenges</li>
+<li>Daily Check-in tracking</li>
+<li>Visit ZoinPark for 5 Consecutive Days</li>
+<li>Visit ZoinPark for 7 Consecutive Days</li>
+<li>Staking challenges</li>
+<li>Challenges of joining community programs</li>
+<li>Reward Claiming</li>
+<li>Automatic Weekly Reset Logic</li>
 </ul>
+
 </div>
