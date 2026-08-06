@@ -134,7 +134,8 @@ The application enables users to securely create an account, stake virtual asset
 </div>
 
 <div>
-📂 Project Structure
+<h1>📂 Project Structure</h1>
+```
 app/
 │
 ├── actions/
@@ -153,6 +154,7 @@ public/
 scripts/
 │
 styles/
+```
 </div>
 
 <div>
@@ -175,7 +177,7 @@ styles/
 </div>
 
 <div>
-⚙️ Installation
+⚙️```Installation
 
 Clone the repository
 
@@ -205,7 +207,8 @@ RESEND_FROM=
 
 Run the development server
 
-npm run dev
+npm run dev```
+
 </div>
 
 <div>
@@ -230,7 +233,7 @@ npm run dev
 <h2>Engineering Highlights</h2>
 
 During development, special attention was given to:
-
+<ul>
 <li>Designing scalable MongoDB schemas</li>
 <li>Maintaining wallet transaction integrity</li>
 <li>Preventing duplicate event registrations</li>
@@ -240,4 +243,39 @@ During development, special attention was given to:
 <li>Responsive UI across devices</li>
 <li>Server-side rendering where appropriate</li>
 <li>Efficient database queries using Mongoose</li>
+</ul>
+</div>
+
+<div>
+<h2>Future Improvements</h2>
+<ul>
+<li>Payment Gateway Integration</li>
+<li>Admin Dashboard</li>
+<li>Push Notifications</li>
+<li>Real Cryptocurrency Deposits</li>
+<li>Two-Factor Authentication (2FA)</li>
+<li>Multi-language Support</li>
+</ul>
+</div>
+
+<div>
+<h2>Contributing</h2>
+
+Contributions, issues, and feature requests are welcome.
+
+Feel free to fork the repository and submit a pull request.
+</div>
+
+<div>
+<h2>📄 License</h2>
+
+This project is licensed under the MIT License.
+</div>
+
+<div align="center">
+
+⭐ If you found this project interesting, consider giving it a star!
+
+Made with ❤️ using Next.js & MongoDB
+
 </div>
