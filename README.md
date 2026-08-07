@@ -246,7 +246,7 @@ zoinpark/
 <b>Dashboard</b>
 </td>
 </tr>
-
+</table>
 
 Weekly Challenges
 
