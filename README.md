@@ -237,16 +237,16 @@ zoinpark/
 <table>
 <tr>
 <td align="center">
+<img src="./screenshots/login.png" width="450"/><br>
 <b>Login</b>
 </td>
 
 <td align="center">
-<img src="./screenshots/login.png" width="450"/><br>
+<img src="./screenshots/dashboard.png" width="450"/><br>
 <b>Dashboard</b>
 </td>
 </tr>
 
-<img src="./screenshots/dashboard.png" width="100%"/>
 
 Weekly Challenges
 
