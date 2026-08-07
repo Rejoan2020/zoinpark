@@ -234,11 +234,17 @@ zoinpark/
 <h2>Screenshots</h2>
 
 <h3>In larger device</h3>
-Login
+<table>
+<tr>
+<td align="center">
+<b>Login</b>
+</td>
 
-<img src="./screenshots/login.png" width="100%"/>
-
-Dashboard
+<td align="center">
+<img src="./screenshots/login.png" width="450"/><br>
+<b>Dashboard</b>
+</td>
+</tr>
 
 <img src="./screenshots/dashboard.png" width="100%"/>
 
@@ -290,7 +296,7 @@ Ticket Response
 
 Total debit-credit
 
-<img src="./screenshots/small-device/total.png" />
+<img src="./screenshots/small-device/total.png"  />
 
 </div>
 
