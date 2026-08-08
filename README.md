@@ -270,11 +270,11 @@ zoinpark/
 <b>Ticket Response</b>
 </td>
 </tr>
-
-Wallet
-
-<img src="./screenshots/walletHistory.png" width="100%"/>
-
+<tr>
+<td align="center">
+<img src="./screenshots/walletHistory.png" width="450"/>
+</td>
+</tr>
 </table>
 
 
