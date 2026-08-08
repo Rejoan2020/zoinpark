@@ -246,27 +246,37 @@ zoinpark/
 <b>Dashboard</b>
 </td>
 </tr>
-</table>
 
-Weekly Challenges
+<tr>
+<td align="center">
+<img src="./screenshots/weeklychallenge.png" width="450"/><br>
+<b>Weekly Challenges</b>
+</td>
 
-<img src="./screenshots/weeklychallenge.png" width="100%"/>
+<td align="center">
+<img src="./screenshots/stakingCenter.png" width="450"/></br>
+<b>Staking</b>
+</td>
+</tr>
 
-Staking
+<tr>
+<td align="center">
+<img src="./screenshots/stakingHistory.png" width="450"/></br>
+<b>Staking History</b>
+</td>
 
-<img src="./screenshots/stakingCenter.png" width="100%"/>
-
-Staking History
-
-<img src="./screenshots/stakingHistory.png" width="100%"/>
-
-Ticket Response
-
-<img src="./screenshots/ticketResponse.png" width="100%"/>
+<td align="center">
+<img src="./screenshots/ticketResponse.png" width="450"/><br>
+<b>Ticket Response</b>
+</td>
+</tr>
 
 Wallet
 
 <img src="./screenshots/walletHistory.png" width="100%"/>
+
+</table>
+
 
 <h3>In smaller devices</h3>
 
