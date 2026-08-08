@@ -282,7 +282,38 @@ zoinpark/
 
 <h3>In smaller devices</h3>
 
-<table> <tr> <td align="center"> <img src="./screenshots/small-device/login.png" width="220"/><br> <b>Login</b> </td> <td align="center"> <img src="./screenshots/small-device/home.png" width="220"/><br> <b>Dashboard</b> </td> <td align="center"> <img src="./screenshots/small-device/challenges.png" width="220"/><br> <b>Weekly Challenges</b> </td> <td align="center"> <img src="./screenshots/small-device/stakingPackages.png" width="220"/><br> <b>Staking Packages</b> </td> </tr> <tr> <td align="center"> <img src="./screenshots/small-device/stakingHistory.png" width="220"/><br> <b>Staking History</b> </td> <td align="center"> <img src="./screenshots/small-device/ticketResponses.png" width="220"/><br> <b>Ticket Response</b> </td> <td align="center"> <img src="./screenshots/small-device/total.png" width="220"/><br> <b>Wallet</b> </td> </tr> </table>
+<table> 
+<tr> 
+<td align="center"> 
+<img src="./screenshots/small-device/login.png" width="220"/><br> 
+<b>Login</b> 
+</td> 
+<td align="center"> 
+<img src="./screenshots/small-device/home.png" width="220"/><br> 
+<b>Dashboard</b> 
+</td> 
+<td align="center"> 
+<img src="./screenshots/small-device/challenges.png" width="220"/><br> 
+<b>Weekly Challenges</b> 
+</td> 
+<td align="center"> 
+<img src="./screenshots/small-device/stakingPackages.png" width="220"/><br> 
+<b>Staking Packages</b> 
+</td> 
+</tr> 
+<tr> 
+<td align="center"> 
+<img src="./screenshots/small-device/stakingHistory.png" width="220"/><br> 
+<b>Staking History</b> </td> <td align="center"> 
+<img src="./screenshots/small-device/ticketResponses.png" width="220"/><br> 
+<b>Ticket Response</b> 
+</td> 
+<td align="center"> 
+<img src="./screenshots/small-device/total.png" width="220"/><br> 
+<b>Wallet</b> 
+</td> 
+</tr> 
+</table>
 </div>
 
 <div>
