@@ -272,42 +272,17 @@ zoinpark/
 </tr>
 <tr>
 <td align="center">
-<img src="./screenshots/walletHistory.png" width="450"/>
+<img src="./screenshots/walletHistory.png" width="450"/><br>
+<b>Wallet</b>
 </td>
 </tr>
+
 </table>
 
 
 <h3>In smaller devices</h3>
 
-Login
-
-<img src="./screenshots/small-device/login.png"/>
-
-Dashboard
-
-<img src="./screenshots/small-device/home.png" />
-
-Weekly Challenges
-
-<img src="./screenshots/small-device/challenges.png"/>
-
-Staking
-
-<img src="./screenshots/small-device/stakingPackages.png" "/>
-
-Staking History
-
-<img src="./screenshots/small-device/stakingHistory.png" />
-
-Ticket Response
-
-<img src="./screenshots/small-device/ticketResponses.png" />
-
-Total debit-credit
-
-<img src="./screenshots/small-device/total.png"  />
-
+<table> <tr> <td align="center"> <img src="./screenshots/small-device/login.png" width="220"/><br> <b>Login</b> </td> <td align="center"> <img src="./screenshots/small-device/home.png" width="220"/><br> <b>Dashboard</b> </td> <td align="center"> <img src="./screenshots/small-device/challenges.png" width="220"/><br> <b>Weekly Challenges</b> </td> <td align="center"> <img src="./screenshots/small-device/stakingPackages.png" width="220"/><br> <b>Staking Packages</b> </td> </tr> <tr> <td align="center"> <img src="./screenshots/small-device/stakingHistory.png" width="220"/><br> <b>Staking History</b> </td> <td align="center"> <img src="./screenshots/small-device/ticketResponses.png" width="220"/><br> <b>Ticket Response</b> </td> <td align="center"> <img src="./screenshots/small-device/total.png" width="220"/><br> <b>Wallet</b> </td> <td align="center"> <img src="./screenshots/small-device/events.png" width="220"/><br> <b>Community Events</b> </td> </tr> </table>
 </div>
 
 <div>
