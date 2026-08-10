@@ -19,6 +19,8 @@ export default function Button({ challenge, title }) {
 
   const disabled = challenge.claimed || !challenge.completed;
 
+  console.log(challenge.challenge,challenge.claimed);
+
   const rewards = {
     "daily-checkin": 5,
     "visit-5": 20,

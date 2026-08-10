@@ -124,21 +124,27 @@ export async function updateDaysCheckIn(challenge, days) {
     else if (dayDiff == 1) {
         challenge.progress++;
         challenge.lastActivity = new Date();
+        if (challenge.progress > days && challenge.claimed){
+            challenge.progress = 1;
+            challenge.completed = false;
+            challenge.claimed = false;
+        }
     }
     else if (dayDiff > 1) {
         challenge.progress = 1;
         challenge.lastActivity = new Date();
+        challenge.completed = false;
+        challenge.claimed = false;
     }
     if (challenge.progress >= days && !challenge.completed) {
         challenge.lastActivity = new Date();
-        // challenge.claimed = false;
         challenge.completed = true;
         challenge.completedAt = new Date();
-    }
+    } 
     await challenge.save();
 }
 
-export async function getUserChallenges() { 
+export async function getUserChallenges() {
     await dbconnect();
     const session = await auth();
     const user = await User.findOne({ email: session.user.email });

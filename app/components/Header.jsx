@@ -56,7 +56,7 @@ export default function Header({ user, unread, notifications }) {
 
   return (
     <>
-      <div className='flex lg:justify-between items-center xl:text-[20px] lg:text-[16px] md:text-[12px] text-[10px] bg-background text-primaryText border-b border-zinc-800 p-1 md:p-2 lg:p-3 xl:p-4 xl:h-24 lg:h-20 md:h-16 h-12'>
+      <div className='flex lg:justify-between items-center xl:text-[20px] lg:text-[16px] md:text-[12px] text-[10px] bg-background text-primaryText border-b border-zinc-800 p-1 xl:h-24 lg:h-20 md:h-16 h-12'>
 
         <div className='lg:hidden'>
           {!loggedin ?
@@ -124,13 +124,13 @@ export default function Header({ user, unread, notifications }) {
 
               <button className='cursor-pointer' onClick={() => handleNotification()}>
                 {alert === 0 ? <Image
-                  className='w-6 h-6 lg:w-12 lg:h-12'
+                  className='w-6 h-6'
                   height={24} width={24} alt='notification' src='/icons/notification.svg' />
                   :
                   <div >
                     <div className='absolute -right-2 -top-2 flex justify-center items-center h-4 w-4 lg:h-6 lg:w-6 text-black p-1 border border-white bg-white rounded-full'>{unread}</div>
                     <Image
-                      className='w-6 h-6 lg:w-12 lg:h-12'
+                      className='w-6 h-6'
                       height={24} width={24} alt='notification!' src={'/icons/notificationalert.svg'} />
                   </div>
                 }

@@ -12,8 +12,7 @@ import Notification from '@/models/Notification';
 import MobileFooter from '../components/MobileFooter';
 
 export default async function layout({ children }) {
-  await dbconnect();
-
+  await dbconnect(); 
   const session = await auth();
   const user = await User.findOne({ email: session?.user?.email }).lean();
   if (user) user._id = user._id.toString();

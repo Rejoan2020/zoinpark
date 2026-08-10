@@ -9,8 +9,8 @@ export default async function page() {
     {
       id: 1,
       image: '/icons/mail.svg',
-      text: 'info@toichain.org',
-      link: "mailto:info@toichain.org",
+      text: 'info@zoichain.org',
+      link: "mailto:info@zoichain.xyz",
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ export default async function page() {
       id: 3,
       image: '/icons/telegramc.svg',
       text: 'Join us on Telegram',
-      link: "https://t.me/zoichain",
+      link: "https://t.me/zoichainzyx",
     }
   ]
   return (

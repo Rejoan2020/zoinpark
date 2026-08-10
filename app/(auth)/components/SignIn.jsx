@@ -11,7 +11,20 @@ const initialState = {
 
 export default function SignIn() {
   const [email, setEmail] = useState(true);
-  const [state, formAction, pending] = useActionState(logIn, initialState)
+  const [emailaddress, setEmailaddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [state, formAction, pending] = useActionState(logIn, initialState);
+
+  const demoCredentials = {
+    email: "test10@gmail.com",
+    password: "test10",
+  };
+
+  function useDemoAccount() {
+    setEmailaddress(demoCredentials.email);
+    setPassword(demoCredentials.password);
+  }
+
   return (
     <div className='flex flex-col min-h-full items-center gap-16 text-primaryText mt-12'>
       <Link href={'/signin'}><Image alt='Logo' height={52} width={106} src={'icons/logo.svg'} /></Link>
@@ -20,6 +33,11 @@ export default function SignIn() {
           <div className='text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px]'>Welcome to ZOI Community</div>
           <div className='flex justify-center text-secondaryText text-[12px] md:text-[14px] lg:text-[17px] xl:text-[20px]'>Please enter your details to sign in to your account</div>
         </div>
+        <button
+          className='bg-green-300 p-4 cursor-pointer text-black'
+          onClick={useDemoAccount}>
+          Use Demo Account
+        </button>
         <form
           className='w-full'
           action={formAction}
@@ -33,6 +51,8 @@ export default function SignIn() {
             type={`${email ? "email" : "phone"}`}
             className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
             placeholder={`Enter your ${email ? "email address" : "phone number"} `}
+            value={emailaddress}
+            onChange={(e)=>setEmailaddress(e.target.value)}
           />
 
           <div className='flex justify-between w-full gap-4 mt-4'>
@@ -44,12 +64,14 @@ export default function SignIn() {
             type='password'
             className='bg-[#242B2B] w-full h-10 md:h-12 lg:h-14 xl:h-16 text-secondaryText p-2 text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px]'
             placeholder={"Enter your password"}
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
           />
           {state?.error && (
             <p className="text-red-500">{state.error}</p>
           )}
           <button disabled={pending}
-            className={`w-full ${pending?"bg-white":"bg-primaryColor"} p-2 mt-4 mb-4 text-black cursor-pointer`}>
+            className={`w-full ${pending ? "bg-white" : "bg-primaryColor"} p-2 mt-4 mb-4 text-black cursor-pointer`}>
             {pending ? "Signing in..." : "sign in"}
           </button>
         </form>
@@ -68,6 +90,8 @@ export default function SignIn() {
             <div className='w-full'>Sign in with Google</div>
           </button>
         </form>
+
+
 
         <div className='text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px] text-secondaryText'>
           Dont you have an account? <Link className='text-primaryText underline' href={'/signup'}>Create a new account</Link>
